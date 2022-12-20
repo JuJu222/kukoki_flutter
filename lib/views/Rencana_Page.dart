@@ -15,7 +15,13 @@ class _RencanaPageState extends State<RencanaPage> {
   late int isWeek = 3;
 
   List<int> noWeek = [1, 2, 3, 4, 5];
-  List<String> week = ["1-6 Desember 2022","7-12 Desember 2022", "13-18 Desember 2022", "19-24 Desember 2022", "25-30 Desember 2022"];
+  List<String> week = [
+    "1-6 Desember 2022",
+    "7-12 Desember 2022",
+    "13-18 Desember 2022",
+    "19-24 Desember 2022",
+    "25-30 Desember 2022"
+  ];
 
   List<CardRencana> cardRencanaWeek1 = [
     CardRencana(
@@ -219,27 +225,31 @@ class _RencanaPageState extends State<RencanaPage> {
                                   fontFamily: "Quicksand")),
                       onPressed: () {
                         if (listKeranjang.isNotEmpty) {
-                          for (var item in listKeranjang) {
-                            if (item.date![1] == " ") {
-                              if (item.date!.substring(0, 1) ==
-                                  checkWeek()[currentSelectedIndex!].date) {
-                                Navigator.pushNamed(
-                                    context, CheckoutPage.routeName,
-                                    arguments: {
-                                      "currentList": tempList,
-                                    });
-                              }
-                            } else {
-                              if (item.date!.substring(0, 2) ==
-                                  checkWeek()[currentSelectedIndex!].date) {
-                                Navigator.pushNamed(
-                                    context, CheckoutPage.routeName,
-                                    arguments: {
-                                      "currentList": tempList,
-                                    });
-                              }
-                            }
-                          }
+                          // for (var item in listKeranjang) {
+                          //   if (item.date![1] == " ") {
+                          //     if (item.date!.substring(0, 1) ==
+                          //         checkWeek()[currentSelectedIndex!].date) {
+                          //       Navigator.pushNamed(
+                          //           context, CheckoutPage.routeName,
+                          //           arguments: {
+                          //             "currentList": tempList,
+                          //           });
+                          //     }
+                          //   } else {
+                          //     if (item.date!.substring(0, 2) ==
+                          //         checkWeek()[currentSelectedIndex!].date) {
+                          //       Navigator.pushNamed(
+                          //           context, CheckoutPage.routeName,
+                          //           arguments: {
+                          //             "currentList": tempList,
+                          //           });
+                          //     }
+                          //   }
+                          // }
+                          Navigator.pushNamed(context, CheckoutPage.routeName,
+                              arguments: {
+                                "currentList": tempList,
+                              });
                         }
                       },
                     ),
@@ -308,8 +318,7 @@ class _RencanaPageState extends State<RencanaPage> {
                           )),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: 
-                          (listPesan.isEmpty)
+                          child: (listPesan.isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -399,7 +408,7 @@ class _RencanaPageState extends State<RencanaPage> {
                                 ))
                     ]),
                   ),
-                  Container(height: 300, width: double.infinity)
+                  Container(height: 250, width: double.infinity)
                 ]),
               ),
             ),
