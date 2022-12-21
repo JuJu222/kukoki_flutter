@@ -43,6 +43,8 @@ class MyApp extends StatelessWidget {
         CheckoutPage.routeName: (context) => const CheckoutPage(),
         HomePage.routeName: (context) => HomePage(),
         ProfilePage.routeName: (context) => ProfilePage(),
+        WebviewMidtrans.routeName: (context) => WebviewMidtrans(),
+        PembayaranBerhasil.routeName: (context) => PembayaranBerhasil()
       },
     );
   }

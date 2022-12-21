@@ -16,86 +16,86 @@ class _RencanaPageState extends State<RencanaPage> {
 
   List<int> noWeek = [1, 2, 3, 4, 5];
   List<String> week = [
-    "1-6 Desember 2022",
-    "7-12 Desember 2022",
-    "13-18 Desember 2022",
-    "19-24 Desember 2022",
-    "25-30 Desember 2022"
+    "1-6 November 2022",
+    "7-12 November 2022",
+    "13-18 November 2022",
+    "19-24 November 2022",
+    "25-30 November 2022"
   ];
 
   List<CardRencana> cardRencanaWeek1 = [
     CardRencana(
-        date: "1", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
+        date: "1", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "2", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
+        date: "2", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "3", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
+        date: "3", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "4", day: "Min", isSelected: false, onSelect: () {}, index: 0),
+        date: "4", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "5", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
+        date: "5", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "6", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
+        date: "6", day: "Min", isSelected: false, onSelect: () {}, index: 0),
   ];
 
   List<CardRencana> cardRencanaWeek2 = [
     CardRencana(
-        date: "7", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
+        date: "7", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "8", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
+        date: "8", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "9", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
+        date: "9", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "10", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
+        date: "10", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "11", day: "Min", isSelected: false, onSelect: () {}, index: 0),
+        date: "11", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "12", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
+        date: "12", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
   ];
 
   List<CardRencana> cardRencanaWeek3 = [
     CardRencana(
-        date: "13", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
+        date: "13", day: "Min", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "14", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
+        date: "14", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "15", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
+        date: "15", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "16", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
+        date: "16", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "17", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
+        date: "17", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "18", day: "Min", isSelected: false, onSelect: () {}, index: 0),
+        date: "18", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
   ];
 
   List<CardRencana> cardRencanaWeek4 = [
     CardRencana(
-        date: "19", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
+        date: "19", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "20", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
+        date: "20", day: "Min", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "21", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
+        date: "21", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "22", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
+        date: "22", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "23", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
+        date: "23", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "24", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
+        date: "24", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
   ];
 
   List<CardRencana> cardRencanaWeek5 = [
     CardRencana(
-        date: "25", day: "Min", isSelected: false, onSelect: () {}, index: 0),
+        date: "25", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "26", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
+        date: "26", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "27", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
+        date: "27", day: "Min", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "28", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
+        date: "28", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "29", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
+        date: "29", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
-        date: "30", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
+        date: "30", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
   ];
 
   @override
@@ -128,7 +128,7 @@ class _RencanaPageState extends State<RencanaPage> {
             child: Row(
               children: [
                 Text(
-                  "${checkWeek()[0].date}-${checkWeek()[checkWeek().length - 1].date} Desember 2022",
+                  "${checkWeek()[0].date}-${checkWeek()[checkWeek().length - 1].date} November 2022",
                   style: Theme.of(context).textTheme.headline5!.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -225,32 +225,26 @@ class _RencanaPageState extends State<RencanaPage> {
                                   fontFamily: "Quicksand")),
                       onPressed: () {
                         if (listKeranjang.isNotEmpty) {
-                          // for (var item in listKeranjang) {
-                          //   if (item.date![1] == " ") {
-                          //     if (item.date!.substring(0, 1) ==
-                          //         checkWeek()[currentSelectedIndex!].date) {
-                          //       Navigator.pushNamed(
-                          //           context, CheckoutPage.routeName,
-                          //           arguments: {
-                          //             "currentList": tempList,
-                          //           });
-                          //     }
-                          //   } else {
-                          //     if (item.date!.substring(0, 2) ==
-                          //         checkWeek()[currentSelectedIndex!].date) {
-                          //       Navigator.pushNamed(
-                          //           context, CheckoutPage.routeName,
-                          //           arguments: {
-                          //             "currentList": tempList,
-                          //           });
-                          //     }
-                          //   }
-                          // }
-                          Navigator.pushNamed(context, CheckoutPage.routeName,
-                              arguments: {
-                                "currentList": tempList,
-                              });
+                          for (var item in listKeranjang) {
+                            if (item.date![1] == " ") {
+                              if (item.date!.substring(0, 1) ==
+                                  checkWeek()[currentSelectedIndex!].date) {}
+                            } else {
+                              if (item.date!.substring(0, 2) ==
+                                  checkWeek()[currentSelectedIndex!].date) {
+                                // Navigator.pushNamed(
+                                //     context, CheckoutPage.routeName,
+                                //     arguments: {
+                                //       "currentList": tempList,
+                                //     });
+                              }
+                            }
+                          }
                         }
+                        Navigator.pushNamed(context, CheckoutPage.routeName,
+                            arguments: {
+                              "currentList": tempList,
+                            });
                       },
                     ),
                   ],
@@ -408,7 +402,7 @@ class _RencanaPageState extends State<RencanaPage> {
                                 ))
                     ]),
                   ),
-                  Container(height: 250, width: double.infinity)
+                  Container(height: 300, width: double.infinity)
                 ]),
               ),
             ),
