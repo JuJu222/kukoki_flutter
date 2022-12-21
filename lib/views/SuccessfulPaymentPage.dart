@@ -33,8 +33,6 @@ class SuccessfulPaymentPage extends StatelessWidget {
               SizedBox(
                 height: 12,
               ),
-
-              //final now = DateTime.now();
               Text(
                 "${data["waktuTransaksi"].day} November ${data["waktuTransaksi"].year}, ${data["waktuTransaksi"].hour}:${data["waktuTransaksi"].minute}",
                 style: Theme.of(context)!
@@ -86,7 +84,6 @@ class SuccessfulPaymentPage extends StatelessWidget {
                               child: Container(
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 4),
-                                // color: Colors.yellow,
                                 child: Text(
                                   "${data["totalPembayaran"]}",
                                   style: TextStyle(

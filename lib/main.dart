@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kukoki_flutter/Repositories/PaymentRepository.dart';
+import 'package:kukoki_flutter/ViewModels/ViewModels.dart';
 import 'package:kukoki_flutter/models/Resep.dart';
 import 'package:kukoki_flutter/views/pages.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,31 +22,36 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'MealKit',
-      theme: ThemeData(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: PaymentViewModel()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'MealKit',
+        theme: ThemeData(
           //Pergantian Warna dan Text pada bar
-          canvasColor: const Color(0xFFFFFFFF),
-          colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: primaryColor,
-              onPrimary: secondaryColor,
-              secondary: secondaryColor),
-          appBarTheme: const AppBarTheme(
-              elevation: 0,
-              systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: Colors.white,
-                  statusBarIconBrightness: Brightness.dark)),
-          textTheme: myTextTheme),
-      initialRoute: HomePage.routeName,
-      routes: {
-        CatalogPage.routeName: (context) => const CatalogPage(),
-        CheckoutPage.routeName: (context) => const CheckoutPage(),
-        HomePage.routeName: (context) => HomePage(),
-        ProfilePage.routeName: (context) => ProfilePage(),
-        WebviewMidtrans.routeName: (context) => WebviewMidtrans(),
-        SuccessfulPaymentPage.routeName: (context) => SuccessfulPaymentPage()
-      },
+            canvasColor: const Color(0xFFFFFFFF),
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+                primary: primaryColor,
+                onPrimary: secondaryColor,
+                secondary: secondaryColor),
+            appBarTheme: const AppBarTheme(
+                elevation: 0,
+                systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarColor: Colors.white,
+                    statusBarIconBrightness: Brightness.dark)),
+            textTheme: myTextTheme),
+        initialRoute: HomePage.routeName,
+        routes: {
+          BerandaPage.routeName: (context) => const BerandaPage(),
+          CheckoutPage.routeName: (context) => const CheckoutPage(),
+          HomePage.routeName: (context) => HomePage(),
+          ProfilePage.routeName: (context) => ProfilePage(),
+          WebviewMidtrans.routeName: (context) => WebviewMidtrans(),
+          SuccessfulPaymentPage.routeName: (context) => SuccessfulPaymentPage()
+        },
+      )
     );
   }
 }

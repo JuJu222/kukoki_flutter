@@ -20,7 +20,6 @@ class _WebviewMidtransState extends State<WebviewMidtrans> {
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
     List<Pesan> tempList = data["tempListKeranjang"];
-    Uri basicUrl = Uri.parse("https://kukoki.com/login");
     return Scaffold(
         body: WebView(
       initialUrl: data["snapUrl"],
@@ -33,8 +32,9 @@ class _WebviewMidtransState extends State<WebviewMidtrans> {
           //Prevent that url works
           //OPEN MIDTRANS WEB URL
           return NavigationDecision.prevent;
+
+          //if the payment got canceled / time out
         } else if (request.url
-            //if the payment got canceled / time out
             .contains("https://kukoki.com/checkout/unfinish")) {
           print("canceled");
           Navigator.pop(context, "Payment Failedd");
@@ -42,10 +42,9 @@ class _WebviewMidtransState extends State<WebviewMidtrans> {
           return NavigationDecision.prevent;
         } else if (request.url.contains("https://kukoki.com/checkout/finish")) {
           String res = request.url;
-          //DEBUG PARSE THE URI LINK TO STRING
+
           print("Response :" + res);
           if (res.contains("transaction_status=settlement")) {
-            // IF THE STRING CONTAINS SETTLEMENTS REDIRECT TO PEMBAYARAN BERHASIL PAGE
             print("Success");
             setState(() {
               listPesan.insertAll(0, tempList);
@@ -59,12 +58,9 @@ class _WebviewMidtransState extends State<WebviewMidtrans> {
               "waktuTransaksi": DateTime.now()
             });
           } else if (res.contains("transaction_status=pending")) {
-            // IF THE STRING CONTAINS PENDING REDIRECT TO PEMBAYARAN BERHASIL PAGE
-            // THIS MEANS THE USER CLICKED THE BACK MERCHANT BUTTON BEFORE PAY AND TIMEOUT
             print("PENDING");
             Navigator.pop(context, "Payment Failed");
           } else {
-            // IF THE STRING DOES NOT CONTAIN ANYTHING
             print("ELSE");
             setState(() {
               listPesan.insertAll(0, tempList);
