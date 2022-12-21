@@ -5,9 +5,9 @@ enum ResultState { noData, hasData, error }
 class PaymentViewModel extends ChangeNotifier {
   late Payments paymentResult;
   late ResultState resultState;
-  String _message = "";
+  String messageResult = "";
 
-  String get message => _message;
+  String get message => messageResult;
 
   Payments get result => paymentResult;
 
@@ -19,7 +19,7 @@ class PaymentViewModel extends ChangeNotifier {
       if (getPayment.snapUrl == null) {
         resultState = ResultState.noData;
         notifyListeners();
-        return _message = "empty data";
+        return messageResult = "empty data";
       } else {
         resultState = ResultState.hasData;
         notifyListeners();
@@ -28,7 +28,7 @@ class PaymentViewModel extends ChangeNotifier {
     } catch (e) {
       resultState = ResultState.error;
       notifyListeners();
-      return _message = "ERROR --> $e";
+      return messageResult = "ERROR --> $e";
     }
   }
 }
