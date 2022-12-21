@@ -12,7 +12,6 @@ class WebviewMidtrans extends StatefulWidget {
 }
 
 class _WebviewMidtransState extends State<WebviewMidtrans> {
-  // String? url;
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 
@@ -29,11 +28,9 @@ class _WebviewMidtransState extends State<WebviewMidtrans> {
       },
       navigationDelegate: (NavigationRequest request) {
         if (request.url.startsWith(data["snapUrl"])) {
-          //Prevent that url works
-          //OPEN MIDTRANS WEB URL
+          // Prevent that url works
+          // OPEN MIDTRANS WEB URL
           return NavigationDecision.prevent;
-
-          //if the payment got canceled / time out
         } else if (request.url
             .contains("https://kukoki.com/checkout/unfinish")) {
           print("canceled");
@@ -42,8 +39,6 @@ class _WebviewMidtransState extends State<WebviewMidtrans> {
           return NavigationDecision.prevent;
         } else if (request.url.contains("https://kukoki.com/checkout/finish")) {
           String res = request.url;
-
-          print("Response :" + res);
           if (res.contains("transaction_status=settlement")) {
             print("Success");
             setState(() {
@@ -78,12 +73,9 @@ class _WebviewMidtransState extends State<WebviewMidtrans> {
           return NavigationDecision.prevent;
         } else if (request.url.contains("https://kukoki.com/checkout/error")) {
           print("error");
-
           Navigator.pop(context, "Payment Failed");
           return NavigationDecision.prevent;
         }
-        //Any other url works
-
         return NavigationDecision.navigate;
       },
     ));

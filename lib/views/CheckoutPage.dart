@@ -12,12 +12,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
   int totalPricingFull = 0;
   int totalPricing = 0;
 
-  late PaymentViewModel vm;
+  late PaymentViewModel paymentViewModel;
 
   @override
   void initState() {
     super.initState();
-    vm = Provider.of<PaymentViewModel>(context, listen: false);
+    paymentViewModel = Provider.of<PaymentViewModel>(context, listen: false);
   }
 
   @override
@@ -34,7 +34,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           totalPricing += int.parse(menuPrice!);
         });
       });
-      print(totalPricing);
+
       return totalPricing;
     }
 
@@ -47,25 +47,21 @@ class _CheckoutPageState extends State<CheckoutPage> {
       return totalPricingFull;
     }
 
-    Future<void> _NavigatePaymentGateaway(BuildContext context) async {
+    // Call ViewModel function to redirect to payment gateaway webview
+    Future<void> NavigatePaymentGateaway(BuildContext context) async {
       var totalPriceVariable =
           "${totalPrice(totalPriceFood, 20000, tempList).toString()}";
-
-      var getpay = await vm.fetchPaymentGateaway(
+      var getPay = await paymentViewModel.fetchPaymentGateaway(
           "${totalPrice(totalPriceFood, 20000, tempList).toString()}");
-
       final result = await Navigator.pushNamed(
           context, WebviewMidtrans.routeName,
           arguments: {
-            "snapUrl": getpay.snapUrl,
+            "snapUrl": getPay.snapUrl,
             "totalPembayaran": "$totalPriceVariable",
             "waktuTransaksi": DateTime.now(),
             "tempListKeranjang": tempList
           });
 
-      if (!mounted) return;
-
-      // After the Selection Screen returns a result, hide any previous snackbars and show the new result.
       if (result == null) {
       } else {
         ScaffoldMessenger.of(context)
@@ -168,7 +164,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                   fontFamily: "Quicksand")),
                                       onPressed: () async {
                                         await CircularProgressIndicator();
-                                        _NavigatePaymentGateaway(context);
+                                        NavigatePaymentGateaway(context);
                                       },
                                     ),
                                   ],
