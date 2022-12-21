@@ -12,4 +12,4 @@ import 'package:collection/collection.dart';
 
 part 'CardRencana.dart';
 part 'CheckoutTile.dart';
-part 'RencanaTile.dart';
+part 'PlanTile.dart';

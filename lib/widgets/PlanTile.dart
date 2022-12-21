@@ -1,11 +1,11 @@
 part of '../widgets/widgets.dart';
 
-class RencanaTile extends StatelessWidget {
+class PlanTile extends StatelessWidget {
   final String menuName;
   final String numberOfPeople;
   final String menuPrice;
   final String menuPreparationTime;
-  const RencanaTile(
+  const PlanTile(
       {super.key,
       required this.menuName,
       required this.numberOfPeople,
