@@ -1,7 +1,7 @@
 part of '../widgets/widgets.dart';
 
 class CheckoutTile extends StatelessWidget {
-  final Pesan pesan;
+  final Order pesan;
   const CheckoutTile({super.key, required this.pesan});
 
   @override
@@ -13,7 +13,12 @@ class CheckoutTile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 0.0),
           avatar: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
-            child: Image.asset('${pesan.images}', width: 79, height: 79, fit: BoxFit.fill,),
+            child: Image.asset(
+              '${pesan.images}',
+              width: 79,
+              height: 79,
+              fit: BoxFit.fill,
+            ),
           ),
           title: Row(
             children: [
@@ -86,9 +91,7 @@ class CheckoutTile extends StatelessWidget {
             ],
           ),
           icon: GestureDetector(
-            onTap: () {
-              
-            },
+            onTap: () {},
             child: Icon(Icons.keyboard_arrow_right_rounded),
           )),
     );
@@ -96,7 +99,7 @@ class CheckoutTile extends StatelessWidget {
 }
 
 class CheckoutTileWithIcon extends StatefulWidget {
-  Pesan pesan;
+  Order pesan;
   Function onDelete;
   CheckoutTileWithIcon(
       {super.key, required this.pesan, required this.onDelete});
@@ -115,7 +118,8 @@ class _CheckoutTileWithIconState extends State<CheckoutTileWithIcon> {
           padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 0.0),
           avatar: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
-            child: Image.asset('${widget.pesan.images}', width: 79, height: 79, fit: BoxFit.fill),
+            child: Image.asset('${widget.pesan.images}',
+                width: 79, height: 79, fit: BoxFit.fill),
           ),
           title: Row(
             children: [

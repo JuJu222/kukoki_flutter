@@ -18,7 +18,7 @@ class _WebviewMidtransState extends State<WebviewMidtrans> {
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
-    List<Pesan> tempList = data["tempListKeranjang"];
+    List<Order> tempList = data["tempListKeranjang"];
     return Scaffold(
         body: WebView(
       initialUrl: data["snapUrl"],

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-class Pesan {
+class Order {
   String? images;
   String? menuName;
   String? numberOfPeople;
@@ -8,7 +8,7 @@ class Pesan {
   String? date;
   String? preparationTime;
   int? menuId;
-  Pesan(
+  Order(
       {required this.images,
       required this.menuName,
       required this.numberOfPeople,
@@ -17,8 +17,8 @@ class Pesan {
       this.menuId});
 }
 
-List<Pesan> listPesan = [
-  Pesan(
+List<Order> listPesan = [
+  Order(
     date: "6 November 2022",
     menuName: "Grilled Salmon",
     menuPrice: "80.000",
@@ -26,7 +26,7 @@ List<Pesan> listPesan = [
     numberOfPeople: "4",
     menuId: 0,
   ),
-  Pesan(
+  Order(
     date: "6 November 2022",
     menuName: "Nabe Veggie Udon",
     menuPrice: "50.000",
@@ -34,7 +34,7 @@ List<Pesan> listPesan = [
     numberOfPeople: "4",
     menuId: 49,
   ),
-  Pesan(
+  Order(
     date: "6 November 2022",
     menuName: "Pesto Pasta Chicken",
     menuPrice: "60.000",
@@ -42,7 +42,7 @@ List<Pesan> listPesan = [
     numberOfPeople: "4",
     menuId: 50,
   ),
-  Pesan(
+  Order(
     date: "16 November 2022",
     menuName: "Grilled Salmon",
     menuPrice: "80.000",
@@ -50,7 +50,7 @@ List<Pesan> listPesan = [
     numberOfPeople: "4",
     menuId: 0,
   ),
-  Pesan(
+  Order(
     date: "16 November 2022",
     menuName: "Nabe Veggie Udon",
     menuPrice: "50.000",
@@ -58,7 +58,7 @@ List<Pesan> listPesan = [
     numberOfPeople: "4",
     menuId: 49,
   ),
-  Pesan(
+  Order(
     date: "16 November 2022",
     menuName: "Pesto Pasta Chicken",
     menuPrice: "60.000",
@@ -66,7 +66,7 @@ List<Pesan> listPesan = [
     numberOfPeople: "4",
     menuId: 50,
   ),
-  Pesan(
+  Order(
     date: "16 November 2022",
     menuName: "Unagi Ramen",
     menuPrice: "30.000",
@@ -76,8 +76,8 @@ List<Pesan> listPesan = [
   ),
 ];
 
-List<Pesan> listKeranjang = [
-  Pesan(
+List<Order> listKeranjang = [
+  Order(
     date: "22 November 2022",
     menuName: "Pesto Pasta Chicken",
     menuPrice: "60.000",
@@ -85,7 +85,7 @@ List<Pesan> listKeranjang = [
     numberOfPeople: "4",
     menuId: 50,
   ),
-  Pesan(
+  Order(
     date: "22 November 2022",
     menuName: "Unagi Ramen",
     menuPrice: "30.000",
@@ -93,7 +93,7 @@ List<Pesan> listKeranjang = [
     numberOfPeople: "2",
     menuId: 48,
   ),
-  Pesan(
+  Order(
     date: "22 November 2022",
     menuName: "Nabe Veggie Udon",
     menuPrice: "50.000",

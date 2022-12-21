@@ -14,7 +14,7 @@ class _PlanningPageState extends State<PlanningPage> {
   // Current selected week
   late int isWeek = 4;
   double totalPricing = 0;
-  List<Pesan> tempList = [];
+  List<Order> tempList = [];
   List<int> noWeek = [1, 2, 3, 4, 5];
   // Ranges of dates in each week
   List<String> week = [
@@ -104,7 +104,7 @@ class _PlanningPageState extends State<PlanningPage> {
   }
 
   // Count total price of mealkits in the cart
-  double totalPrice(List<Pesan> tempList) {
+  double totalPrice(List<Order> tempList) {
     totalPricing = 0;
     for (var e in tempList) {
       setState(() {
