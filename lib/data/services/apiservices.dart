@@ -1,6 +1,6 @@
 part of "services.dart";
 
-class ApiServices {
+class APIServices {
   Future<dynamic> addPayment(
     String total,
   ) async {

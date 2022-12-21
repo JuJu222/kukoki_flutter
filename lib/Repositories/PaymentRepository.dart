@@ -5,7 +5,7 @@ import 'package:kukoki_flutter/models/Payments.dart';
 
 class PaymentRepository {
   Future<Payments> getPaymentRepository(dynamic amount) async {
-    final ApiServices addPaymentService = ApiServices();
+    final APIServices addPaymentService = APIServices();
     dynamic response = await addPaymentService.addPayment(amount);
 
     return Payments.fromJson(json.decode(response));
