@@ -1,13 +1,13 @@
 part of '../widgets/widgets.dart';
 
-class CardRencana extends StatefulWidget {
+class PlanCard extends StatefulWidget {
   bool isSelected;
   int index;
   VoidCallback onSelect;
   final String day;
   final String date;
 
-  CardRencana({
+  PlanCard({
     super.key,
     required this.index,
     required this.day,
@@ -17,10 +17,10 @@ class CardRencana extends StatefulWidget {
   });
 
   @override
-  State<CardRencana> createState() => _CardRencanaState();
+  State<PlanCard> createState() => _PlanCardState();
 }
 
-class _CardRencanaState extends State<CardRencana> {
+class _PlanCardState extends State<PlanCard> {
   @override
   Widget build(BuildContext context) {
     return Expanded(

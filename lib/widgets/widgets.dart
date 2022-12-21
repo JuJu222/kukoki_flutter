@@ -10,6 +10,6 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:collection/collection.dart';
 
-part 'CardRencana.dart';
+part 'PlanCard.dart';
 part 'CheckoutTile.dart';
 part 'PlanTile.dart';

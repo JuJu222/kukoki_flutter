@@ -24,74 +24,74 @@ class _PlanningPageState extends State<PlanningPage> {
     "19-24 November 2022",
     "25-30 November 2022"
   ];
-  List<CardRencana> currentMonthWeek1 = [
-    CardRencana(
+  List<PlanCard> currentMonthWeek1 = [
+    PlanCard(
         date: "1", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "2", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "3", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "4", day: "Min", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "5", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "6", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
   ];
-  List<CardRencana> currentMonthWeek2 = [
-    CardRencana(
+  List<PlanCard> currentMonthWeek2 = [
+    PlanCard(
         date: "7", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "8", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "9", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "10", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "11", day: "Min", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "12", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
   ];
-  List<CardRencana> currentMonthWeek3 = [
-    CardRencana(
+  List<PlanCard> currentMonthWeek3 = [
+    PlanCard(
         date: "13", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "14", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "15", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "16", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "17", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "18", day: "Min", isSelected: false, onSelect: () {}, index: 0),
   ];
-  List<CardRencana> currentMonthWeek4 = [
-    CardRencana(
+  List<PlanCard> currentMonthWeek4 = [
+    PlanCard(
         date: "19", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "20", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "21", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "22", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "23", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "24", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
   ];
-  List<CardRencana> currentMonthWeek5 = [
-    CardRencana(
+  List<PlanCard> currentMonthWeek5 = [
+    PlanCard(
         date: "25", day: "Min", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "26", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "27", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "28", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "29", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
-    CardRencana(
+    PlanCard(
         date: "30", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
   ];
 
@@ -115,8 +115,8 @@ class _PlanningPageState extends State<PlanningPage> {
   }
 
   // Check and return the current week
-  List<CardRencana> checkWeek() {
-    List<CardRencana> temp = [];
+  List<PlanCard> checkWeek() {
+    List<PlanCard> temp = [];
     if (isWeek == 1) {
       temp = currentMonthWeek1;
     } else if (isWeek == 2) {
@@ -301,7 +301,7 @@ class _PlanningPageState extends State<PlanningPage> {
                 child: Column(children: [
                   Row(
                       children: checkWeek().mapIndexed((index, item) {
-                    return CardRencana(
+                    return PlanCard(
                         date: item.date,
                         day: item.day,
                         index: index,
