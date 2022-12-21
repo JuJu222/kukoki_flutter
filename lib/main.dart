@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           textTheme: myTextTheme),
       initialRoute: HomePage.routeName,
       routes: {
-        BerandaPage.routeName: (context) => const BerandaPage(),
+        CatalogPage.routeName: (context) => const CatalogPage(),
         CheckoutPage.routeName: (context) => const CheckoutPage(),
         HomePage.routeName: (context) => HomePage(),
         ProfilePage.routeName: (context) => ProfilePage(),

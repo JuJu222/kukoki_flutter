@@ -9,17 +9,20 @@ class PlanningPage extends StatefulWidget {
 }
 
 class _PlanningPageState extends State<PlanningPage> {
-  int? currentSelectedIndex = 4;
-  late int isWeek = 3;
+  // Current selected date
+  int? currentSelectedIndex = 3;
+  // Current selected week
+  late int isWeek = 4;
   double totalPricing = 0;
   List<Pesan> tempList = [];
   List<int> noWeek = [1, 2, 3, 4, 5];
+  // Ranges of dates in each week
   List<String> week = [
-    "1-6 Desember 2022",
-    "7-12 Desember 2022",
-    "13-18 Desember 2022",
-    "19-24 Desember 2022",
-    "25-30 Desember 2022"
+    "1-6 November 2022",
+    "7-12 November 2022",
+    "13-18 November 2022",
+    "19-24 November 2022",
+    "25-30 November 2022"
   ];
   List<CardRencana> currentMonthWeek1 = [
     CardRencana(
@@ -92,10 +95,45 @@ class _PlanningPageState extends State<PlanningPage> {
         date: "30", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
   ];
 
+  // Remove a mealkit on the cart when delete icon is clicked
+  void removeItem(int index) {
+    setState(() {
+      tempList.removeAt(index);
+      listKeranjang.removeAt(index);
+    });
+  }
+
+  // Count total price of mealkits in the cart
+  double totalPrice(List<Pesan> tempList) {
+    totalPricing = 0;
+    for (var e in tempList) {
+      setState(() {
+        totalPricing += double.parse(e.menuPrice!);
+      });
+    }
+    return totalPricing;
+  }
+
+  // Check and return the current week
+  List<CardRencana> checkWeek() {
+    List<CardRencana> temp = [];
+    if (isWeek == 1) {
+      temp = currentMonthWeek1;
+    } else if (isWeek == 2) {
+      temp = currentMonthWeek2;
+    } else if (isWeek == 3) {
+      temp = currentMonthWeek3;
+    } else if (isWeek == 4) {
+      temp = currentMonthWeek4;
+    } else if (isWeek == 5) {
+      temp = currentMonthWeek5;
+    }
+    return temp;
+  }
+
   @override
   initState() {
     super.initState();
-    // Add listeners to this class
     for (var item in listKeranjang) {
       if (item.date![1] == " ") {
         if (item.date!.substring(0, 1) ==
@@ -121,7 +159,7 @@ class _PlanningPageState extends State<PlanningPage> {
             child: Row(
               children: [
                 Text(
-                  "${checkWeek()[0].date}-${checkWeek()[checkWeek().length - 1].date} Desember 2022",
+                  "${checkWeek()[0].date}-${checkWeek()[checkWeek().length - 1].date} November 2022",
                   style: Theme.of(context).textTheme.headline5!.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -129,34 +167,10 @@ class _PlanningPageState extends State<PlanningPage> {
                 ),
                 const SizedBox(width: 5),
                 PopupMenuButton(
-                  onSelected: (value) {
-                    setState(() {
-                      isWeek = value;
-                      tempList = [];
-                      for (var item in listKeranjang) {
-                        if (item.date![1] == " ") {
-                          if (item.date!.substring(0, 1) ==
-                              checkWeek()[currentSelectedIndex!].date) {
-                            tempList.add(item);
-                          }
-                        } else {
-                          if (item.date!.substring(0, 2) ==
-                              checkWeek()[currentSelectedIndex!].date) {
-                            tempList.add(item);
-                          }
-                        }
-                      }
-                    });
-                  },
                   child: const Icon(Icons.keyboard_arrow_down,
                       size: 24, color: Colors.black),
                   itemBuilder: (context) {
-                    return week
-                        .mapIndexed((index, item) => PopupMenuItem(
-                              value: noWeek[index],
-                              child: Text(item),
-                            ))
-                        .toList();
+                    return [];
                   },
                 )
               ],
@@ -274,25 +288,7 @@ class _PlanningPageState extends State<PlanningPage> {
                         day: item.day,
                         index: index,
                         isSelected: currentSelectedIndex == index,
-                        onSelect: (() {
-                          setState(() {
-                            currentSelectedIndex = index;
-                            tempList = [];
-                            for (var itm in listKeranjang) {
-                              if (itm.date![1] == " ") {
-                                if (itm.date!.substring(0, 1) ==
-                                    checkWeek()[currentSelectedIndex!].date) {
-                                  tempList.add(itm);
-                                }
-                              } else {
-                                if (itm.date!.substring(0, 2) ==
-                                    checkWeek()[currentSelectedIndex!].date) {
-                                  tempList.add(itm);
-                                }
-                              }
-                            }
-                          });
-                        }));
+                        onSelect: (() {}));
                   }).toList()),
                   const SizedBox(height: 25),
                   SizedBox(
@@ -379,7 +375,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                             checkWeek()[currentSelectedIndex!]
                                                 .date) {
                                           return CheckoutTileWithIcon(
-                                            onDelete: () => removeItem(index),
+                                            onDelete: () {},
                                             pesan: listKeranjang[index],
                                           );
                                         } else {
@@ -390,7 +386,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                             checkWeek()[currentSelectedIndex!]
                                                 .date) {
                                           return CheckoutTileWithIcon(
-                                            onDelete: () => removeItem(index),
+                                            onDelete: () {},
                                             pesan: listKeranjang[index],
                                           );
                                         } else {
@@ -408,38 +404,5 @@ class _PlanningPageState extends State<PlanningPage> {
             ),
           ),
         ));
-  }
-
-  void removeItem(int index) {
-    setState(() {
-      tempList.removeAt(index);
-      listKeranjang.removeAt(index);
-    });
-  }
-
-  double totalPrice(List<Pesan> tempList) {
-    totalPricing = 0;
-    for (var e in tempList) {
-      setState(() {
-        totalPricing += double.parse(e.menuPrice!);
-      });
-    }
-    return totalPricing;
-  }
-
-  List<CardRencana> checkWeek() {
-    List<CardRencana> temp = [];
-    if (isWeek == 1) {
-      temp = currentMonthWeek1;
-    } else if (isWeek == 2) {
-      temp = currentMonthWeek2;
-    } else if (isWeek == 3) {
-      temp = currentMonthWeek3;
-    } else if (isWeek == 4) {
-      temp = currentMonthWeek4;
-    } else if (isWeek == 5) {
-      temp = currentMonthWeek5;
-    }
-    return temp;
   }
 }
