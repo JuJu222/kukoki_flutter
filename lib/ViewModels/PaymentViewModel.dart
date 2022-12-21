@@ -1,6 +1,6 @@
-  part of 'ViewModels.dart';
+part of 'ViewModels.dart';
 
-  enum ResultState { noData, hasData, error }
+enum ResultState { noData, hasData, error }
 
 class PaymentViewModel extends ChangeNotifier {
   late Payments paymentResult;
@@ -9,10 +9,11 @@ class PaymentViewModel extends ChangeNotifier {
 
   String get message => messageResult;
 
-    Payments get result => paymentResult;
+  Payments get result => paymentResult;
 
-    ResultState get state => resultState;
+  ResultState get state => resultState;
 
+  //Fetch SnapURL from Midtrans
   Future<dynamic> fetchPaymentGateaway(String amount) async {
     try {
       final getPayment = await PaymentRepository().getPaymentRepository(amount);
