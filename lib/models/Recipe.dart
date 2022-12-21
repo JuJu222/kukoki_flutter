@@ -632,40 +632,6 @@ List<Recipe> listResep = [
         '6. Setelah dirasa semua matang dan empuk, tuang telur kocok, aduk-aduk. Kemudian masukkan maizena cair, gula, oregano dan penyedap.',
         '7. Aduk-aduk hingga mengental. Angkat.'
       ]),
-  // Recipe(
-  //     menuId: 21,
-  //     menuImage: 'assets/images/foods/resep/cepatdanmudah3.png',
-  //     menuName: 'Sop Sayur Makaroni',
-  //     menuPortion: '2 Porsi',
-  //     menuPrice: 'Rp14.000',
-  //     menuPreference: 'Cepat dan Mudah',
-  //     menuDuration: '15 min',
-  //     menuDescription:
-  //         'Kangkung tumis atau kadang disebut tumis kangkung atau cah kangkung adalah hidangan sayur tumis yang lazim ditemukan dalam hidangan Asia.',
-  //     menuIngredients: [
-  //       '2 buah Wortel',
-  //       '2 buah Kentang',
-  //       'Kol, buncis secukupnya',
-  //       'Makaroni secukupnya',
-  //       '2 biji daun bawang',
-  //       '¼ butir tomat',
-  //       '3 siung bawang putih',
-  //       '¼ sdt merica',
-  //       'Pala bubuk seujung kecil sendok teh',
-  //       '½ sdt gula pasir',
-  //       '1 sdt garam',
-  //       '1/4 sdt Royco rasa sapi',
-  //       '800 ml air'
-  //     ],
-  //     menuTools: ['Pisau', 'Wajan datar', 'Gelas ukur', 'Panci'],
-  //     menuReview: '4,6',
-  //     menuProcedure: [
-  //       '1. Cuci bersih semua sayur kemudian potong-potong wortel, kentang, kol, buncis, tomat dan daun bawang.',
-  //       '2. Haluskan bawang putih, garam dan merica.',
-  //       '3. Panaskan margarine tumis bawang putih dan daun bawang hingga harum, tuang air dan masukkan makaroni dan kentang.',
-  //       '4. Jika makaroni sudah ½ matang, masukkan sayur.',
-  //       '5. Setelah dirasa semua sayur matang masukkan gula dan penyedap makanan, angkat.',
-  //     ]),
   Recipe(
       menuId: 22,
       menuImage: 'assets/images/foods/resep/cepatdanmudah4.png',
@@ -827,7 +793,6 @@ List<Recipe> listResep = [
         '8. Diamkan lagi di wadah yang ditutup plastik sampai mengembang 2x lipat.',
         '9. Panggang 20-25 menit dalam oven dengan suhu 200C. '
       ]),
-
   Recipe(
       menuId: 27,
       menuImage: 'assets/images/foods/resep/roti3.jpg',
@@ -867,7 +832,6 @@ List<Recipe> listResep = [
         '4. Beri fillingnya sesuai selera, lalu di bentuk sesuai selera juga. Selanjutnya letakkan di loyang yang sudah di oles sedikit minyak olive atau pake kertas roti, dan diamkan lagi selama 1 jam hingga mengembang lagi.',
         '5. Panggang di oven selama 30-35 menit atau sesuai cara kerja oven masing-masing dengan suhu 180 derajat celcius.',
       ]),
-
   Recipe(
       menuId: 28,
       menuImage: 'assets/images/foods/resep/roti4.jpg',
@@ -905,7 +869,6 @@ List<Recipe> listResep = [
         '5. Tata di loyang, tutup dengan kain, biarkan fermentasi 45 menit-1 jam sampai double size.',
         '6. Panaskan oven 190C. Bake selama 20 menit (sesuaikan dengan oven masing-masing). Setelah matang segera oles dengan margarin selagi panas.'
       ]),
-
   Recipe(
       menuId: 29,
       menuImage: 'assets/images/foods/resep/roti5.jpg',
@@ -948,7 +911,6 @@ List<Recipe> listResep = [
         '6. Panggang roti di pan antilengket hingga kecokelatan (gunakan api kecil saja).',
         '7. Kebab penuh siap disajikan.'
       ]),
-
   Recipe(
       menuId: 30,
       menuImage: 'assets/images/foods/resep/tinggiprotein0.jpg',
@@ -978,7 +940,6 @@ List<Recipe> listResep = [
         '3. Masukkan tomat, masak sebentar hingga mendidih selama 5 menit.',
         '4. Matikan api, masukkan bayam. Angkat. ⁣ Sajikan.',
       ]),
-
   Recipe(
       menuId: 31,
       menuImage: 'assets/images/foods/resep/tinggiprotein1.png',
@@ -1016,7 +977,6 @@ List<Recipe> listResep = [
         '4. Masukkan pakcoi dan sawi putih, beri larutan maizena ketika air sudah mendidih. Aduk hingga mengental',
         '5. Masukkan tofu/tahu, kemudian taburi dengan bawang daun. Sajikan.'
       ]),
-
   Recipe(
       menuId: 32,
       menuImage: 'assets/images/foods/resep/tinggiprotein2.jpg',
@@ -1054,7 +1014,6 @@ List<Recipe> listResep = [
         '4. Tambahkan air, lalu masak hingga mendidih. Masukkan kailan rebus.',
         '5.  Masukkan larutan maizena, lalu masak hingga mengental. Sajikan..'
       ]),
-
   Recipe(
       menuId: 33,
       menuImage: 'assets/images/foods/resep/tinggiprotein3.jpg',
@@ -1081,7 +1040,6 @@ List<Recipe> listResep = [
         '5.  Jika sudah dirasa benar-benar matang, matikan api dan diamkan di atas wajan terlebih dahulu selama 5 menit.',
         '6.  Sajikan.'
       ]),
-
   Recipe(
       menuId: 34,
       menuImage: 'assets/images/foods/resep/tinggiprotein4.jpg',
@@ -1109,7 +1067,6 @@ List<Recipe> listResep = [
         '5.  Tambahkan minyak zaitun.',
         '6.  Sajikan.'
       ]),
-
   Recipe(
       menuId: 35,
       menuImage: 'assets/images/foods/resep/tinggiprotein5.jpg',
@@ -1138,7 +1095,6 @@ List<Recipe> listResep = [
         '4. Susun campuran alpukat dan telur di atas roti gandum.',
         '5.  Sajikan.'
       ]),
-
   Recipe(
       menuId: 36,
       menuImage: 'assets/images/foods/resep/makananlaut0.png',
@@ -1174,7 +1130,6 @@ List<Recipe> listResep = [
         '4. Marinasi ikan dengan bumbu selama 30 menit dalam kulkas.',
         '5. Keluarkan ikan, bakar arang dan bakar ikan sampai matang sambil dioles sisa bumbu.',
       ]),
-
   Recipe(
       menuId: 37,
       menuImage: 'assets/images/foods/resep/makananlaut1.png',
@@ -1220,7 +1175,6 @@ List<Recipe> listResep = [
         "7. Panaskan teflon, oles dengan minyak goreng, bakar cumi sambil dibolak balik dan diolesi bumbu marinade tadi."
             "8. Bakar sampai matang, angkat, potong-potong dan siap disajikan"
       ]),
-
   Recipe(
       menuId: 38,
       menuImage: 'assets/images/foods/resep/makananlaut2.png',
@@ -1263,7 +1217,6 @@ List<Recipe> listResep = [
         '5. Masak sampai meletup-letup.',
         '5. Angkat dan sajikan.',
       ]),
-
   Recipe(
       menuId: 39,
       menuImage: 'assets/images/foods/resep/makananlaut3.png',
@@ -1302,7 +1255,6 @@ List<Recipe> listResep = [
         '2. Masukkan kerang. Tambahkan air, gula, dan garam. Aduk rata.',
         '3. Tambahkan saus tiram dan daun bawang. Masak sampai bumbu meresap. Angkat dan sajikan.',
       ]),
-
   Recipe(
       menuId: 40,
       menuImage: 'assets/images/foods/resep/makananlaut4.png',
@@ -1338,7 +1290,6 @@ List<Recipe> listResep = [
         '3. Masak sampai kuah menyusut dan mengental.',
         "4. Terakhir koreksi rasa tambahkan irisan tomat dan sajikan."
       ]),
-
   Recipe(
       menuId: 41,
       menuImage: 'assets/images/foods/resep/makananlaut5.png',
@@ -1418,7 +1369,6 @@ List<Recipe> listResep = [
         '2. Masukkan daun bayam, masak sampai layu.',
         '3. Tambahkan kecambah. Beri sedikit garam. Dan siap disajikan.',
       ]),
-
   Recipe(
       menuId: 43,
       menuImage: 'assets/images/foods/resep/menudiet1.png',
@@ -1454,7 +1404,6 @@ List<Recipe> listResep = [
         '3. Beri sedikit air, masak hingga matang.',
         "4. Masukkan tomat, masak sebentar. Dan siap disajikan."
       ]),
-
   Recipe(
       menuId: 44,
       menuImage: 'assets/images/foods/resep/menudiet2.png',
@@ -1501,7 +1450,6 @@ List<Recipe> listResep = [
         "5. Masak lagi air kuahnya. Tambahkan bawang dan cabai blender.",
         "6. Tuang fiber cream, aduk, dan hidangan siap disajikan."
       ]),
-
   Recipe(
       menuId: 45,
       menuImage: 'assets/images/foods/resep/menudiet3.png',
@@ -1544,7 +1492,6 @@ List<Recipe> listResep = [
         "4. Campur ke dalam panci kuah rebusan ayam, masukkan lagi ayam. Beri bakso, aduk rata.",
         "5. Tambahkan campuran terigu, masak sampai agak kental. Dan siap disajikan",
       ]),
-
   Recipe(
       menuId: 46,
       menuImage: 'assets/images/foods/resep/menudiet4.png',
@@ -1588,7 +1535,6 @@ List<Recipe> listResep = [
         "6. Matikan api, beri garam lalu aduk rata.",
         "7. Tuang saus ke steak tempe.Dan siap disajikan."
       ]),
-
   Recipe(
       menuId: 47,
       menuImage: 'assets/images/foods/resep/menudiet5.png',
@@ -1650,7 +1596,6 @@ List<Recipe> listResep = [
         "4. Rebus mie ramen selama 15 menit.",
         "5. Sajikan ramen dengan unagi yang telah dipanggang.",
       ]),
-
   Recipe(
       menuId: 49,
       menuImage: 'assets/images/foods/imagefood3.png',
@@ -1682,7 +1627,6 @@ List<Recipe> listResep = [
         '4. Aduk panci selama 15 menit.',
         '5. Sajikan ramen di mangkok.',
       ]),
-
   Recipe(
       menuId: 50,
       menuImage: 'assets/images/foods/imagefood5.png',
