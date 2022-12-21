@@ -36,4 +36,4 @@ part 'ProfilePage.dart';
 part 'MenuPage.dart';
 part 'CheckoutPage.dart';
 part 'Webview_Midtrans.dart';
-part 'Pembayaran_Berhasil_Page.dart';
+part 'SuccessfulPaymentPage.dart';
