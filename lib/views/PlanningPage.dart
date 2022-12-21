@@ -253,6 +253,15 @@ class _PlanningPageState extends State<PlanningPage> {
                                       "currentList": tempList,
                                     });
                                 break;
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                  ..removeCurrentSnackBar()
+                                  ..showSnackBar(SnackBar(
+                                      action: SnackBarAction(
+                                        label: "OK",
+                                        onPressed: () {},
+                                      ),
+                                      content: Text('No meal kits in cart')));
                               }
                             } else {
                               if (item.date!.substring(0, 2) ==
@@ -263,6 +272,15 @@ class _PlanningPageState extends State<PlanningPage> {
                                       "currentList": tempList,
                                     });
                                 break;
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                  ..removeCurrentSnackBar()
+                                  ..showSnackBar(SnackBar(
+                                      action: SnackBarAction(
+                                        label: "OK",
+                                        onPressed: () {},
+                                      ),
+                                      content: Text('No meal kits in cart')));
                               }
                             }
                           }
