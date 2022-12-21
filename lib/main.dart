@@ -6,8 +6,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setPreferredOrientations(
-  //     [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
         statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark),

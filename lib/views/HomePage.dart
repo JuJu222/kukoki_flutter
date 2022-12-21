@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _listPageWidget = [
     BerandaPage(),
-    RencanaPage(),
+    PlanningPage(),
     PesananPage(),
     ProfilePage() 
   ];
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
                 ? const Color(0xFF1C9FE2)
                 : const Color(0xFFA9A9A9),
           ),
-          label: RencanaPage.pageName),
+          label: PlanningPage.pageName),
       BottomNavigationBarItem(
           icon: SvgPicture.asset(
             'assets/icons/pesanan.svg',

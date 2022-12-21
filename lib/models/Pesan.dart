@@ -82,7 +82,7 @@ List<Pesan> listPesan = [
 List<Pesan> listKeranjang = [
   
   Pesan(
-    date: "20 Desember 2022",
+    date: "7 Desember 2022",
     menuName: "Pesto Pasta Chicken",
     menuPrice: "60.000",
     images: "assets/images/foods/imagefood5.png",
@@ -90,7 +90,7 @@ List<Pesan> listKeranjang = [
     menuId: 50,
   ),
   Pesan(
-    date: "20 Desember 2022",
+    date: "7 Desember 2022",
     menuName: "Unagi Ramen",
     menuPrice: "30.000",
     images: "assets/images/foods/imagefood2.png",

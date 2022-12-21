@@ -1,23 +1,27 @@
 part of 'pages.dart';
 
-class RencanaPage extends StatefulWidget {
-  static const pageName = "Rencana";
-  const RencanaPage({super.key});
+class PlanningPage extends StatefulWidget {
+  static const pageName = "Planning";
+  const PlanningPage({super.key});
 
   @override
-  State<RencanaPage> createState() => _RencanaPageState();
+  State<PlanningPage> createState() => _PlanningPageState();
 }
 
-class _RencanaPageState extends State<RencanaPage> {
+class _PlanningPageState extends State<PlanningPage> {
   int? currentSelectedIndex = 4;
-  List<Pesan> tempList = [];
-  double totalPricing = 0;
   late int isWeek = 3;
-
+  double totalPricing = 0;
+  List<Pesan> tempList = [];
   List<int> noWeek = [1, 2, 3, 4, 5];
-  List<String> week = ["1-6 Desember 2022","7-12 Desember 2022", "13-18 Desember 2022", "19-24 Desember 2022", "25-30 Desember 2022"];
-
-  List<CardRencana> cardRencanaWeek1 = [
+  List<String> week = [
+    "1-6 Desember 2022",
+    "7-12 Desember 2022",
+    "13-18 Desember 2022",
+    "19-24 Desember 2022",
+    "25-30 Desember 2022"
+  ];
+  List<CardRencana> currentMonthWeek1 = [
     CardRencana(
         date: "1", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
@@ -31,8 +35,7 @@ class _RencanaPageState extends State<RencanaPage> {
     CardRencana(
         date: "6", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
   ];
-
-  List<CardRencana> cardRencanaWeek2 = [
+  List<CardRencana> currentMonthWeek2 = [
     CardRencana(
         date: "7", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
@@ -46,8 +49,7 @@ class _RencanaPageState extends State<RencanaPage> {
     CardRencana(
         date: "12", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
   ];
-
-  List<CardRencana> cardRencanaWeek3 = [
+  List<CardRencana> currentMonthWeek3 = [
     CardRencana(
         date: "13", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
@@ -61,8 +63,7 @@ class _RencanaPageState extends State<RencanaPage> {
     CardRencana(
         date: "18", day: "Min", isSelected: false, onSelect: () {}, index: 0),
   ];
-
-  List<CardRencana> cardRencanaWeek4 = [
+  List<CardRencana> currentMonthWeek4 = [
     CardRencana(
         date: "19", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
@@ -76,8 +77,7 @@ class _RencanaPageState extends State<RencanaPage> {
     CardRencana(
         date: "24", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
   ];
-
-  List<CardRencana> cardRencanaWeek5 = [
+  List<CardRencana> currentMonthWeek5 = [
     CardRencana(
         date: "25", day: "Min", isSelected: false, onSelect: () {}, index: 0),
     CardRencana(
@@ -109,7 +109,6 @@ class _RencanaPageState extends State<RencanaPage> {
         }
       }
     }
-    print(tempList);
   }
 
   @override
@@ -202,9 +201,20 @@ class _RencanaPageState extends State<RencanaPage> {
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10.0),
-                          backgroundColor: (listKeranjang.isEmpty)
-                              ? Colors.grey
-                              : const Color(0xFF1C9FE2),
+                          backgroundColor: (listKeranjang.any((item) {
+                            if (item.date![1] == " ") {
+                              if (item.date!.substring(0, 1) ==
+                                  checkWeek()[currentSelectedIndex!].date) {
+                                return true;
+                              }
+                            } else if (item.date!.substring(0, 2) ==
+                                checkWeek()[currentSelectedIndex!].date) {
+                              return true;
+                            }
+                            return false;
+                          }))
+                              ? const Color(0xFF1C9FE2)
+                              : Colors.grey,
                           elevation: 0.0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0))),
@@ -228,6 +238,7 @@ class _RencanaPageState extends State<RencanaPage> {
                                     arguments: {
                                       "currentList": tempList,
                                     });
+                                break;
                               }
                             } else {
                               if (item.date!.substring(0, 2) ==
@@ -237,6 +248,7 @@ class _RencanaPageState extends State<RencanaPage> {
                                     arguments: {
                                       "currentList": tempList,
                                     });
+                                break;
                               }
                             }
                           }
@@ -255,9 +267,7 @@ class _RencanaPageState extends State<RencanaPage> {
               height: double.infinity,
               child: SingleChildScrollView(
                 child: Column(children: [
-                  //asMap turns list into a Map, get the key and values of the map, item is the index, value is the key
                   Row(
-                      // ...ituberdasarkan
                       children: checkWeek().mapIndexed((index, item) {
                     return CardRencana(
                         date: item.date,
@@ -284,12 +294,9 @@ class _RencanaPageState extends State<RencanaPage> {
                           });
                         }));
                   }).toList()),
-                  // Row(children: cardRencana),
                   const SizedBox(height: 25),
-                  //3rd section
                   SizedBox(
                     width: double.infinity,
-                    // height: double.infinity,
                     child: Column(children: [
                       Align(
                           alignment: Alignment.topLeft,
@@ -308,8 +315,7 @@ class _RencanaPageState extends State<RencanaPage> {
                           )),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: 
-                          (listPesan.isEmpty)
+                          child: (listPesan.isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -368,9 +374,6 @@ class _RencanaPageState extends State<RencanaPage> {
                               : Column(
                                   children: listKeranjang.mapIndexed(
                                     (index, item) {
-                                      //item yang datenya sama
-                                      //filter cuman date yang sama
-
                                       if (item.date![1] == " ") {
                                         if (item.date!.substring(0, 1) ==
                                             checkWeek()[currentSelectedIndex!]
@@ -399,7 +402,7 @@ class _RencanaPageState extends State<RencanaPage> {
                                 ))
                     ]),
                   ),
-                  Container(height: 300, width: double.infinity)
+                  const SizedBox(height: 300, width: double.infinity)
                 ]),
               ),
             ),
@@ -416,26 +419,26 @@ class _RencanaPageState extends State<RencanaPage> {
 
   double totalPrice(List<Pesan> tempList) {
     totalPricing = 0;
-    tempList.forEach((e) {
+    for (var e in tempList) {
       setState(() {
         totalPricing += double.parse(e.menuPrice!);
       });
-    });
+    }
     return totalPricing;
   }
 
   List<CardRencana> checkWeek() {
     List<CardRencana> temp = [];
     if (isWeek == 1) {
-      temp = cardRencanaWeek1;
+      temp = currentMonthWeek1;
     } else if (isWeek == 2) {
-      temp = cardRencanaWeek2;
+      temp = currentMonthWeek2;
     } else if (isWeek == 3) {
-      temp = cardRencanaWeek3;
+      temp = currentMonthWeek3;
     } else if (isWeek == 4) {
-      temp = cardRencanaWeek4;
+      temp = currentMonthWeek4;
     } else if (isWeek == 5) {
-      temp = cardRencanaWeek5;
+      temp = currentMonthWeek5;
     }
     return temp;
   }
