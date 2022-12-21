@@ -1,17 +1,17 @@
 part of 'pages.dart';
 
-class WebviewMidtrans extends StatefulWidget {
+class WebviewMidtransPage extends StatefulWidget {
   static const routeName = '/checkout_web';
 
-  WebviewMidtrans({
+  WebviewMidtransPage({
     super.key,
   });
 
   @override
-  State<WebviewMidtrans> createState() => _WebviewMidtransState();
+  State<WebviewMidtransPage> createState() => _WebviewMidtransState();
 }
 
-class _WebviewMidtransState extends State<WebviewMidtrans> {
+class _WebviewMidtransState extends State<WebviewMidtransPage> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 

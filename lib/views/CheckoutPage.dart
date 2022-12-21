@@ -53,7 +53,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       var getPay = await paymentViewModel.fetchPaymentGateaway(
           "${totalPrice(totalPriceFood, 20000, tempList).toString()}");
       final result = await Navigator.pushNamed(
-          context, WebviewMidtrans.routeName,
+          context, WebviewMidtransPage.routeName,
           arguments: {
             "snapUrl": getPay.snapUrl,
             "totalPembayaran": "$totalPriceVariable",

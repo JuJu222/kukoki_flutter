@@ -40,5 +40,5 @@ part 'OrderPage.dart';
 part 'ProfilePage.dart';
 part 'MenuPage.dart';
 part 'CheckoutPage.dart';
-part 'WebviewMidtrans.dart';
+part 'WebviewMidtransPage.dart';
 part 'SuccessfulPaymentPage.dart';
