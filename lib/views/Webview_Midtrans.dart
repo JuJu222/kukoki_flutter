@@ -54,7 +54,7 @@ class _WebviewMidtransState extends State<WebviewMidtrans> {
               }
             });
             Navigator.pushReplacementNamed(
-                context, PembayaranBerhasil.routeName, arguments: {
+                context, SuccessfulPaymentPage.routeName, arguments: {
               "totalPembayaran": data["totalPembayaran"],
               "waktuTransaksi": DateTime.now()
             });
@@ -73,7 +73,7 @@ class _WebviewMidtransState extends State<WebviewMidtrans> {
               }
             });
             Navigator.pushReplacementNamed(
-                context, PembayaranBerhasil.routeName, arguments: {
+                context, SuccessfulPaymentPage.routeName, arguments: {
               "totalPembayaran": data["totalPembayaran"],
               "waktuTransaksi": DateTime.now()
             });

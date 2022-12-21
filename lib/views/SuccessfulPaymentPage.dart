@@ -1,8 +1,8 @@
 part of 'pages.dart';
 
-class PembayaranBerhasil extends StatelessWidget {
-  static const routeName = "/PembayaranBerhasil";
-  const PembayaranBerhasil({super.key});
+class SuccessfulPaymentPage extends StatelessWidget {
+  static const routeName = "/SuccessfulPaymentPage";
+  const SuccessfulPaymentPage({super.key});
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
