@@ -12,8 +12,11 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
   bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Text("Hello"),);
+    return Scaffold(
+      body: Text("Hello"),
+    );
   }
 }

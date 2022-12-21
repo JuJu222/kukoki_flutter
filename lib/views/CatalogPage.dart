@@ -12,6 +12,7 @@ class _CatalogPageState extends State<CatalogPage> {
   int? countPendek = 0;
   int? countPanjang = 0;
   final searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

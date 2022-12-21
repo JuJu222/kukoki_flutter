@@ -11,7 +11,6 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   int totalPricingFull = 0;
   int totalPricing = 0;
-
   late PaymentViewModel paymentViewModel;
 
   @override

@@ -9,14 +9,11 @@ class PlanningPage extends StatefulWidget {
 }
 
 class _PlanningPageState extends State<PlanningPage> {
-  // Current selected date
   int? currentSelectedIndex = 3;
-  // Current selected week
   late int isWeek = 4;
   double totalPricing = 0;
   List<Order> tempList = [];
   List<int> noWeek = [1, 2, 3, 4, 5];
-  // Ranges of dates in each week
   List<String> week = [
     "1-6 November 2022",
     "7-12 November 2022",

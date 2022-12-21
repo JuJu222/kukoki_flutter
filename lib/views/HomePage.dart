@@ -11,12 +11,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _bottomNavindex = 0;
-
   List<Widget> _listPageWidget = [
     CatalogPage(),
     PlanningPage(),
     OrderPage(),
-    ProfilePage() 
+    ProfilePage()
   ];
 
   @override
