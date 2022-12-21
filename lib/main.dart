@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         HomePage.routeName: (context) => HomePage(),
         ProfilePage.routeName: (context) => ProfilePage(),
         WebviewMidtrans.routeName: (context) => WebviewMidtrans(),
-        PembayaranBerhasil.routeName: (context) => PembayaranBerhasil()
+        SuccessfulPaymentPage.routeName: (context) => SuccessfulPaymentPage()
       },
     );
   }
