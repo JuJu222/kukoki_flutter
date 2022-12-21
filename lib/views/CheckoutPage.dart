@@ -11,6 +11,15 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   int totalPricingFull = 0;
   int totalPricing = 0;
+
+  late PaymentViewModel vm;
+
+  @override
+  void initState() {
+    super.initState();
+    vm = Provider.of<PaymentViewModel>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
@@ -42,10 +51,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
       var totalPriceVariable =
           "${totalPrice(totalPriceFood, 20000, tempList).toString()}";
 
-      var getpay = await ApiServices.addPayment(
+      var getpay = await vm.fetchPaymentGateaway(
           "${totalPrice(totalPriceFood, 20000, tempList).toString()}");
 
-      print(getpay.snapUrl);
       final result = await Navigator.pushNamed(
           context, WebviewMidtrans.routeName,
           arguments: {
