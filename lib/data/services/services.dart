@@ -4,4 +4,4 @@ import 'package:http/http.dart' as http;
 
 import '../shared/shared.dart';
 
-part 'ApiServices.dart';
+part 'apiservices.dart';
