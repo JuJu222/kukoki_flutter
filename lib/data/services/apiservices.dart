@@ -1,6 +1,7 @@
 part of "services.dart";
 
 class APIServices {
+  //Return Midtrans' snap token in JSON to be passed on to the mobile app through existing User ID.
   Future<dynamic> addPayment(
     String total,
   ) async {
