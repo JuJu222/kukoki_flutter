@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kukoki_flutter/Repositories/PaymentRepository.dart';
 import 'package:kukoki_flutter/ViewModels/ViewModels.dart';
-import 'package:kukoki_flutter/models/Resep.dart';
+import 'package:kukoki_flutter/models/Recipe.dart';
 import 'package:kukoki_flutter/views/pages.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -23,35 +23,35 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: PaymentViewModel()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'MealKit',
-        theme: ThemeData(
-          //Pergantian Warna dan Text pada bar
-            canvasColor: const Color(0xFFFFFFFF),
-            colorScheme: Theme.of(context).colorScheme.copyWith(
-                primary: primaryColor,
-                onPrimary: secondaryColor,
-                secondary: secondaryColor),
-            appBarTheme: const AppBarTheme(
-                elevation: 0,
-                systemOverlayStyle: SystemUiOverlayStyle(
-                    statusBarColor: Colors.white,
-                    statusBarIconBrightness: Brightness.dark)),
-            textTheme: myTextTheme),
-        initialRoute: HomePage.routeName,
-        routes: {
-          CatalogPage.routeName: (context) => const CatalogPage(),
-          CheckoutPage.routeName: (context) => const CheckoutPage(),
-          HomePage.routeName: (context) => HomePage(),
-          ProfilePage.routeName: (context) => ProfilePage(),
-          WebviewMidtrans.routeName: (context) => WebviewMidtrans(),
-          SuccessfulPaymentPage.routeName: (context) => SuccessfulPaymentPage()
-        },
-      )
-    );
+        providers: [
+          ChangeNotifierProvider.value(value: PaymentViewModel()),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'MealKit',
+          theme: ThemeData(
+              //Pergantian Warna dan Text pada bar
+              canvasColor: const Color(0xFFFFFFFF),
+              colorScheme: Theme.of(context).colorScheme.copyWith(
+                  primary: primaryColor,
+                  onPrimary: secondaryColor,
+                  secondary: secondaryColor),
+              appBarTheme: const AppBarTheme(
+                  elevation: 0,
+                  systemOverlayStyle: SystemUiOverlayStyle(
+                      statusBarColor: Colors.white,
+                      statusBarIconBrightness: Brightness.dark)),
+              textTheme: myTextTheme),
+          initialRoute: HomePage.routeName,
+          routes: {
+            CatalogPage.routeName: (context) => const CatalogPage(),
+            CheckoutPage.routeName: (context) => const CheckoutPage(),
+            HomePage.routeName: (context) => HomePage(),
+            ProfilePage.routeName: (context) => ProfilePage(),
+            WebviewMidtrans.routeName: (context) => WebviewMidtrans(),
+            SuccessfulPaymentPage.routeName: (context) =>
+                SuccessfulPaymentPage()
+          },
+        ));
   }
 }

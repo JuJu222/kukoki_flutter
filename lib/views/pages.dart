@@ -28,7 +28,7 @@ import '../Repositories/PaymentRepository.dart';
 import '../ViewModels/ViewModels.dart';
 import '../data/services/services.dart';
 import '../models/Order.dart';
-import '../models/Resep.dart';
+import '../models/Recipe.dart';
 
 import '../widgets/Loading.dart';
 import '../widgets/widgets.dart';

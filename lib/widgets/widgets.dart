@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import '../models/Resep.dart';
+import '../models/Recipe.dart';
 import '../models/Order.dart';
 import 'Loading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
