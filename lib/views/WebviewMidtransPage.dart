@@ -12,8 +12,15 @@ class WebviewMidtransPage extends StatefulWidget {
 }
 
 class _WebviewMidtransState extends State<WebviewMidtransPage> {
+  late PlanningViewModel planningViewModel;
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
+
+  @override
+  initState() {
+    super.initState();
+    planningViewModel = Provider.of<PlanningViewModel>(context, listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +49,9 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
           if (res.contains("transaction_status=settlement")) {
             print("Success");
             setState(() {
-              listPesan.insertAll(0, tempList);
+              planningViewModel.listPesan.insertAll(0, tempList);
               for (var item in tempList) {
-                listKeranjang.removeWhere((element) => element == item);
+                planningViewModel.listKeranjang.removeWhere((element) => element == item);
               }
             });
             Navigator.pushReplacementNamed(
@@ -58,9 +65,9 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
           } else {
             print("ELSE");
             setState(() {
-              listPesan.insertAll(0, tempList);
+              planningViewModel.listPesan.insertAll(0, tempList);
               for (var item in tempList) {
-                listKeranjang.removeWhere((element) => element == item);
+                planningViewModel.listKeranjang.removeWhere((element) => element == item);
               }
             });
             Navigator.pushReplacementNamed(

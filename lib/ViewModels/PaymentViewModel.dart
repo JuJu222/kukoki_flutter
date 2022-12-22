@@ -13,7 +13,7 @@ class PaymentViewModel extends ChangeNotifier {
 
   ResultState get state => resultState;
 
-  //Fetch SnapURL from Midtrans
+  // Fetch SnapURL from Midtrans
   Future<dynamic> fetchPaymentGateaway(String amount) async {
     try {
       final getPayment = await PaymentRepository().getPaymentRepository(amount);

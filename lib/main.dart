@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider.value(value: PaymentViewModel()),
+          ChangeNotifierProvider.value(value: PlanningViewModel()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

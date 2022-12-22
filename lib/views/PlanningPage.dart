@@ -11,6 +11,7 @@ class PlanningPage extends StatefulWidget {
 class _PlanningPageState extends State<PlanningPage> {
   int? currentSelectedIndex = 3;
   late int isWeek = 4;
+  late PlanningViewModel planningViewModel;
   double totalPricing = 0;
   List<Order> tempList = [];
   List<int> noWeek = [1, 2, 3, 4, 5];
@@ -96,7 +97,7 @@ class _PlanningPageState extends State<PlanningPage> {
   void removeItem(int index) {
     setState(() {
       tempList.removeAt(index);
-      listKeranjang.removeAt(index);
+      planningViewModel.listKeranjang.removeAt(index);
     });
   }
 
@@ -131,7 +132,8 @@ class _PlanningPageState extends State<PlanningPage> {
   @override
   initState() {
     super.initState();
-    for (var item in listKeranjang) {
+    planningViewModel = Provider.of<PlanningViewModel>(context, listen: false);
+    for (var item in planningViewModel.listKeranjang) {
       if (item.date![1] == " ") {
         if (item.date!.substring(0, 1) ==
             checkWeek()[currentSelectedIndex!].date) {
@@ -197,7 +199,7 @@ class _PlanningPageState extends State<PlanningPage> {
                             fontFamily: "Quicksand",
                             color: const Color(0xFF6A6A6A))),
                     Text(
-                        (listKeranjang.isEmpty)
+                        (planningViewModel.listKeranjang.isEmpty)
                             ? "0"
                             : "Rp${totalPrice(tempList).toString()}00",
                         style: Theme.of(context).textTheme.headline5!.copyWith(
@@ -212,7 +214,7 @@ class _PlanningPageState extends State<PlanningPage> {
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10.0),
-                          backgroundColor: (listKeranjang.any((item) {
+                          backgroundColor: (planningViewModel.listKeranjang.any((item) {
                             if (item.date![1] == " ") {
                               if (item.date!.substring(0, 1) ==
                                   checkWeek()[currentSelectedIndex!].date) {
@@ -239,8 +241,8 @@ class _PlanningPageState extends State<PlanningPage> {
                                   color: Colors.white,
                                   fontFamily: "Quicksand")),
                       onPressed: () {
-                        if (listKeranjang.isNotEmpty) {
-                          for (var item in listKeranjang) {
+                        if (planningViewModel.listKeranjang.isNotEmpty) {
+                          for (var item in planningViewModel.listKeranjang) {
                             if (item.date![1] == " ") {
                               if (item.date!.substring(0, 1) ==
                                   checkWeek()[currentSelectedIndex!].date) {
@@ -326,7 +328,7 @@ class _PlanningPageState extends State<PlanningPage> {
                           )),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: (listPesan.isEmpty)
+                          child: (planningViewModel.listPesan.isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -336,7 +338,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                           fontWeight: FontWeight.w500)),
                                 )
                               : Column(
-                                  children: listPesan.mapIndexed(
+                                  children: planningViewModel.listPesan.mapIndexed(
                                   (index, item) {
                                     if (item.date![1] == " ") {
                                       if (item.date!.substring(0, 1) ==
@@ -377,13 +379,13 @@ class _PlanningPageState extends State<PlanningPage> {
                       ),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: (listKeranjang.isEmpty)
+                          child: (planningViewModel.listKeranjang.isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
                                   child: Text("Tidak ada meal kit dikeranjang"),
                                 )
                               : Column(
-                                  children: listKeranjang.mapIndexed(
+                                  children: planningViewModel.listKeranjang.mapIndexed(
                                     (index, item) {
                                       if (item.date![1] == " ") {
                                         if (item.date!.substring(0, 1) ==
@@ -391,7 +393,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
-                                            pesan: listKeranjang[index],
+                                            pesan: planningViewModel.listKeranjang[index],
                                           );
                                         } else {
                                           return Container();
@@ -402,7 +404,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
-                                            pesan: listKeranjang[index],
+                                            pesan: planningViewModel.listKeranjang[index],
                                           );
                                         } else {
                                           return Container();
