@@ -26,8 +26,7 @@ class APIServices {
           "userID": "1",
           "cart": jsonEncode(cart),
         }));
-    print(jsonEncode(cart).runtimeType);
-    print(response.body);
+
     return response.body;
   }
 }

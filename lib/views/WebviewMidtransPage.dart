@@ -32,7 +32,6 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
     // Call ViewModel function to redirect to payment gateaway webview
     Future<void> createOrder() async {
       var getPay = await checkoutViewModel.fetchCreateOrder(tempList);
-      print('hello $getPay');
     }
 
 
@@ -50,14 +49,12 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
           return NavigationDecision.prevent;
         } else if (request.url
             .contains("https://kukoki.com/checkout/unfinish")) {
-          print("canceled");
           Navigator.pop(context, "Payment Failedd");
 
           return NavigationDecision.prevent;
         } else if (request.url.contains("https://kukoki.com/checkout/finish")) {
           String res = request.url;
           if (res.contains("transaction_status=settlement")) {
-            print("Success");
             setState(() {
               createOrder();
               planningViewModel.orderList.insertAll(0, tempList);
@@ -71,10 +68,8 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
               "waktuTransaksi": DateTime.now()
             });
           } else if (res.contains("transaction_status=pending")) {
-            print("PENDING");
             Navigator.pop(context, "Payment Failed");
           } else {
-            print("ELSE");
             setState(() {
               planningViewModel.orderList.insertAll(0, tempList);
               for (var item in tempList) {
@@ -90,7 +85,6 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
 
           return NavigationDecision.prevent;
         } else if (request.url.contains("https://kukoki.com/checkout/error")) {
-          print("error");
           Navigator.pop(context, "Payment Failed");
           return NavigationDecision.prevent;
         }
