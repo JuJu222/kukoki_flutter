@@ -14,4 +14,20 @@ class APIServices {
 
     return response.body;
   }
+
+  Future<dynamic> createOrder(
+      List<Meal> cart,
+      ) async {
+    var response = await http.post(Uri.parse(Const.baseUrl + "createOrder"),
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+        body: jsonEncode(<String, dynamic>{
+          "userID": "1",
+          "cart": jsonEncode(cart),
+        }));
+    print(jsonEncode(cart).runtimeType);
+    print(response.body);
+    return response.body;
+  }
 }

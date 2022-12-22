@@ -1,28 +1,28 @@
 part of 'ViewModels.dart';
 
-class PaymentViewModel extends ChangeNotifier {
-  late Payments paymentResult;
+class CheckoutViewModel extends ChangeNotifier {
+  late OrderResponse createOrderResult;
   late ResultState resultState;
   String messageResult = "";
 
   String get message => messageResult;
 
-  Payments get result => paymentResult;
+  OrderResponse get result => createOrderResult;
 
   ResultState get state => resultState;
 
-  // Fetch SnapURL from Midtrans
-  Future<dynamic> fetchPaymentGateaway(String amount) async {
+  //Fetch SnapURL from Midtrans
+  Future<dynamic> fetchCreateOrder(List<Meal> cart) async {
     try {
-      final getPayment = await PaymentRepository().getPaymentRepository(amount);
-      if (getPayment.snapUrl == null) {
+      final createOrder = await CheckoutRepository().getCheckoutRepository(cart);
+      if (createOrder.status == null) {
         resultState = ResultState.noData;
         notifyListeners();
         return messageResult = "empty data";
       } else {
         resultState = ResultState.hasData;
         notifyListeners();
-        return paymentResult = getPayment;
+        return createOrderResult = createOrder;
       }
     } catch (e) {
       resultState = ResultState.error;

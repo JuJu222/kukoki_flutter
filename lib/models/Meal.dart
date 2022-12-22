@@ -15,5 +15,12 @@ class Meal {
       required this.menuPrice,
       required this.date,
       this.menuId});
-}
 
+  Map<String, dynamic> toJson(){
+    return {
+      "meal_id": menuId,
+      "portion": numberOfPeople,
+      "date": date,
+    };
+  }
+}

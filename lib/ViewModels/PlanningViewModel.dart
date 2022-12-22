@@ -8,7 +8,7 @@ class PlanningViewModel extends ChangeNotifier {
       menuPrice: "60.000",
       images: "assets/images/foods/imagefood5.png",
       numberOfPeople: "4",
-      menuId: 50,
+      menuId: 1,
     ),
     Meal(
       date: "22 November 2022",
@@ -16,7 +16,7 @@ class PlanningViewModel extends ChangeNotifier {
       menuPrice: "30.000",
       images: "assets/images/foods/imagefood2.png",
       numberOfPeople: "2",
-      menuId: 48,
+      menuId: 2,
     ),
     Meal(
       date: "22 November 2022",
@@ -24,7 +24,7 @@ class PlanningViewModel extends ChangeNotifier {
       menuPrice: "50.000",
       images: "assets/images/foods/imagefood3.png",
       numberOfPeople: "4",
-      menuId: 49,
+      menuId: 3,
     ),
   ];
 
@@ -43,7 +43,7 @@ class PlanningViewModel extends ChangeNotifier {
     menuPrice: "50.000",
     images: "assets/images/foods/imagefood3.png",
     numberOfPeople: "4",
-    menuId: 49,
+    menuId: 3,
   ),
   Meal(
     date: "6 November 2022",
@@ -51,7 +51,7 @@ class PlanningViewModel extends ChangeNotifier {
     menuPrice: "60.000",
     images: "assets/images/foods/imagefood5.png",
     numberOfPeople: "4",
-    menuId: 50,
+    menuId: 1,
   ),
   Meal(
     date: "16 November 2022",
@@ -67,7 +67,7 @@ class PlanningViewModel extends ChangeNotifier {
     menuPrice: "50.000",
     images: "assets/images/foods/imagefood3.png",
     numberOfPeople: "4",
-    menuId: 49,
+    menuId: 3,
   ),
   Meal(
     date: "16 November 2022",
@@ -75,7 +75,7 @@ class PlanningViewModel extends ChangeNotifier {
     menuPrice: "60.000",
     images: "assets/images/foods/imagefood5.png",
     numberOfPeople: "4",
-    menuId: 50,
+    menuId: 1,
   ),
   Meal(
     date: "16 November 2022",
@@ -83,7 +83,7 @@ class PlanningViewModel extends ChangeNotifier {
     menuPrice: "30.000",
     images: "assets/images/foods/imagefood2.png",
     numberOfPeople: "2",
-    menuId: 48,
+    menuId: 2,
   ),
 ];
 }

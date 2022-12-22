@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kukoki_flutter/Repositories/PaymentRepository.dart';
 import 'package:kukoki_flutter/ViewModels/ViewModels.dart';
-import 'package:kukoki_flutter/models/Recipe.dart';
 import 'package:kukoki_flutter/views/pages.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider.value(value: PaymentViewModel()),
           ChangeNotifierProvider.value(value: PlanningViewModel()),
+          ChangeNotifierProvider.value(value: CheckoutViewModel()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

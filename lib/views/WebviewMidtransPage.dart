@@ -13,6 +13,7 @@ class WebviewMidtransPage extends StatefulWidget {
 
 class _WebviewMidtransState extends State<WebviewMidtransPage> {
   late PlanningViewModel planningViewModel;
+  late CheckoutViewModel checkoutViewModel;
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 
@@ -20,12 +21,21 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
   initState() {
     super.initState();
     planningViewModel = Provider.of<PlanningViewModel>(context, listen: false);
+    checkoutViewModel = Provider.of<CheckoutViewModel>(context, listen: false);
   }
 
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
     List<Meal> tempList = data["tempListKeranjang"];
+
+    // Call ViewModel function to redirect to payment gateaway webview
+    Future<void> createOrder() async {
+      var getPay = await checkoutViewModel.fetchCreateOrder(tempList);
+      print('hello $getPay');
+    }
+
+
     return Scaffold(
         body: WebView(
       initialUrl: data["snapUrl"],
@@ -49,6 +59,7 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
           if (res.contains("transaction_status=settlement")) {
             print("Success");
             setState(() {
+              createOrder();
               planningViewModel.orderList.insertAll(0, tempList);
               for (var item in tempList) {
                 planningViewModel.cartList.removeWhere((element) => element == item);
