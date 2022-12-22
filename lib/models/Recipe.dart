@@ -30,7 +30,7 @@ class Recipe {
   });
 }
 
-List<Recipe> listResep = [
+List<Recipe> recipeList = [
   Recipe(
       menuId: 0,
       menuImage: 'assets/images/foods/resep/salmon.png',

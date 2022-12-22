@@ -1,7 +1,7 @@
 part of '../widgets/widgets.dart';
 
 class CheckoutTile extends StatelessWidget {
-  final Order pesan;
+  final Meal pesan;
   const CheckoutTile({super.key, required this.pesan});
 
   @override
@@ -99,7 +99,7 @@ class CheckoutTile extends StatelessWidget {
 }
 
 class CheckoutTileWithIcon extends StatefulWidget {
-  Order pesan;
+  Meal pesan;
   Function onDelete;
   CheckoutTileWithIcon(
       {super.key, required this.pesan, required this.onDelete});

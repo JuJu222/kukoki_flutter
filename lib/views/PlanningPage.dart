@@ -13,7 +13,7 @@ class _PlanningPageState extends State<PlanningPage> {
   late int isWeek = 4;
   late PlanningViewModel planningViewModel;
   double totalPricing = 0;
-  List<Order> tempList = [];
+  List<Meal> tempList = [];
   List<int> noWeek = [1, 2, 3, 4, 5];
   List<String> week = [
     "1-6 November 2022",
@@ -97,12 +97,12 @@ class _PlanningPageState extends State<PlanningPage> {
   void removeItem(int index) {
     setState(() {
       tempList.removeAt(index);
-      planningViewModel.listKeranjang.removeAt(index);
+      planningViewModel.cartList.removeAt(index);
     });
   }
 
   // Count total price of mealkits in the cart
-  double totalPrice(List<Order> tempList) {
+  double totalPrice(List<Meal> tempList) {
     totalPricing = 0;
     for (var e in tempList) {
       setState(() {
@@ -133,7 +133,7 @@ class _PlanningPageState extends State<PlanningPage> {
   initState() {
     super.initState();
     planningViewModel = Provider.of<PlanningViewModel>(context, listen: false);
-    for (var item in planningViewModel.listKeranjang) {
+    for (var item in planningViewModel.cartList) {
       if (item.date![1] == " ") {
         if (item.date!.substring(0, 1) ==
             checkWeek()[currentSelectedIndex!].date) {
@@ -199,7 +199,7 @@ class _PlanningPageState extends State<PlanningPage> {
                             fontFamily: "Quicksand",
                             color: const Color(0xFF6A6A6A))),
                     Text(
-                        (planningViewModel.listKeranjang.isEmpty)
+                        (planningViewModel.cartList.isEmpty)
                             ? "0"
                             : "Rp${totalPrice(tempList).toString()}00",
                         style: Theme.of(context).textTheme.headline5!.copyWith(
@@ -214,7 +214,7 @@ class _PlanningPageState extends State<PlanningPage> {
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10.0),
-                          backgroundColor: (planningViewModel.listKeranjang.any((item) {
+                          backgroundColor: (planningViewModel.cartList.any((item) {
                             if (item.date![1] == " ") {
                               if (item.date!.substring(0, 1) ==
                                   checkWeek()[currentSelectedIndex!].date) {
@@ -241,8 +241,8 @@ class _PlanningPageState extends State<PlanningPage> {
                                   color: Colors.white,
                                   fontFamily: "Quicksand")),
                       onPressed: () {
-                        if (planningViewModel.listKeranjang.isNotEmpty) {
-                          for (var item in planningViewModel.listKeranjang) {
+                        if (planningViewModel.cartList.isNotEmpty) {
+                          for (var item in planningViewModel.cartList) {
                             if (item.date![1] == " ") {
                               if (item.date!.substring(0, 1) ==
                                   checkWeek()[currentSelectedIndex!].date) {
@@ -328,7 +328,7 @@ class _PlanningPageState extends State<PlanningPage> {
                           )),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: (planningViewModel.listPesan.isEmpty)
+                          child: (planningViewModel.orderList.isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -338,7 +338,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                           fontWeight: FontWeight.w500)),
                                 )
                               : Column(
-                                  children: planningViewModel.listPesan.mapIndexed(
+                                  children: planningViewModel.orderList.mapIndexed(
                                   (index, item) {
                                     if (item.date![1] == " ") {
                                       if (item.date!.substring(0, 1) ==
@@ -379,13 +379,13 @@ class _PlanningPageState extends State<PlanningPage> {
                       ),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: (planningViewModel.listKeranjang.isEmpty)
+                          child: (planningViewModel.cartList.isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
                                   child: Text("Tidak ada meal kit dikeranjang"),
                                 )
                               : Column(
-                                  children: planningViewModel.listKeranjang.mapIndexed(
+                                  children: planningViewModel.cartList.mapIndexed(
                                     (index, item) {
                                       if (item.date![1] == " ") {
                                         if (item.date!.substring(0, 1) ==
@@ -393,7 +393,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
-                                            pesan: planningViewModel.listKeranjang[index],
+                                            pesan: planningViewModel.cartList[index],
                                           );
                                         } else {
                                           return Container();
@@ -404,7 +404,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
-                                            pesan: planningViewModel.listKeranjang[index],
+                                            pesan: planningViewModel.cartList[index],
                                           );
                                         } else {
                                           return Container();

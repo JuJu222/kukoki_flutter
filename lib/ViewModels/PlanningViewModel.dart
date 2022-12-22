@@ -1,8 +1,8 @@
 part of "ViewModels.dart";
 
 class PlanningViewModel extends ChangeNotifier {
-  List<Order> listKeranjang = [
-    Order(
+  List<Meal> cartList = [
+    Meal(
       date: "22 November 2022",
       menuName: "Pesto Pasta Chicken",
       menuPrice: "60.000",
@@ -10,7 +10,7 @@ class PlanningViewModel extends ChangeNotifier {
       numberOfPeople: "4",
       menuId: 50,
     ),
-    Order(
+    Meal(
       date: "22 November 2022",
       menuName: "Unagi Ramen",
       menuPrice: "30.000",
@@ -18,7 +18,7 @@ class PlanningViewModel extends ChangeNotifier {
       numberOfPeople: "2",
       menuId: 48,
     ),
-    Order(
+    Meal(
       date: "22 November 2022",
       menuName: "Nabe Veggie Udon",
       menuPrice: "50.000",
@@ -28,8 +28,8 @@ class PlanningViewModel extends ChangeNotifier {
     ),
   ];
 
-  List<Order> listPesan = [
-  Order(
+  List<Meal> orderList = [
+  Meal(
     date: "6 November 2022",
     menuName: "Grilled Salmon",
     menuPrice: "80.000",
@@ -37,7 +37,7 @@ class PlanningViewModel extends ChangeNotifier {
     numberOfPeople: "4",
     menuId: 0,
   ),
-  Order(
+  Meal(
     date: "6 November 2022",
     menuName: "Nabe Veggie Udon",
     menuPrice: "50.000",
@@ -45,7 +45,7 @@ class PlanningViewModel extends ChangeNotifier {
     numberOfPeople: "4",
     menuId: 49,
   ),
-  Order(
+  Meal(
     date: "6 November 2022",
     menuName: "Pesto Pasta Chicken",
     menuPrice: "60.000",
@@ -53,7 +53,7 @@ class PlanningViewModel extends ChangeNotifier {
     numberOfPeople: "4",
     menuId: 50,
   ),
-  Order(
+  Meal(
     date: "16 November 2022",
     menuName: "Grilled Salmon",
     menuPrice: "80.000",
@@ -61,7 +61,7 @@ class PlanningViewModel extends ChangeNotifier {
     numberOfPeople: "4",
     menuId: 0,
   ),
-  Order(
+  Meal(
     date: "16 November 2022",
     menuName: "Nabe Veggie Udon",
     menuPrice: "50.000",
@@ -69,7 +69,7 @@ class PlanningViewModel extends ChangeNotifier {
     numberOfPeople: "4",
     menuId: 49,
   ),
-  Order(
+  Meal(
     date: "16 November 2022",
     menuName: "Pesto Pasta Chicken",
     menuPrice: "60.000",
@@ -77,7 +77,7 @@ class PlanningViewModel extends ChangeNotifier {
     numberOfPeople: "4",
     menuId: 50,
   ),
-  Order(
+  Meal(
     date: "16 November 2022",
     menuName: "Unagi Ramen",
     menuPrice: "30.000",

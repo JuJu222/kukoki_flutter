@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-class Order {
+class Meal {
   String? images;
   String? menuName;
   String? numberOfPeople;
@@ -8,7 +8,7 @@ class Order {
   String? date;
   String? preparationTime;
   int? menuId;
-  Order(
+  Meal(
       {required this.images,
       required this.menuName,
       required this.numberOfPeople,

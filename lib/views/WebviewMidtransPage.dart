@@ -25,7 +25,7 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
-    List<Order> tempList = data["tempListKeranjang"];
+    List<Meal> tempList = data["tempListKeranjang"];
     return Scaffold(
         body: WebView(
       initialUrl: data["snapUrl"],
@@ -49,9 +49,9 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
           if (res.contains("transaction_status=settlement")) {
             print("Success");
             setState(() {
-              planningViewModel.listPesan.insertAll(0, tempList);
+              planningViewModel.orderList.insertAll(0, tempList);
               for (var item in tempList) {
-                planningViewModel.listKeranjang.removeWhere((element) => element == item);
+                planningViewModel.cartList.removeWhere((element) => element == item);
               }
             });
             Navigator.pushReplacementNamed(
@@ -65,9 +65,9 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
           } else {
             print("ELSE");
             setState(() {
-              planningViewModel.listPesan.insertAll(0, tempList);
+              planningViewModel.orderList.insertAll(0, tempList);
               for (var item in tempList) {
-                planningViewModel.listKeranjang.removeWhere((element) => element == item);
+                planningViewModel.cartList.removeWhere((element) => element == item);
               }
             });
             Navigator.pushReplacementNamed(

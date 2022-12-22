@@ -22,10 +22,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
-    List<Order> tempList = data["currentList"];
+    List<Meal> tempList = data["currentList"];
 
     // Calculate total price
-    int totalPriceFood(List<Order> tempList) {
+    int totalPriceFood(List<Meal> tempList) {
       totalPricing = 0;
       tempList.forEach((e) {
         setState(() {
@@ -39,7 +39,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
     // Calculate price
     int totalPrice(
-        Function totalPriceFood, int ongkosKirim, List<Order> tempList) {
+        Function totalPriceFood, int ongkosKirim, List<Meal> tempList) {
       totalPricingFull = 0;
       totalPricingFull = totalPriceFood(tempList) + ongkosKirim;
       tempList = [];
