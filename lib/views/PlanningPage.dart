@@ -283,6 +283,15 @@ class _PlanningPageState extends State<PlanningPage> {
                               }
                             }
                           }
+                        } else {
+                          ScaffoldMessenger.of(context)
+                            ..removeCurrentSnackBar()
+                            ..showSnackBar(SnackBar(
+                                action: SnackBarAction(
+                                  label: "OK",
+                                  onPressed: () {},
+                                ),
+                                content: Text('No meal kits in cart')));
                         }
                       },
                     ),
