@@ -325,7 +325,7 @@ class _PlanningPageState extends State<PlanningPage> {
                           child: Row(
                             children: [
                               const SizedBox(width: 10.0),
-                              Text("Telah Dipesan",
+                              Text("Ordered Meal Kits",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline5!
@@ -341,7 +341,7 @@ class _PlanningPageState extends State<PlanningPage> {
                               ? const Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                      "Tidak ada meal kit yang telah dipesan",
+                                      "No ordered meal kits",
                                       style: TextStyle(
                                           fontFamily: "Quicksand",
                                           fontWeight: FontWeight.w500)),
@@ -376,7 +376,7 @@ class _PlanningPageState extends State<PlanningPage> {
                       Row(
                         children: [
                           const SizedBox(width: 10.0),
-                          Text("Keranjang",
+                          Text("Cart",
                               style: Theme.of(context)
                                   .textTheme
                                   .headline5!
@@ -391,7 +391,7 @@ class _PlanningPageState extends State<PlanningPage> {
                           child: (planningViewModel.cartList.isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
-                                  child: Text("Tidak ada meal kit dikeranjang"),
+                                  child: Text("No meal kits in cart"),
                                 )
                               : Column(
                                   children: planningViewModel.cartList.mapIndexed(
