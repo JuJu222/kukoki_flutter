@@ -20,10 +20,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
     await userViewModel.fetchGetUser().then((result) {
       setState(() {
         userResponse = result as UserResponse;
-        if(userResponse != null) {
+        if (userResponse != null) {
           isLoading = false;
         }
-        });
+      });
     });
   }
 
@@ -55,15 +55,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
     // Calculate price
     int totalPrice(
-        Function totalPriceFood, int ongkosKirim, List<Meal> tempList) {
+        Function totalPriceFood, int deliveryFee, List<Meal> tempList) {
       totalPricingFull = 0;
-      totalPricingFull = totalPriceFood(tempList) + ongkosKirim;
+      totalPricingFull = totalPriceFood(tempList) + deliveryFee;
       tempList = [];
       return totalPricingFull;
     }
 
     // Call ViewModel function to redirect to payment gateaway webview
-    Future<void> NavigatePaymentGateaway(BuildContext context) async {
+    Future<void> navigatePaymentGateaway(BuildContext context) async {
       var totalPriceVariable =
           "${totalPrice(totalPriceFood, 20000, tempList).toString()}";
       var getPay = await paymentViewModel.fetchPaymentGateaway(
@@ -90,362 +90,406 @@ class _CheckoutPageState extends State<CheckoutPage> {
       }
     }
 
-    return isLoading ? Loading.loading() : Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: primaryColor),
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: Text(
-          "Checkout",
-          style: Theme.of(context).textTheme.headline5!.copyWith(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              fontFamily: "Quicksand"),
-        ),
-      ),
-      body: SlidingUpPanel(
-        minHeight: 105,
-        maxHeight: 210,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-        panel: Center(
-          child: Container(
-            padding: EdgeInsets.all(10),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Column(
+    return isLoading
+        ? Loading.loading()
+        : Scaffold(
+            appBar: AppBar(
+              iconTheme: IconThemeData(color: primaryColor),
+              backgroundColor: Colors.transparent,
+              centerTitle: true,
+              title: Text(
+                "Checkout",
+                style: Theme.of(context).textTheme.headline5!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    fontFamily: "Quicksand"),
+              ),
+            ),
+            body: SlidingUpPanel(
+              minHeight: 105,
+              maxHeight: 210,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+              panel: Center(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Total",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    fontFamily: "Quicksand")),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      child: Row(children: [
-                                        Text("Rp.",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
-                                                    fontFamily: "Quicksand")),
-                                        SizedBox(width: 2.0),
-                                        Text(
-                                            "${(totalPrice(totalPriceFood, 20000, tempList).toString())}",
-                                            overflow: TextOverflow.fade,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 32,
-                                                    fontFamily: "Quicksand")),
-                                      ]),
-                                    ),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 40.0, vertical: 12.0),
-                                          backgroundColor: Color(0xFF1C9FE2),
-                                          elevation: 0.0,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0))),
-                                      child: Text("Order",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline5!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16,
-                                                  color: Colors.white,
-                                                  fontFamily: "Quicksand")),
-                                      onPressed: () async {
-                                        await CircularProgressIndicator();
-                                        NavigatePaymentGateaway(context);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ]),
-          ),
-        ),
-        body: Container(
-          width: double.infinity,
-          height: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-          child: Column(
-            children: [
-              Flexible(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 25.0),
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Alamat Pengiriman",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFF1C9FE2),
-                                        fontSize: 16,
-                                        fontFamily: "Quicksand")),
-                            SizedBox(height: 17),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                          size: 30,
-                                          Icons.person,
-                                          color: Color(0xFF707070)),
-                                      SizedBox(width: 10),
-                                      Text("${userResponse.user?.fullName}",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline5!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xFF707070),
-                                                  fontSize: 12,
-                                                  fontFamily: "Quicksand")),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                          size: 30,
-                                          Icons.phone_outlined,
-                                          color: Color(0xFF707070)),
-                                      SizedBox(width: 10),
-                                      Text("${userResponse.user?.phone}",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline5!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xFF707070),
-                                                  fontSize: 14,
-                                                  fontFamily: "Quicksand")),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 25.0),
-                            Row(
-                              children: [
-                                Icon(
-                                    size: 30,
-                                    Icons.location_on_outlined,
-                                    color: Color(0xFF707070)),
-                                SizedBox(width: 10),
-                                Flexible(
-                                  flex: 1,
-                                  child: Text(
-                                      "${userResponse.user?.address}, ${userResponse.user?.district}, ${userResponse.user?.ward}, Kota ${userResponse.user?.city}, ${userResponse.user?.province}",
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Total",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline5!
                                           .copyWith(
                                               fontWeight: FontWeight.bold,
-                                              color: Color(0xFF707070),
-                                              fontSize: 12,
+                                              fontSize: 18,
                                               fontFamily: "Quicksand")),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 25.0),
-                      Container(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text("Pesanan",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline5!
-                                      .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xFF1C9FE2),
-                                          fontSize: 16,
-                                          fontFamily: "Quicksand")),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                child: Row(children: [
+                                                  Text("Rp.",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headline5!
+                                                          .copyWith(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 18,
+                                                              fontFamily:
+                                                                  "Quicksand")),
+                                                  SizedBox(width: 2.0),
+                                                  Text(
+                                                      "${(totalPrice(totalPriceFood, 20000, tempList).toString())}",
+                                                      overflow:
+                                                          TextOverflow.fade,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headline5!
+                                                          .copyWith(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 32,
+                                                              fontFamily:
+                                                                  "Quicksand")),
+                                                ]),
+                                              ),
+                                              ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 40.0,
+                                                            vertical: 12.0),
+                                                    backgroundColor:
+                                                        Color(0xFF1C9FE2),
+                                                    elevation: 0.0,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0))),
+                                                child: Text("Order",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headline5!
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 16,
+                                                            color: Colors.white,
+                                                            fontFamily:
+                                                                "Quicksand")),
+                                                onPressed: () async {
+                                                  await CircularProgressIndicator();
+                                                  navigatePaymentGateaway(
+                                                      context);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              )
                             ],
                           ),
-                          SizedBox(height: 5),
-                          ...tempList.mapIndexed(
-                            (index, e) {
-                              return CheckoutTile(
-                                pesan: tempList[index],
-                              );
-                            },
-                          )
-                        ],
-                      )),
-                      SizedBox(height: 15.0),
-                      Container(
+                        ),
+                      ]),
+                ),
+              ),
+              body: Container(
+                width: double.infinity,
+                height: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                child: Column(
+                  children: [
+                    Flexible(
+                      child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text("Rincian Pembayaran",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline5!
-                                        .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xFF1C9FE2),
-                                            fontSize: 16,
-                                            fontFamily: "Quicksand")),
-                              ],
-                            ),
-                            SizedBox(height: 10.0),
-                            Card(
-                              elevation: 0.0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  side: BorderSide(
-                                      width: 1.4, color: Color(0xFFBFBFBF))),
-                              child: Container(
-                                padding: EdgeInsets.all(20),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Harga Makanan",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                    fontFamily: "Quicksand")),
-                                        Text(
-                                            "Rp${totalPriceFood(tempList).toString()}",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                    fontFamily: "Quicksand")),
-                                      ],
-                                    ),
-                                    SizedBox(height: 10.0),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Ongkos Kirim",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                    fontFamily: "Quicksand")),
-                                        Text("Rp20.000",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                    fontFamily: "Quicksand")),
-                                      ],
-                                    ),
-                                    SizedBox(height: 15.0),
-                                    Divider(
-                                        color: Colors.grey[400], height: 10),
-                                    SizedBox(height: 15.0),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Total",
+                            SizedBox(height: 25.0),
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Alamat Pengiriman",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5!
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF1C9FE2),
+                                              fontSize: 16,
+                                              fontFamily: "Quicksand")),
+                                  SizedBox(height: 17),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                                size: 30,
+                                                Icons.person,
+                                                color: Color(0xFF707070)),
+                                            SizedBox(width: 10),
+                                            Text(
+                                                "${userResponse.user?.fullName}",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline5!
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            Color(0xFF707070),
+                                                        fontSize: 12,
+                                                        fontFamily:
+                                                            "Quicksand")),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                                size: 30,
+                                                Icons.phone_outlined,
+                                                color: Color(0xFF707070)),
+                                            SizedBox(width: 10),
+                                            Text("${userResponse.user?.phone}",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline5!
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            Color(0xFF707070),
+                                                        fontSize: 14,
+                                                        fontFamily:
+                                                            "Quicksand")),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 25.0),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                          size: 30,
+                                          Icons.location_on_outlined,
+                                          color: Color(0xFF707070)),
+                                      SizedBox(width: 10),
+                                      Flexible(
+                                        flex: 1,
+                                        child: Text(
+                                            "${userResponse.user?.address}, ${userResponse.user?.district}, ${userResponse.user?.ward}, Kota ${userResponse.user?.city}, ${userResponse.user?.province}",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline5!
                                                 .copyWith(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Color(0xFF1C9FE2),
-                                                    fontSize: 16,
+                                                    color: Color(0xFF707070),
+                                                    fontSize: 12,
                                                     fontFamily: "Quicksand")),
-                                        Text(
-                                            "Rp${(totalPrice(totalPriceFood, 20000, tempList).toString())}",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color(0xFF1C9FE2),
-                                                    fontSize: 16,
-                                                    fontFamily: "Quicksand")),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(height: 20.0),
-                            Container(height: 200, width: double.infinity)
+                            SizedBox(height: 25.0),
+                            Container(
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text("Pesanan",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline5!
+                                            .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xFF1C9FE2),
+                                                fontSize: 16,
+                                                fontFamily: "Quicksand")),
+                                  ],
+                                ),
+                                SizedBox(height: 5),
+                                ...tempList.mapIndexed(
+                                  (index, e) {
+                                    return CheckoutTile(
+                                      pesan: tempList[index],
+                                    );
+                                  },
+                                )
+                              ],
+                            )),
+                            SizedBox(height: 15.0),
+                            Container(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text("Rincian Pembayaran",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5!
+                                              .copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color(0xFF1C9FE2),
+                                                  fontSize: 16,
+                                                  fontFamily: "Quicksand")),
+                                    ],
+                                  ),
+                                  SizedBox(height: 10.0),
+                                  Card(
+                                    elevation: 0.0,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        side: BorderSide(
+                                            width: 1.4,
+                                            color: Color(0xFFBFBFBF))),
+                                    child: Container(
+                                      padding: EdgeInsets.all(20),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("Harga Makanan",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline5!
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.black,
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              "Quicksand")),
+                                              Text(
+                                                  "Rp${totalPriceFood(tempList).toString()}",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline5!
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: Colors.black,
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              "Quicksand")),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10.0),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("Ongkos Kirim",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline5!
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.black,
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              "Quicksand")),
+                                              Text("Rp20.000",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline5!
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: Colors.black,
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              "Quicksand")),
+                                            ],
+                                          ),
+                                          SizedBox(height: 15.0),
+                                          Divider(
+                                              color: Colors.grey[400],
+                                              height: 10),
+                                          SizedBox(height: 15.0),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("Total",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline5!
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color:
+                                                              Color(0xFF1C9FE2),
+                                                          fontSize: 16,
+                                                          fontFamily:
+                                                              "Quicksand")),
+                                              Text(
+                                                  "Rp${(totalPrice(totalPriceFood, 20000, tempList).toString())}",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline5!
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color:
+                                                              Color(0xFF1C9FE2),
+                                                          fontSize: 16,
+                                                          fontFamily:
+                                                              "Quicksand")),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 20.0),
+                                  Container(height: 200, width: double.infinity)
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 }
