@@ -9,14 +9,30 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
+  bool isLoading = true;
   int totalPricingFull = 0;
   int totalPricing = 0;
   late PaymentViewModel paymentViewModel;
+  late UserViewModel userViewModel;
+  var userResponse;
+
+  Future<void> getUser() async {
+    await userViewModel.fetchGetUser().then((result) {
+      setState(() {
+        userResponse = result as UserResponse;
+        if(userResponse != null) {
+          isLoading = false;
+        }
+        });
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     paymentViewModel = Provider.of<PaymentViewModel>(context, listen: false);
+    userViewModel = Provider.of<UserViewModel>(context, listen: false);
+    getUser();
   }
 
   @override
@@ -74,7 +90,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       }
     }
 
-    return Scaffold(
+    return isLoading ? Loading.loading() : Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: primaryColor),
         backgroundColor: Colors.transparent,
@@ -216,7 +232,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                           Icons.person,
                                           color: Color(0xFF707070)),
                                       SizedBox(width: 10),
-                                      Text("Kenny Jinhiro",
+                                      Text("${userResponse.user?.fullName}",
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline5!
@@ -236,7 +252,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                           Icons.phone_outlined,
                                           color: Color(0xFF707070)),
                                       SizedBox(width: 10),
-                                      Text("0812345678901",
+                                      Text("${userResponse.user?.phone}",
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline5!
@@ -261,7 +277,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 Flexible(
                                   flex: 1,
                                   child: Text(
-                                      "Jl. CitraLand CBD Boulevard, Made, Kec. Sambikerep, Kota SBY, Jawa Timur 60219",
+                                      "${userResponse.user?.address}, ${userResponse.user?.district}, ${userResponse.user?.ward}, Kota ${userResponse.user?.city}, ${userResponse.user?.province}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline5!

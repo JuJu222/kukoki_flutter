@@ -1,18 +1,17 @@
-import "package:flutter/material.dart";
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+part of "widgets.dart";
 
 //loading is like it's own page so it has to be stateless widget
-class Loading extends StatelessWidget {
-  const Loading({super.key});
-
-  @override
-  Widget build(BuildContext context) {
+class Loading  {
+  static Container loading(){
     return Container(
+      alignment: Alignment.center,
+      width: double.infinity,
+      height: double.infinity,
+      color: Colors.white,
+      child: const SpinKitFadingCircle(
+        size: 50,
         color: Color(0xFF1C9FE2),
-        child: const Center(
-            child: SpinKitChasingDots(
-          color: Colors.white,
-          size: 50.0,
-        )));
+      ),
+    );
   }
 }

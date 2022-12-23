@@ -29,7 +29,7 @@ import '../ViewModels/ViewModels.dart';
 import '../data/services/services.dart';
 import '../models/Meal.dart';
 
-import '../widgets/Loading.dart';
+import '../models/UserResponse.dart';
 import '../widgets/widgets.dart';
 part 'CatalogPage.dart';
 part 'HomePage.dart';

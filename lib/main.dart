@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider.value(value: PaymentViewModel()),
           ChangeNotifierProvider.value(value: PlanningViewModel()),
           ChangeNotifierProvider.value(value: CheckoutViewModel()),
+          ChangeNotifierProvider.value(value: UserViewModel())
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
