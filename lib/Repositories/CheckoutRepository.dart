@@ -14,7 +14,6 @@ class CheckoutRepository {
           'userID': '1',
           'cart': jsonEncode(cart),
         }));
-    print(response.body);
     return OrderResponse.fromJson(json.decode(response.body));
   }
 }
