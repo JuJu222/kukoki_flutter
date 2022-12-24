@@ -1,7 +1,24 @@
-part of "pages.dart";
+import 'dart:async';
+import 'dart:ui';
+import 'package:collection/collection.dart';
+import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:getwidget/components/list_tile/gf_list_tile.dart';
+import 'package:provider/provider.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '../Models/Meal.dart';
+import '../Models/UserResponse.dart';
+import '../ViewModels/OrderViewModel.dart';
+import 'WebviewMidtransPage.dart';
 
 class CheckoutPage extends StatefulWidget {
-  static const routeName = "Checkout";
+  static const routeName = 'Checkout';
+
   const CheckoutPage({super.key});
 
   @override
@@ -12,12 +29,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
   bool isLoading = true;
   int totalPricingFull = 0;
   int totalPricing = 0;
-  late PaymentViewModel paymentViewModel;
-  late UserViewModel userViewModel;
+  late OrderViewModel orderViewModel;
   var userResponse;
 
   Future<void> getUser() async {
-    await userViewModel.fetchGetUser().then((result) {
+    await orderViewModel.getUser().then((result) {
       setState(() {
         userResponse = result as UserResponse;
         if (userResponse != null) {
@@ -30,15 +46,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
   @override
   void initState() {
     super.initState();
-    paymentViewModel = Provider.of<PaymentViewModel>(context, listen: false);
-    userViewModel = Provider.of<UserViewModel>(context, listen: false);
+    orderViewModel = Provider.of<OrderViewModel>(context, listen: false);
     getUser();
   }
 
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
-    List<Meal> tempList = data["currentList"];
+    List<Meal> tempList = data['currentList'];
 
     // Calculate total price
     int totalPriceFood(List<Meal> tempList) {
@@ -65,16 +80,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
     // Call ViewModel function to redirect to payment gateaway webview
     Future<void> navigatePaymentGateaway(BuildContext context) async {
       var totalPriceVariable =
-          "${totalPrice(totalPriceFood, 20000, tempList).toString()}";
-      var getPay = await paymentViewModel.fetchPaymentGateaway(
-          "${totalPrice(totalPriceFood, 20000, tempList).toString()}");
+          '${totalPrice(totalPriceFood, 20000, tempList).toString()}';
+      var getPay = await orderViewModel.checkout(
+          '${totalPrice(totalPriceFood, 20000, tempList).toString()}');
       final result = await Navigator.pushNamed(
           context, WebviewMidtransPage.routeName,
           arguments: {
-            "snapUrl": getPay.snapUrl,
-            "totalPembayaran": "$totalPriceVariable",
-            "waktuTransaksi": DateTime.now(),
-            "tempListKeranjang": tempList
+            'snapUrl': getPay.snapUrl,
+            'totalPembayaran': '$totalPriceVariable',
+            'waktuTransaksi': DateTime.now(),
+            'tempListKeranjang': tempList
           });
 
       if (result == null) {
@@ -83,7 +98,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ..removeCurrentSnackBar()
           ..showSnackBar(SnackBar(
               action: SnackBarAction(
-                label: "OK",
+                label: 'OK',
                 onPressed: () {},
               ),
               content: Text('$result')));
@@ -94,15 +109,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
         ? Loading.loading()
         : Scaffold(
             appBar: AppBar(
-              iconTheme: IconThemeData(color: primaryColor),
+              iconTheme: IconThemeData(color: Color(0XFF1c9fe2)),
               backgroundColor: Colors.transparent,
               centerTitle: true,
-              title: Text(
-                "Checkout",
-                style: Theme.of(context).textTheme.headline5!.copyWith(
+              title: const Text(
+                'Checkout',
+                style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
-                    fontFamily: "Quicksand"),
+                    fontFamily: 'Quicksand'),
               ),
             ),
             body: SlidingUpPanel(
@@ -122,14 +137,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Total",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline5!
-                                          .copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                              fontFamily: "Quicksand")),
+                                  const Text('Total',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          fontFamily: 'Quicksand')),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -142,32 +154,23 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                             children: [
                                               Container(
                                                 child: Row(children: [
-                                                  Text("Rp.",
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline5!
-                                                          .copyWith(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
+                                                  const Text('Rp.',
+                                                      style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
                                                               fontSize: 18,
-                                                              fontFamily:
-                                                                  "Quicksand")),
+                                                              fontFamily: 'Quicksand')),
                                                   SizedBox(width: 2.0),
                                                   Text(
-                                                      "${(totalPrice(totalPriceFood, 20000, tempList).toString())}",
+                                                      '${(totalPrice(totalPriceFood, 20000, tempList).toString())}',
                                                       overflow:
                                                           TextOverflow.fade,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline5!
-                                                          .copyWith(
+                                                      style: const TextStyle(
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
                                                               fontSize: 32,
                                                               fontFamily:
-                                                                  "Quicksand")),
+                                                                  'Quicksand')),
                                                 ]),
                                               ),
                                               ElevatedButton(
@@ -185,17 +188,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                                 BorderRadius
                                                                     .circular(
                                                                         5.0))),
-                                                child: Text("Order",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .headline5!
-                                                        .copyWith(
+                                                child: const Text('Order',
+                                                    style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontSize: 16,
                                                             color: Colors.white,
                                                             fontFamily:
-                                                                "Quicksand")),
+                                                                'Quicksand')),
                                                 onPressed: () async {
                                                   await CircularProgressIndicator();
                                                   navigatePaymentGateaway(
@@ -231,15 +231,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Alamat Pengiriman",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline5!
-                                          .copyWith(
+                                  const Text('Alamat Pengiriman',
+                                      style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xFF1C9FE2),
                                               fontSize: 16,
-                                              fontFamily: "Quicksand")),
+                                              fontFamily: 'Quicksand')),
                                   SizedBox(height: 17),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -253,18 +250,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                 color: Color(0xFF707070)),
                                             SizedBox(width: 10),
                                             Text(
-                                                "${userResponse.user?.fullName}",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headline5!
-                                                    .copyWith(
+                                                '${userResponse.user?.fullName}',
+                                                style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         color:
                                                             Color(0xFF707070),
                                                         fontSize: 12,
                                                         fontFamily:
-                                                            "Quicksand")),
+                                                            'Quicksand')),
                                           ],
                                         ),
                                       ),
@@ -276,18 +270,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                 Icons.phone_outlined,
                                                 color: Color(0xFF707070)),
                                             SizedBox(width: 10),
-                                            Text("${userResponse.user?.phone}",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headline5!
-                                                    .copyWith(
+                                            Text('${userResponse.user?.phone}',
+                                                style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         color:
                                                             Color(0xFF707070),
                                                         fontSize: 14,
                                                         fontFamily:
-                                                            "Quicksand")),
+                                                            'Quicksand')),
                                           ],
                                         ),
                                       ),
@@ -304,15 +295,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       Flexible(
                                         flex: 1,
                                         child: Text(
-                                            "${userResponse.user?.address}, ${userResponse.user?.district}, ${userResponse.user?.ward}, Kota ${userResponse.user?.city}, ${userResponse.user?.province}",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(
+                                            '${userResponse.user?.address}, ${userResponse.user?.district}, ${userResponse.user?.ward}, Kota ${userResponse.user?.city}, ${userResponse.user?.province}',
+                                            style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Color(0xFF707070),
                                                     fontSize: 12,
-                                                    fontFamily: "Quicksand")),
+                                                    fontFamily: 'Quicksand')),
                                       ),
                                     ],
                                   ),
@@ -326,16 +314,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               children: [
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text("Pesanan",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline5!
-                                            .copyWith(
+                                  children: const [
+                                    Text('Pesanan',
+                                        style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Color(0xFF1C9FE2),
                                                 fontSize: 16,
-                                                fontFamily: "Quicksand")),
+                                                fontFamily: 'Quicksand')),
                                   ],
                                 ),
                                 SizedBox(height: 5),
@@ -354,19 +339,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text("Rincian Pembayaran",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline5!
-                                              .copyWith(
+                                    children: const [
+                                      Text('Rincian Pembayaran',
+                                          style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Color(0xFF1C9FE2),
                                                   fontSize: 16,
-                                                  fontFamily: "Quicksand")),
+                                                  fontFamily: 'Quicksand')),
                                     ],
                                   ),
-                                  SizedBox(height: 10.0),
+                                const   SizedBox(height: 10.0),
                                   Card(
                                     elevation: 0.0,
                                     shape: RoundedRectangleBorder(
@@ -383,58 +365,46 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text("Harga Makanan",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline5!
-                                                      .copyWith(
+                                              const Text('Harga Makanan',
+                                                  style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           color: Colors.black,
                                                           fontSize: 14,
                                                           fontFamily:
-                                                              "Quicksand")),
+                                                              'Quicksand')),
                                               Text(
-                                                  "Rp${totalPriceFood(tempList).toString()}",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline5!
-                                                      .copyWith(
+                                                  'Rp${totalPriceFood(tempList).toString()}',
+                                                  style: const TextStyle(
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           color: Colors.black,
                                                           fontSize: 14,
                                                           fontFamily:
-                                                              "Quicksand")),
+                                                              'Quicksand')),
                                             ],
                                           ),
                                           SizedBox(height: 10.0),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text("Ongkos Kirim",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline5!
-                                                      .copyWith(
+                                            children: const [
+                                              Text('Ongkos Kirim',
+                                                  style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           color: Colors.black,
                                                           fontSize: 14,
                                                           fontFamily:
-                                                              "Quicksand")),
-                                              Text("Rp20.000",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline5!
-                                                      .copyWith(
+                                                              'Quicksand')),
+                                              Text('Rp20.000',
+                                                  style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           color: Colors.black,
                                                           fontSize: 14,
                                                           fontFamily:
-                                                              "Quicksand")),
+                                                              'Quicksand')),
                                             ],
                                           ),
                                           SizedBox(height: 15.0),
@@ -446,31 +416,25 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text("Total",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline5!
-                                                      .copyWith(
+                                              const Text('Total',
+                                                  style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           color:
                                                               Color(0xFF1C9FE2),
                                                           fontSize: 16,
                                                           fontFamily:
-                                                              "Quicksand")),
+                                                              'Quicksand')),
                                               Text(
-                                                  "Rp${(totalPrice(totalPriceFood, 20000, tempList).toString())}",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline5!
-                                                      .copyWith(
+                                                  'Rp${(totalPrice(totalPriceFood, 20000, tempList).toString())}',
+                                                  style: const TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           color:
                                                               Color(0xFF1C9FE2),
                                                           fontSize: 16,
                                                           fontFamily:
-                                                              "Quicksand")),
+                                                              'Quicksand')),
                                             ],
                                           ),
                                         ],
@@ -491,5 +455,215 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
             ),
           );
+  }
+}
+
+class CheckoutTile extends StatelessWidget {
+  final Meal pesan;
+
+  const CheckoutTile({super.key, required this.pesan});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 0.0,
+      child: GFListTile(
+          margin: const EdgeInsets.all(0),
+          padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 0.0),
+          avatar: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset(
+              '${pesan.images}',
+              width: 79,
+              height: 79,
+              fit: BoxFit.fill,
+            ),
+          ),
+          title: Row(
+            children: [
+              Row(
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Text(pesan.menuName!,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'Quicksand')),
+                ],
+              ),
+            ],
+          ),
+          subTitle: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 5.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Row(
+                    children: [
+                      const Icon(Icons.group,
+                          size: 22, color: Color(0xFF6A6A6A)),
+                      Text('${pesan.numberOfPeople} orang',
+                          style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10,
+                                  color: const Color(0xFF6A6A6A),
+                                  fontFamily: 'Quicksand')),
+                    ],
+                  ),
+                  const SizedBox(width: 16.0),
+                  Row(
+                    children: [
+                      const Icon(Icons.date_range_outlined,
+                          size: 22, color: Color(0xFF6A6A6A)),
+                      Text('${pesan.date}',
+                          style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10,
+                                  color: const Color(0xFF6A6A6A),
+                                  fontFamily: 'Quicksand')),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4.0),
+              Row(
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Text('Rp.${pesan.menuPrice}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10,
+                          fontFamily: 'Quicksand',
+                          color: Color(0xFF1C9FE2))),
+                ],
+              ),
+            ],
+          ),
+          icon: GestureDetector(
+            onTap: () {},
+            child: Icon(Icons.keyboard_arrow_right_rounded),
+          )),
+    );
+  }
+}
+
+class CheckoutTileWithIcon extends StatefulWidget {
+  Meal pesan;
+  Function onDelete;
+
+  CheckoutTileWithIcon(
+      {super.key, required this.pesan, required this.onDelete});
+
+  @override
+  State<CheckoutTileWithIcon> createState() => _CheckoutTileWithIconState();
+}
+
+class _CheckoutTileWithIconState extends State<CheckoutTileWithIcon> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 0.0,
+      child: GFListTile(
+          margin: const EdgeInsets.all(0),
+          padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 0.0),
+          avatar: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset('${widget.pesan.images}',
+                width: 79, height: 79, fit: BoxFit.fill),
+          ),
+          title: Row(
+            children: [
+              Row(
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Text(widget.pesan.menuName!,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'Quicksand')),
+                ],
+              ),
+            ],
+          ),
+          subTitle: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 5.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Row(
+                    children: [
+                      const Icon(Icons.group,
+                          size: 22, color: Color(0xFF6A6A6A)),
+                      Text('${widget.pesan.numberOfPeople} orang',
+                          style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10,
+                                  color: Color(0xFF6A6A6A),
+                                  fontFamily: 'Quicksand')),
+                    ],
+                  ),
+                  const SizedBox(width: 16.0),
+                  Row(
+                    children: [
+                      const Icon(Icons.date_range_outlined,
+                          size: 22, color: Color(0xFF6A6A6A)),
+                      Text('${widget.pesan.date}',
+                          style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10,
+                                  color: Color(0xFF6A6A6A),
+                                  fontFamily: 'Quicksand')),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4.0),
+              Row(
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Text('Rp.${widget.pesan.menuPrice}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10,
+                          fontFamily: 'Quicksand',
+                          color: Color(0xFF1C9FE2))),
+                ],
+              ),
+            ],
+          ),
+          icon: GestureDetector(
+            onTap: () {
+              setState(() {
+                widget.onDelete();
+              });
+            },
+            child: const CircleAvatar(
+                backgroundColor: Color(0xFF703900),
+                child: Icon(Icons.delete_outline_rounded, color: Colors.white)),
+          )),
+    );
+  }
+}
+
+class Loading {
+  static Container loading() {
+    return Container(
+      alignment: Alignment.center,
+      width: double.infinity,
+      height: double.infinity,
+      color: Colors.white,
+      child: const SpinKitFadingCircle(
+        size: 50,
+        color: Color(0xFF1C9FE2),
+      ),
+    );
   }
 }

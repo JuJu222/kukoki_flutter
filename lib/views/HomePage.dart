@@ -1,7 +1,18 @@
-part of 'pages.dart';
+import 'dart:ui';
+import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'CatalogPage.dart';
+import 'MenuPage.dart';
+import 'OrderPage.dart';
+import 'PlanningPage.dart';
+import 'ProfilePage.dart';
 
 class HomePage extends StatefulWidget {
-  static final routeName = "/HomePage";
+  static final routeName = '/HomePage';
 
   const HomePage({Key? key}) : super(key: key);
 

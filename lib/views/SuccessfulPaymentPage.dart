@@ -1,7 +1,16 @@
-part of 'pages.dart';
+import 'dart:ui';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
+import 'HomePage.dart';
 
 class SuccessfulPaymentPage extends StatelessWidget {
-  static const routeName = "/SuccessfulPaymentPage";
+  static const routeName = '/SuccessfulPaymentPage';
+
   const SuccessfulPaymentPage({super.key});
 
   @override
@@ -17,7 +26,7 @@ class SuccessfulPaymentPage extends StatelessWidget {
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.25,
             child: LottieBuilder.asset(
-              "assets/lottie/payment_complete2.json",
+              'assets/lottie/payment_complete2.json',
               repeat: false,
               delegates: LottieDelegates(),
             ),
@@ -26,20 +35,23 @@ class SuccessfulPaymentPage extends StatelessWidget {
             width: double.infinity,
             // color: Colors.red,
             child: Column(children: [
-              Text("Pembayaran Berhasil",
-                  style: Theme.of(context)!.textTheme.headline6!.copyWith(
-                      color: primaryColor,
+              Text('Pembayaran Berhasil',
+                  style: TextStyle(
+                      color: Color(0XFF1c9fe2),
+                      letterSpacing: 0.15,
                       fontWeight: FontWeight.bold,
-                      fontSize: 18)),
+                      fontSize: 18,
+                      fontFamily: 'Quicksand')),
               SizedBox(
                 height: 12,
               ),
               Text(
-                "${data["waktuTransaksi"].day} November ${data["waktuTransaksi"].year}, ${data["waktuTransaksi"].hour}:${data["waktuTransaksi"].minute}",
-                style: Theme.of(context)!
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(letterSpacing: 0.1),
+                '${data['waktuTransaksi'].day} November ${data['waktuTransaksi'].year}, ${data['waktuTransaksi'].hour}:${data['waktuTransaksi'].minute}',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 0.1,
+                    fontFamily: 'Quicksand'),
               ),
               SizedBox(
                 height: 16,
@@ -48,11 +60,12 @@ class SuccessfulPaymentPage extends StatelessWidget {
                 // color: Colors.red,
                 child: Column(children: [
                   Text(
-                    "Total",
-                    style: Theme.of(context)!
-                        .textTheme
-                        .subtitle1!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    'Total',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.15,
+                        fontFamily: 'Quicksand'),
                   ),
                   SizedBox(
                     height: 10,
@@ -71,7 +84,7 @@ class SuccessfulPaymentPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    "Rp.",
+                                    'Rp.',
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontFamily: 'Quicksand',
@@ -86,7 +99,7 @@ class SuccessfulPaymentPage extends StatelessWidget {
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 4),
                                 child: Text(
-                                  "${data["totalPembayaran"]}",
+                                  '${data['totalPembayaran']}',
                                   style: TextStyle(
                                       fontSize: 32,
                                       fontFamily: 'Quicksand',
@@ -107,7 +120,7 @@ class SuccessfulPaymentPage extends StatelessWidget {
                           Container(
                             height: 9,
                             child: SvgPicture.asset(
-                              "assets/images/payments/ovo_logo.svg",
+                              'assets/images/payments/ovo_logo.svg',
                               width: 29,
                               height: 9,
                             ),
@@ -116,7 +129,7 @@ class SuccessfulPaymentPage extends StatelessWidget {
                             width: 8,
                           ),
                           Text(
-                            "0812*****8901",
+                            '0812*****8901',
                             style: TextStyle(
                                 fontSize: 14,
                                 fontFamily: 'Quicksand',
@@ -130,21 +143,20 @@ class SuccessfulPaymentPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0)),
-                          backgroundColor: primaryColor,
+                          backgroundColor: Color(0XFF1c9fe2),
                           padding: EdgeInsets.symmetric(
                               horizontal: 40, vertical: 10.0)),
                       onPressed: () {
                         Navigator.pushNamedAndRemoveUntil(
                             context, HomePage.routeName, (route) => false);
                       },
-                      child: Text("Ok",
-                          style: Theme.of(context)!
-                              .textTheme
-                              .headline6!
-                              .copyWith(
+                      child: Text('Ok',
+                          style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18)))
+                                  fontSize: 18,
+                                  letterSpacing: 0.15,
+                                  fontFamily: 'Quicksand')))
                 ]),
               )
             ]),

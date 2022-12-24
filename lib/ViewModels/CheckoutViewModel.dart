@@ -1,33 +1,38 @@
-part of 'ViewModels.dart';
+import 'package:flutter/cupertino.dart';
+import '../Models/Meal.dart';
+import '../Models/OrderResponse.dart';
+import '../Repositories/CheckoutRepository.dart';
+import '../Repositories/OrderRepository.dart';
 
 class CheckoutViewModel extends ChangeNotifier {
+  List<Meal> getCartList() {
+    return OrderRepository.cartList;
+  }
+
+  void emptyCart() {
+    OrderRepository.cartList = [];
+  }
+
   late OrderResponse createOrderResult;
-  late ResultState resultState;
-  String messageResult = "";
+  String messageResult = '';
 
   String get message => messageResult;
-
   OrderResponse get result => createOrderResult;
 
-  ResultState get state => resultState;
-
-  //Fetch SnapURL from Midtrans
-  Future<dynamic> fetchCreateOrder(List<Meal> cart) async {
+  // Call createOrder function from the repository to be returned to the view
+  Future<dynamic> createOrder(List<Meal> cart) async {
     try {
-      final createOrder = await CheckoutRepository().getCheckoutRepository(cart);
+      final createOrder = await CheckoutRepository().createOrder(cart);
       if (createOrder.status == null) {
-        resultState = ResultState.noData;
         notifyListeners();
-        return messageResult = "empty data";
+        return messageResult = 'empty data';
       } else {
-        resultState = ResultState.hasData;
         notifyListeners();
         return createOrderResult = createOrder;
       }
     } catch (e) {
-      resultState = ResultState.error;
       notifyListeners();
-      return messageResult = "ERROR --> $e";
+      return messageResult = 'ERROR --> $e';
     }
   }
 }

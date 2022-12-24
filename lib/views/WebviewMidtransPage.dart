@@ -1,4 +1,12 @@
-part of 'pages.dart';
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import '../Models/Meal.dart';
+import '../ViewModels/CheckoutViewModel.dart';
+import 'SuccessfulPaymentPage.dart';
 
 class WebviewMidtransPage extends StatefulWidget {
   static const routeName = '/checkout_web';
@@ -12,7 +20,6 @@ class WebviewMidtransPage extends StatefulWidget {
 }
 
 class _WebviewMidtransState extends State<WebviewMidtransPage> {
-  late PlanningViewModel planningViewModel;
   late CheckoutViewModel checkoutViewModel;
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
@@ -20,72 +27,65 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
   @override
   initState() {
     super.initState();
-    planningViewModel = Provider.of<PlanningViewModel>(context, listen: false);
     checkoutViewModel = Provider.of<CheckoutViewModel>(context, listen: false);
   }
 
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
-    List<Meal> tempList = data["tempListKeranjang"];
-
-    // Call ViewModel function to redirect to payment gateaway webview
-    Future<void> createOrder() async {
-      var getPay = await checkoutViewModel.fetchCreateOrder(tempList);
-    }
-
+    List<Meal> tempList = data['tempListKeranjang'];
 
     return Scaffold(
         body: WebView(
-      initialUrl: data["snapUrl"],
+      initialUrl: data['snapUrl'],
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (WebViewController webViewController) {
         _controller.complete(webViewController);
       },
       navigationDelegate: (NavigationRequest request) {
-        if (request.url.startsWith(data["snapUrl"])) {
+        if (request.url.startsWith(data['snapUrl'])) {
           // Prevent that url works
           // OPEN MIDTRANS WEB URL
           return NavigationDecision.prevent;
         } else if (request.url
-            .contains("https://kukoki.com/checkout/unfinish")) {
-          Navigator.pop(context, "Payment Failedd");
+            .contains('https://kukoki.com/checkout/unfinish')) {
+          Navigator.pop(context, 'Payment Failedd');
 
           return NavigationDecision.prevent;
-        } else if (request.url.contains("https://kukoki.com/checkout/finish")) {
+        } else if (request.url.contains('https://kukoki.com/checkout/finish')) {
           String res = request.url;
-          if (res.contains("transaction_status=settlement")) {
+          if (res.contains('transaction_status=settlement')) {
             setState(() {
-              createOrder();
-              planningViewModel.orderList.insertAll(0, tempList);
+              checkoutViewModel.createOrder(tempList);
+              checkoutViewModel.emptyCart();
+              tempList = checkoutViewModel.getCartList();
               for (var item in tempList) {
-                planningViewModel.cartList.removeWhere((element) => element == item);
+                checkoutViewModel.getCartList().removeWhere((element) => element == item);
               }
             });
             Navigator.pushReplacementNamed(
                 context, SuccessfulPaymentPage.routeName, arguments: {
-              "totalPembayaran": data["totalPembayaran"],
-              "waktuTransaksi": DateTime.now()
+              'totalPembayaran': data['totalPembayaran'],
+              'waktuTransaksi': DateTime.now()
             });
-          } else if (res.contains("transaction_status=pending")) {
-            Navigator.pop(context, "Payment Failed");
+          } else if (res.contains('transaction_status=pending')) {
+            Navigator.pop(context, 'Payment Failed');
           } else {
             setState(() {
-              planningViewModel.orderList.insertAll(0, tempList);
-              for (var item in tempList) {
-                planningViewModel.cartList.removeWhere((element) => element == item);
-              }
+              checkoutViewModel.createOrder(tempList);
+              checkoutViewModel.emptyCart();
+              tempList = checkoutViewModel.getCartList();
             });
             Navigator.pushReplacementNamed(
                 context, SuccessfulPaymentPage.routeName, arguments: {
-              "totalPembayaran": data["totalPembayaran"],
-              "waktuTransaksi": DateTime.now()
+              'totalPembayaran': data['totalPembayaran'],
+              'waktuTransaksi': DateTime.now()
             });
           }
 
           return NavigationDecision.prevent;
-        } else if (request.url.contains("https://kukoki.com/checkout/error")) {
-          Navigator.pop(context, "Payment Failed");
+        } else if (request.url.contains('https://kukoki.com/checkout/error')) {
+          Navigator.pop(context, 'Payment Failed');
           return NavigationDecision.prevent;
         }
         return NavigationDecision.navigate;

@@ -1,7 +1,20 @@
-part of 'pages.dart';
+import 'dart:ui';
+import 'package:collection/collection.dart';
+import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:getwidget/components/list_tile/gf_list_tile.dart';
+import 'package:provider/provider.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+import '../Models/Meal.dart';
+import '../ViewModels/OrderViewModel.dart';
+import 'CheckoutPage.dart';
 
 class PlanningPage extends StatefulWidget {
-  static const pageName = "Planning";
+  static const pageName = 'Planning';
   const PlanningPage({super.key});
 
   @override
@@ -11,93 +24,93 @@ class PlanningPage extends StatefulWidget {
 class _PlanningPageState extends State<PlanningPage> {
   int? currentSelectedIndex = 3;
   late int isWeek = 4;
-  late PlanningViewModel planningViewModel;
+  late OrderViewModel orderViewModel;
   double totalPricing = 0;
   List<Meal> tempList = [];
   List<int> noWeek = [1, 2, 3, 4, 5];
   List<String> week = [
-    "1-6 November 2022",
-    "7-12 November 2022",
-    "13-18 November 2022",
-    "19-24 November 2022",
-    "25-30 November 2022"
+    '1-6 November 2022',
+    '7-12 November 2022',
+    '13-18 November 2022',
+    '19-24 November 2022',
+    '25-30 November 2022'
   ];
   List<PlanCard> currentMonthWeek1 = [
     PlanCard(
-        date: "1", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
+        date: '1', day: 'Kam', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "2", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
+        date: '2', day: 'Jum', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "3", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
+        date: '3', day: 'Sab', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "4", day: "Min", isSelected: false, onSelect: () {}, index: 0),
+        date: '4', day: 'Min', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "5", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
+        date: '5', day: 'Sen', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "6", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
+        date: '6', day: 'Sel', isSelected: false, onSelect: () {}, index: 0),
   ];
   List<PlanCard> currentMonthWeek2 = [
     PlanCard(
-        date: "7", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
+        date: '7', day: 'Rab', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "8", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
+        date: '8', day: 'Kam', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "9", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
+        date: '9', day: 'Jum', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "10", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
+        date: '10', day: 'Sab', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "11", day: "Min", isSelected: false, onSelect: () {}, index: 0),
+        date: '11', day: 'Min', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "12", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
+        date: '12', day: 'Sen', isSelected: false, onSelect: () {}, index: 0),
   ];
   List<PlanCard> currentMonthWeek3 = [
     PlanCard(
-        date: "13", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
+        date: '13', day: 'Sel', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "14", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
+        date: '14', day: 'Rab', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "15", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
+        date: '15', day: 'Kam', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "16", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
+        date: '16', day: 'Jum', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "17", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
+        date: '17', day: 'Sab', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "18", day: "Min", isSelected: false, onSelect: () {}, index: 0),
+        date: '18', day: 'Min', isSelected: false, onSelect: () {}, index: 0),
   ];
   List<PlanCard> currentMonthWeek4 = [
     PlanCard(
-        date: "19", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
+        date: '19', day: 'Sen', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "20", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
+        date: '20', day: 'Sel', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "21", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
+        date: '21', day: 'Rab', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "22", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
+        date: '22', day: 'Kam', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "23", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
+        date: '23', day: 'Jum', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "24", day: "Sab", isSelected: false, onSelect: () {}, index: 0),
+        date: '24', day: 'Sab', isSelected: false, onSelect: () {}, index: 0),
   ];
   List<PlanCard> currentMonthWeek5 = [
     PlanCard(
-        date: "25", day: "Min", isSelected: false, onSelect: () {}, index: 0),
+        date: '25', day: 'Min', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "26", day: "Sen", isSelected: false, onSelect: () {}, index: 0),
+        date: '26', day: 'Sen', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "27", day: "Sel", isSelected: false, onSelect: () {}, index: 0),
+        date: '27', day: 'Sel', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "28", day: "Rab", isSelected: false, onSelect: () {}, index: 0),
+        date: '28', day: 'Rab', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "29", day: "Kam", isSelected: false, onSelect: () {}, index: 0),
+        date: '29', day: 'Kam', isSelected: false, onSelect: () {}, index: 0),
     PlanCard(
-        date: "30", day: "Jum", isSelected: false, onSelect: () {}, index: 0),
+        date: '30', day: 'Jum', isSelected: false, onSelect: () {}, index: 0),
   ];
 
   // Remove a mealkit on the cart when delete icon is clicked
   void removeItem(int index) {
     setState(() {
       tempList.removeAt(index);
-      planningViewModel.cartList.removeAt(index);
+      orderViewModel.getCartList().removeAt(index);
     });
   }
 
@@ -132,9 +145,9 @@ class _PlanningPageState extends State<PlanningPage> {
   @override
   initState() {
     super.initState();
-    planningViewModel = Provider.of<PlanningViewModel>(context, listen: false);
-    for (var item in planningViewModel.cartList) {
-      if (item.date![1] == " ") {
+    orderViewModel = Provider.of<OrderViewModel>(context, listen: false);
+    for (var item in orderViewModel.getCartList()) {
+      if (item.date![1] == ' ') {
         if (item.date!.substring(0, 1) ==
             checkWeek()[currentSelectedIndex!].date) {
           tempList.add(item);
@@ -158,11 +171,11 @@ class _PlanningPageState extends State<PlanningPage> {
             child: Row(
               children: [
                 Text(
-                  "${checkWeek()[0].date}-${checkWeek()[checkWeek().length - 1].date} November 2022",
-                  style: Theme.of(context).textTheme.headline5!.copyWith(
+                  '${checkWeek()[0].date}-${checkWeek()[checkWeek().length - 1].date} November 2022',
+                  style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      fontFamily: "Quicksand"),
+                      fontFamily: 'Quicksand'),
                 ),
                 const SizedBox(width: 5),
                 PopupMenuButton(
@@ -192,20 +205,20 @@ class _PlanningPageState extends State<PlanningPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Total",
-                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                    Text('Total',
+                        style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 14,
-                            fontFamily: "Quicksand",
+                            fontFamily: 'Quicksand',
                             color: const Color(0xFF6A6A6A))),
                     Text(
-                        (planningViewModel.cartList.isEmpty)
-                            ? "0"
-                            : "Rp${totalPrice(tempList).toString()}00",
-                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                        (orderViewModel.getCartList().isEmpty)
+                            ? '0'
+                            : 'Rp${totalPrice(tempList).toString()}00',
+                        style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
-                            fontFamily: "Quicksand"))
+                            fontFamily: 'Quicksand'))
                   ],
                 ),
                 Column(
@@ -214,8 +227,8 @@ class _PlanningPageState extends State<PlanningPage> {
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10.0),
-                          backgroundColor: (planningViewModel.cartList.any((item) {
-                            if (item.date![1] == " ") {
+                          backgroundColor: (orderViewModel.getCartList().any((item) {
+                            if (item.date![1] == ' ') {
                               if (item.date!.substring(0, 1) ==
                                   checkWeek()[currentSelectedIndex!].date) {
                                 return true;
@@ -231,25 +244,22 @@ class _PlanningPageState extends State<PlanningPage> {
                           elevation: 0.0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0))),
-                      child: Text("Checkout",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(
+                      child: Text('Checkout',
+                          style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                   color: Colors.white,
-                                  fontFamily: "Quicksand")),
+                                  fontFamily: 'Quicksand')),
                       onPressed: () {
-                        if (planningViewModel.cartList.isNotEmpty) {
-                          for (var item in planningViewModel.cartList) {
-                            if (item.date![1] == " ") {
+                        if (orderViewModel.getCartList().isNotEmpty) {
+                          for (var item in orderViewModel.getCartList()) {
+                            if (item.date![1] == ' ') {
                               if (item.date!.substring(0, 1) ==
                                   checkWeek()[currentSelectedIndex!].date) {
                                 Navigator.pushNamed(
                                     context, CheckoutPage.routeName,
                                     arguments: {
-                                      "currentList": tempList,
+                                      'currentList': tempList,
                                     });
                                 break;
                               } else {
@@ -257,7 +267,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                   ..removeCurrentSnackBar()
                                   ..showSnackBar(SnackBar(
                                       action: SnackBarAction(
-                                        label: "OK",
+                                        label: 'OK',
                                         onPressed: () {},
                                       ),
                                       content: Text('No meal kits in cart')));
@@ -268,7 +278,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                 Navigator.pushNamed(
                                     context, CheckoutPage.routeName,
                                     arguments: {
-                                      "currentList": tempList,
+                                      'currentList': tempList,
                                     });
                                 break;
                               } else {
@@ -276,7 +286,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                   ..removeCurrentSnackBar()
                                   ..showSnackBar(SnackBar(
                                       action: SnackBarAction(
-                                        label: "OK",
+                                        label: 'OK',
                                         onPressed: () {},
                                       ),
                                       content: Text('No meal kits in cart')));
@@ -288,7 +298,7 @@ class _PlanningPageState extends State<PlanningPage> {
                             ..removeCurrentSnackBar()
                             ..showSnackBar(SnackBar(
                                 action: SnackBarAction(
-                                  label: "OK",
+                                  label: 'OK',
                                   onPressed: () {},
                                 ),
                                 content: Text('No meal kits in cart')));
@@ -325,31 +335,28 @@ class _PlanningPageState extends State<PlanningPage> {
                           child: Row(
                             children: [
                               const SizedBox(width: 10.0),
-                              Text("Ordered Meal Kits",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline5!
-                                      .copyWith(
+                              Text('Ordered Meal Kits',
+                                  style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18,
-                                          fontFamily: "Quicksand")),
+                                          fontFamily: 'Quicksand')),
                             ],
                           )),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: (planningViewModel.orderList.isEmpty)
+                          child: (orderViewModel.getOrderList().isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                      "No ordered meal kits",
+                                      'No ordered meal kits',
                                       style: TextStyle(
-                                          fontFamily: "Quicksand",
+                                          fontFamily: 'Quicksand',
                                           fontWeight: FontWeight.w500)),
                                 )
                               : Column(
-                                  children: planningViewModel.orderList.mapIndexed(
+                                  children: orderViewModel.getOrderList().mapIndexed(
                                   (index, item) {
-                                    if (item.date![1] == " ") {
+                                    if (item.date![1] == ' ') {
                                       if (item.date!.substring(0, 1) ==
                                           checkWeek()[currentSelectedIndex!]
                                               .date) {
@@ -376,33 +383,30 @@ class _PlanningPageState extends State<PlanningPage> {
                       Row(
                         children: [
                           const SizedBox(width: 10.0),
-                          Text("Cart",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline5!
-                                  .copyWith(
+                          Text('Cart',
+                              style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
-                                      fontFamily: "Quicksand")),
+                                      fontFamily: 'Quicksand')),
                         ],
                       ),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: (planningViewModel.cartList.isEmpty)
+                          child: (orderViewModel.getCartList().isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
-                                  child: Text("No meal kits in cart"),
+                                  child: Text('No meal kits in cart'),
                                 )
                               : Column(
-                                  children: planningViewModel.cartList.mapIndexed(
+                                  children: orderViewModel.getCartList().mapIndexed(
                                     (index, item) {
-                                      if (item.date![1] == " ") {
+                                      if (item.date![1] == ' ') {
                                         if (item.date!.substring(0, 1) ==
                                             checkWeek()[currentSelectedIndex!]
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
-                                            pesan: planningViewModel.cartList[index],
+                                            pesan: orderViewModel.getCartList()[index],
                                           );
                                         } else {
                                           return Container();
@@ -413,7 +417,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
-                                            pesan: planningViewModel.cartList[index],
+                                            pesan: orderViewModel.getCartList()[index],
                                           );
                                         } else {
                                           return Container();
@@ -430,5 +434,271 @@ class _PlanningPageState extends State<PlanningPage> {
             ),
           ),
         ));
+  }
+}
+
+class PlanCard extends StatefulWidget {
+  bool isSelected;
+  int index;
+  VoidCallback onSelect;
+  final String day;
+  final String date;
+
+  PlanCard({
+    super.key,
+    required this.index,
+    required this.day,
+    required this.date,
+    required this.isSelected,
+    required this.onSelect,
+  });
+
+  @override
+  State<PlanCard> createState() => _PlanCardState();
+}
+
+class _PlanCardState extends State<PlanCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 7),
+        child: GestureDetector(
+          onTap: widget.onSelect,
+          child: Card(
+            margin: const EdgeInsets.symmetric(horizontal: 2.0),
+            color: (widget.isSelected)
+                ? const Color(0xFF1C9FE2)
+                : Color(0xF2F2F2).withOpacity(1),
+            elevation: 0.0,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Column(children: [
+                Text(widget.day,
+                    style: (widget.isSelected)
+                        ? TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Quicksand',
+                        color: Colors.white)
+                        : TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Quicksand',
+                        color: Color(0xF6A6A6A).withOpacity(1.0))),
+                SizedBox(height: 3.0),
+                Text(widget.date,
+                    style: (widget.isSelected)
+                        ? TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontFamily: 'Quicksand',
+                        color: Colors.white)
+                        : TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontFamily: 'Quicksand',
+                        color: Color(0xF6A6A6A).withOpacity(1.0))),
+              ]),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CheckoutTile extends StatelessWidget {
+  final Meal pesan;
+  const CheckoutTile({super.key, required this.pesan});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 0.0,
+      child: GFListTile(
+          margin: const EdgeInsets.all(0),
+          padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 0.0),
+          avatar: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset(
+              '${pesan.images}',
+              width: 79,
+              height: 79,
+              fit: BoxFit.fill,
+            ),
+          ),
+          title: Row(
+            children: [
+              Row(
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Text(pesan.menuName!,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'Quicksand')),
+                ],
+              ),
+            ],
+          ),
+          subTitle: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 5.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Row(
+                    children: [
+                      const Icon(Icons.group,
+                          size: 22, color: Color(0xFF6A6A6A)),
+                      Text('${pesan.numberOfPeople} orang',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                              color: const Color(0xFF6A6A6A),
+                              fontFamily: 'Quicksand')),
+                    ],
+                  ),
+                  const SizedBox(width: 16.0),
+                  Row(
+                    children: [
+                      const Icon(Icons.date_range_outlined,
+                          size: 22, color: Color(0xFF6A6A6A)),
+                      Text('${pesan.date}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                              color: const Color(0xFF6A6A6A),
+                              fontFamily: 'Quicksand')),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4.0),
+              Row(
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Text('Rp.${pesan.menuPrice}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10,
+                          fontFamily: 'Quicksand',
+                          color: const Color(0xFF1C9FE2))),
+                ],
+              ),
+            ],
+          ),
+          icon: GestureDetector(
+            onTap: () {},
+            child: Icon(Icons.keyboard_arrow_right_rounded),
+          )),
+    );
+  }
+}
+
+class CheckoutTileWithIcon extends StatefulWidget {
+  Meal pesan;
+  Function onDelete;
+  CheckoutTileWithIcon(
+      {super.key, required this.pesan, required this.onDelete});
+
+  @override
+  State<CheckoutTileWithIcon> createState() => _CheckoutTileWithIconState();
+}
+
+class _CheckoutTileWithIconState extends State<CheckoutTileWithIcon> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 0.0,
+      child: GFListTile(
+          margin: const EdgeInsets.all(0),
+          padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 0.0),
+          avatar: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset('${widget.pesan.images}',
+                width: 79, height: 79, fit: BoxFit.fill),
+          ),
+          title: Row(
+            children: [
+              Row(
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Text(widget.pesan.menuName!,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'Quicksand')),
+                ],
+              ),
+            ],
+          ),
+          subTitle: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 5.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Row(
+                    children: [
+                      const Icon(Icons.group,
+                          size: 22, color: Color(0xFF6A6A6A)),
+                      Text('${widget.pesan.numberOfPeople} orang',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                              color: const Color(0xFF6A6A6A),
+                              fontFamily: 'Quicksand')),
+                    ],
+                  ),
+                  const SizedBox(width: 16.0),
+                  Row(
+                    children: [
+                      const Icon(Icons.date_range_outlined,
+                          size: 22, color: Color(0xFF6A6A6A)),
+                      Text('${widget.pesan.date}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                              color: const Color(0xFF6A6A6A),
+                              fontFamily: 'Quicksand')),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4.0),
+              Row(
+                children: [
+                  // const SizedBox(width: 5.0),
+                  Text('Rp.${widget.pesan.menuPrice}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10,
+                          fontFamily: 'Quicksand',
+                          color: const Color(0xFF1C9FE2))),
+                ],
+              ),
+            ],
+          ),
+          icon: GestureDetector(
+            onTap: () {
+              setState(() {
+                widget.onDelete();
+              });
+            },
+            child: const CircleAvatar(
+                backgroundColor: Color(0xFF703900),
+                child: Icon(Icons.delete_outline_rounded, color: Colors.white)),
+          )),
+    );
   }
 }

@@ -1,7 +1,8 @@
-part of "pages.dart";
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class CatalogPage extends StatefulWidget {
-  static const routeName = "Catalog";
+  static const routeName = 'Catalog';
   const CatalogPage({super.key});
 
   @override
@@ -16,7 +17,7 @@ class _CatalogPageState extends State<CatalogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Hello"),
+      body: Text('Hello'),
     );
   }
 }

@@ -1,14 +1,20 @@
 import 'dart:convert';
-
-import 'package:kukoki_flutter/data/services/services.dart';
-import 'package:kukoki_flutter/models/OrderResponse.dart';
+import 'package:http/http.dart' as http;
+import '../Models/Meal.dart';
+import '../Models/OrderResponse.dart';
 
 class CheckoutRepository {
-  //To call repository in PaymentViewModel
-  Future<OrderResponse> getCheckoutRepository(dynamic cart) async {
-    final APIServices apiServices = APIServices();
-    dynamic response = await apiServices.createOrder(cart);
-
-    return OrderResponse.fromJson(json.decode(response));
+  // Log order in database after successful payment
+  Future<dynamic> createOrder(List<Meal> cart) async {
+    var response = await http.post(Uri.parse('https://se.kukoki.com/api/createOrder'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': '1',
+          'cart': jsonEncode(cart),
+        }));
+    print(response.body);
+    return OrderResponse.fromJson(json.decode(response.body));
   }
 }

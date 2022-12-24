@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 class Meal {
   String? images;
   String? menuName;
@@ -16,11 +14,12 @@ class Meal {
       required this.date,
       this.menuId});
 
+  // Convert Meal object to JSON
   Map<String, dynamic> toJson(){
     return {
-      "meal_id": menuId,
-      "portion": numberOfPeople,
-      "date": date,
+      'meal_id': menuId,
+      'portion': numberOfPeople,
+      'date': date,
     };
   }
 }

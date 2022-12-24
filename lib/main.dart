@@ -1,10 +1,18 @@
+import 'dart:ui';
+import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kukoki_flutter/Repositories/PaymentRepository.dart';
-import 'package:kukoki_flutter/ViewModels/ViewModels.dart';
-import 'package:kukoki_flutter/views/pages.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:kukoki_flutter/ViewModels/CheckoutViewModel.dart';
+import 'package:kukoki_flutter/Views/CatalogPage.dart';
+import 'package:kukoki_flutter/Views/CheckoutPage.dart';
+import 'package:kukoki_flutter/Views/HomePage.dart';
+import 'package:kukoki_flutter/Views/ProfilePage.dart';
+import 'package:kukoki_flutter/Views/SuccessfulPaymentPage.dart';
+import 'package:kukoki_flutter/Views/WebviewMidtransPage.dart';
 import 'package:provider/provider.dart';
+import '../ViewModels/OrderViewModel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,10 +31,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider.value(value: PaymentViewModel()),
-          ChangeNotifierProvider.value(value: PlanningViewModel()),
+          ChangeNotifierProvider.value(value: OrderViewModel()),
           ChangeNotifierProvider.value(value: CheckoutViewModel()),
-          ChangeNotifierProvider.value(value: UserViewModel())
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -35,15 +41,14 @@ class MyApp extends StatelessWidget {
               //Pergantian Warna dan Text pada bar
               canvasColor: const Color(0xFFFFFFFF),
               colorScheme: Theme.of(context).colorScheme.copyWith(
-                  primary: primaryColor,
-                  onPrimary: secondaryColor,
-                  secondary: secondaryColor),
+                  primary: Color(0XFF1c9fe2),
+                  onPrimary: Color(0XFF1C9FE2),
+                  secondary: Color(0XFF1C9FE2)),
               appBarTheme: const AppBarTheme(
                   elevation: 0,
                   systemOverlayStyle: SystemUiOverlayStyle(
                       statusBarColor: Colors.white,
-                      statusBarIconBrightness: Brightness.dark)),
-              textTheme: myTextTheme),
+                      statusBarIconBrightness: Brightness.dark))),
           initialRoute: HomePage.routeName,
           routes: {
             CatalogPage.routeName: (context) => const CatalogPage(),

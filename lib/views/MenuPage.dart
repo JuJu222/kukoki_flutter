@@ -1,7 +1,9 @@
-part of 'pages.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
 class MenuPage extends StatefulWidget {
-  static const routeName = "Beranda";
+  static const routeName = 'Beranda';
   MenuPage({
     super.key,
   });
@@ -16,7 +18,7 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Hello"),
+      body: Text('Hello'),
     );
   }
 }
