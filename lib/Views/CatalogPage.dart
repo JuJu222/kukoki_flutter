@@ -10,8 +10,8 @@ class CatalogPage extends StatefulWidget {
 }
 
 class _CatalogPageState extends State<CatalogPage> {
-  int? countPendek = 0;
-  int? countPanjang = 0;
+  int? shortCount = 0;
+  int? longCount = 0;
   final searchController = TextEditingController();
 
   @override
