@@ -538,7 +538,6 @@ class CheckoutTile extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  // const SizedBox(width: 5.0),
                   Text(pesan.menuName!,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -556,7 +555,6 @@ class CheckoutTile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // const SizedBox(width: 5.0),
                   Row(
                     children: [
                       const Icon(Icons.group,
@@ -587,7 +585,6 @@ class CheckoutTile extends StatelessWidget {
               const SizedBox(height: 4.0),
               Row(
                 children: [
-                  // const SizedBox(width: 5.0),
                   Text('Rp.${pesan.menuPrice}',
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
