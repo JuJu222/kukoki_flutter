@@ -17,6 +17,7 @@ class CheckoutViewModel extends ChangeNotifier {
   String messageResult = '';
 
   String get message => messageResult;
+
   OrderResponse get result => createOrderResult;
 
   // Call createOrder function from the repository to be returned to the view

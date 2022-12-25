@@ -33,7 +33,7 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
-    List<Meal> tempList = data['tempListKeranjang'];
+    List<Meal> tempList = data['temporaryCart'];
 
     return Scaffold(
         body: WebView(
@@ -43,14 +43,12 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
         _controller.complete(webViewController);
       },
       navigationDelegate: (NavigationRequest request) {
+        // Open Midtrans Web
         if (request.url.startsWith(data['snapUrl'])) {
-          // Prevent that url works
-          // OPEN MIDTRANS WEB URL
           return NavigationDecision.prevent;
         } else if (request.url
             .contains('https://kukoki.com/checkout/unfinish')) {
           Navigator.pop(context, 'Payment Failedd');
-
           return NavigationDecision.prevent;
         } else if (request.url.contains('https://kukoki.com/checkout/finish')) {
           String res = request.url;
@@ -60,13 +58,15 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
               checkoutViewModel.emptyCart();
               tempList = checkoutViewModel.getCartList();
               for (var item in tempList) {
-                checkoutViewModel.getCartList().removeWhere((element) => element == item);
+                checkoutViewModel
+                    .getCartList()
+                    .removeWhere((element) => element == item);
               }
             });
             Navigator.pushReplacementNamed(
                 context, SuccessfulPaymentPage.routeName, arguments: {
-              'totalPembayaran': data['totalPembayaran'],
-              'waktuTransaksi': DateTime.now()
+              'totalPayment': data['totalPayment'],
+              'transactionTime': DateTime.now()
             });
           } else if (res.contains('transaction_status=pending')) {
             Navigator.pop(context, 'Payment Failed');
@@ -78,8 +78,8 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
             });
             Navigator.pushReplacementNamed(
                 context, SuccessfulPaymentPage.routeName, arguments: {
-              'totalPembayaran': data['totalPembayaran'],
-              'waktuTransaksi': DateTime.now()
+              'totalPayment': data['totalPayment'],
+              'transactionTime': DateTime.now()
             });
           }
 

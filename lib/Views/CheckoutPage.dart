@@ -87,9 +87,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
           context, WebviewMidtransPage.routeName,
           arguments: {
             'snapUrl': getPay.snapUrl,
-            'totalPembayaran': '$totalPriceVariable',
-            'waktuTransaksi': DateTime.now(),
-            'tempListKeranjang': tempList
+            'totalPayment': '$totalPriceVariable',
+            'transactionTime': DateTime.now(),
+            'temporaryCart': tempList
           });
 
       if (result == null) {
@@ -156,21 +156,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                 child: Row(children: [
                                                   const Text('Rp.',
                                                       style: TextStyle(
-                                                              fontWeight: FontWeight.bold,
-                                                              fontSize: 18,
-                                                              fontFamily: 'Quicksand')),
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 18,
+                                                          fontFamily:
+                                                              'Quicksand')),
                                                   SizedBox(width: 2.0),
                                                   Text(
                                                       '${(totalPrice(totalPriceFood, 20000, tempList).toString())}',
                                                       overflow:
                                                           TextOverflow.fade,
                                                       style: const TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 32,
-                                                              fontFamily:
-                                                                  'Quicksand')),
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 32,
+                                                          fontFamily:
+                                                              'Quicksand')),
                                                 ]),
                                               ),
                                               ElevatedButton(
@@ -190,12 +191,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                                         5.0))),
                                                 child: const Text('Order',
                                                     style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 16,
-                                                            color: Colors.white,
-                                                            fontFamily:
-                                                                'Quicksand')),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                        color: Colors.white,
+                                                        fontFamily:
+                                                            'Quicksand')),
                                                 onPressed: () async {
                                                   await CircularProgressIndicator();
                                                   navigatePaymentGateaway(
@@ -233,10 +234,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 children: [
                                   const Text('Alamat Pengiriman',
                                       style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Color(0xFF1C9FE2),
-                                              fontSize: 16,
-                                              fontFamily: 'Quicksand')),
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFF1C9FE2),
+                                          fontSize: 16,
+                                          fontFamily: 'Quicksand')),
                                   SizedBox(height: 17),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -252,13 +253,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                             Text(
                                                 '${userResponse.user?.fullName}',
                                                 style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color:
-                                                            Color(0xFF707070),
-                                                        fontSize: 12,
-                                                        fontFamily:
-                                                            'Quicksand')),
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color(0xFF707070),
+                                                    fontSize: 12,
+                                                    fontFamily: 'Quicksand')),
                                           ],
                                         ),
                                       ),
@@ -272,13 +270,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                             SizedBox(width: 10),
                                             Text('${userResponse.user?.phone}',
                                                 style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color:
-                                                            Color(0xFF707070),
-                                                        fontSize: 14,
-                                                        fontFamily:
-                                                            'Quicksand')),
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color(0xFF707070),
+                                                    fontSize: 14,
+                                                    fontFamily: 'Quicksand')),
                                           ],
                                         ),
                                       ),
@@ -297,10 +292,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                         child: Text(
                                             '${userResponse.user?.address}, ${userResponse.user?.district}, ${userResponse.user?.ward}, Kota ${userResponse.user?.city}, ${userResponse.user?.province}',
                                             style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color(0xFF707070),
-                                                    fontSize: 12,
-                                                    fontFamily: 'Quicksand')),
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xFF707070),
+                                                fontSize: 12,
+                                                fontFamily: 'Quicksand')),
                                       ),
                                     ],
                                   ),
@@ -317,10 +312,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   children: const [
                                     Text('Pesanan',
                                         style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Color(0xFF1C9FE2),
-                                                fontSize: 16,
-                                                fontFamily: 'Quicksand')),
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFF1C9FE2),
+                                            fontSize: 16,
+                                            fontFamily: 'Quicksand')),
                                   ],
                                 ),
                                 SizedBox(height: 5),
@@ -342,13 +337,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     children: const [
                                       Text('Rincian Pembayaran',
                                           style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xFF1C9FE2),
-                                                  fontSize: 16,
-                                                  fontFamily: 'Quicksand')),
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF1C9FE2),
+                                              fontSize: 16,
+                                              fontFamily: 'Quicksand')),
                                     ],
                                   ),
-                                const   SizedBox(height: 10.0),
+                                  const SizedBox(height: 10.0),
                                   Card(
                                     elevation: 0.0,
                                     shape: RoundedRectangleBorder(
@@ -367,21 +362,19 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                             children: [
                                               const Text('Harga Makanan',
                                                   style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontFamily:
-                                                              'Quicksand')),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontFamily: 'Quicksand')),
                                               Text(
                                                   'Rp${totalPriceFood(tempList).toString()}',
                                                   style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontFamily:
-                                                              'Quicksand')),
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontFamily: 'Quicksand')),
                                             ],
                                           ),
                                           SizedBox(height: 10.0),
@@ -391,20 +384,18 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                             children: const [
                                               Text('Ongkos Kirim',
                                                   style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontFamily:
-                                                              'Quicksand')),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontFamily: 'Quicksand')),
                                               Text('Rp20.000',
                                                   style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontFamily:
-                                                              'Quicksand')),
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontFamily: 'Quicksand')),
                                             ],
                                           ),
                                           SizedBox(height: 15.0),
@@ -418,23 +409,19 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                             children: [
                                               const Text('Total',
                                                   style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color:
-                                                              Color(0xFF1C9FE2),
-                                                          fontSize: 16,
-                                                          fontFamily:
-                                                              'Quicksand')),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Color(0xFF1C9FE2),
+                                                      fontSize: 16,
+                                                      fontFamily: 'Quicksand')),
                                               Text(
                                                   'Rp${(totalPrice(totalPriceFood, 20000, tempList).toString())}',
                                                   style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color:
-                                                              Color(0xFF1C9FE2),
-                                                          fontSize: 16,
-                                                          fontFamily:
-                                                              'Quicksand')),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Color(0xFF1C9FE2),
+                                                      fontSize: 16,
+                                                      fontFamily: 'Quicksand')),
                                             ],
                                           ),
                                         ],
@@ -508,10 +495,10 @@ class CheckoutTile extends StatelessWidget {
                           size: 22, color: Color(0xFF6A6A6A)),
                       Text('${pesan.numberOfPeople} orang',
                           style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 10,
-                                  color: const Color(0xFF6A6A6A),
-                                  fontFamily: 'Quicksand')),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                              color: const Color(0xFF6A6A6A),
+                              fontFamily: 'Quicksand')),
                     ],
                   ),
                   const SizedBox(width: 16.0),
@@ -521,10 +508,10 @@ class CheckoutTile extends StatelessWidget {
                           size: 22, color: Color(0xFF6A6A6A)),
                       Text('${pesan.date}',
                           style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 10,
-                                  color: const Color(0xFF6A6A6A),
-                                  fontFamily: 'Quicksand')),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                              color: const Color(0xFF6A6A6A),
+                              fontFamily: 'Quicksand')),
                     ],
                   ),
                 ],
@@ -604,10 +591,10 @@ class _CheckoutTileWithIconState extends State<CheckoutTileWithIcon> {
                           size: 22, color: Color(0xFF6A6A6A)),
                       Text('${widget.pesan.numberOfPeople} orang',
                           style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 10,
-                                  color: Color(0xFF6A6A6A),
-                                  fontFamily: 'Quicksand')),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                              color: Color(0xFF6A6A6A),
+                              fontFamily: 'Quicksand')),
                     ],
                   ),
                   const SizedBox(width: 16.0),
@@ -617,10 +604,10 @@ class _CheckoutTileWithIconState extends State<CheckoutTileWithIcon> {
                           size: 22, color: Color(0xFF6A6A6A)),
                       Text('${widget.pesan.date}',
                           style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 10,
-                                  color: Color(0xFF6A6A6A),
-                                  fontFamily: 'Quicksand')),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                              color: Color(0xFF6A6A6A),
+                              fontFamily: 'Quicksand')),
                     ],
                   ),
                 ],
