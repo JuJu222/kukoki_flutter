@@ -45,7 +45,7 @@ class SuccessfulPaymentPage extends StatelessWidget {
                 height: 12,
               ),
               Text(
-                '${data['waktuTransaksi'].day} November ${data['waktuTransaksi'].year}, ${data['waktuTransaksi'].hour}:${data['waktuTransaksi'].minute}',
+                '${data['transactionTime'].day} November ${data['transactionTime'].year}, ${data['transactionTime'].hour}:${data['transactionTime'].minute}',
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -95,7 +95,7 @@ class SuccessfulPaymentPage extends StatelessWidget {
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 4),
                                 child: Text(
-                                  '${data['totalPembayaran']}',
+                                  '${data['totalPayment']}',
                                   style: TextStyle(
                                       fontSize: 32,
                                       fontFamily: 'Quicksand',
