@@ -33,7 +33,6 @@ class SuccessfulPaymentPage extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            // color: Colors.red,
             child: Column(children: [
               Text('Pembayaran Berhasil',
                   style: TextStyle(
@@ -57,7 +56,6 @@ class SuccessfulPaymentPage extends StatelessWidget {
                 height: 16,
               ),
               Container(
-                // color: Colors.red,
                 child: Column(children: [
                   Text(
                     'Total',
@@ -72,14 +70,12 @@ class SuccessfulPaymentPage extends StatelessWidget {
                   ),
                   Container(
                     height: 40,
-                    // color: Colors.amber,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                               flex: 2,
                               child: Container(
-                                  // color: Colors.green,
                                   child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -152,11 +148,11 @@ class SuccessfulPaymentPage extends StatelessWidget {
                       },
                       child: Text('Ok',
                           style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  letterSpacing: 0.15,
-                                  fontFamily: 'Quicksand')))
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              letterSpacing: 0.15,
+                              fontFamily: 'Quicksand')))
                 ]),
               )
             ]),

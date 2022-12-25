@@ -227,7 +227,8 @@ class _PlanningPageState extends State<PlanningPage> {
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10.0),
-                          backgroundColor: (orderViewModel.getCartList().any((item) {
+                          backgroundColor:
+                              (orderViewModel.getCartList().any((item) {
                             if (item.date![1] == ' ') {
                               if (item.date!.substring(0, 1) ==
                                   checkWeek()[currentSelectedIndex!].date) {
@@ -239,17 +240,17 @@ class _PlanningPageState extends State<PlanningPage> {
                             }
                             return false;
                           }))
-                              ? const Color(0xFF1C9FE2)
-                              : Colors.grey,
+                                  ? const Color(0xFF1C9FE2)
+                                  : Colors.grey,
                           elevation: 0.0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0))),
                       child: Text('Checkout',
                           style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontFamily: 'Quicksand')),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontFamily: 'Quicksand')),
                       onPressed: () {
                         if (orderViewModel.getCartList().isNotEmpty) {
                           for (var item in orderViewModel.getCartList()) {
@@ -337,9 +338,9 @@ class _PlanningPageState extends State<PlanningPage> {
                               const SizedBox(width: 10.0),
                               Text('Ordered Meal Kits',
                                   style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          fontFamily: 'Quicksand')),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      fontFamily: 'Quicksand')),
                             ],
                           )),
                       const SizedBox(height: 15.0),
@@ -347,14 +348,14 @@ class _PlanningPageState extends State<PlanningPage> {
                           child: (orderViewModel.getOrderList().isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
-                                  child: Text(
-                                      'No ordered meal kits',
+                                  child: Text('No ordered meal kits',
                                       style: TextStyle(
                                           fontFamily: 'Quicksand',
                                           fontWeight: FontWeight.w500)),
                                 )
                               : Column(
-                                  children: orderViewModel.getOrderList().mapIndexed(
+                                  children:
+                                      orderViewModel.getOrderList().mapIndexed(
                                   (index, item) {
                                     if (item.date![1] == ' ') {
                                       if (item.date!.substring(0, 1) ==
@@ -385,9 +386,9 @@ class _PlanningPageState extends State<PlanningPage> {
                           const SizedBox(width: 10.0),
                           Text('Cart',
                               style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      fontFamily: 'Quicksand')),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  fontFamily: 'Quicksand')),
                         ],
                       ),
                       const SizedBox(height: 15.0),
@@ -398,7 +399,8 @@ class _PlanningPageState extends State<PlanningPage> {
                                   child: Text('No meal kits in cart'),
                                 )
                               : Column(
-                                  children: orderViewModel.getCartList().mapIndexed(
+                                  children:
+                                      orderViewModel.getCartList().mapIndexed(
                                     (index, item) {
                                       if (item.date![1] == ' ') {
                                         if (item.date!.substring(0, 1) ==
@@ -406,7 +408,8 @@ class _PlanningPageState extends State<PlanningPage> {
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
-                                            pesan: orderViewModel.getCartList()[index],
+                                            pesan: orderViewModel
+                                                .getCartList()[index],
                                           );
                                         } else {
                                           return Container();
@@ -417,7 +420,8 @@ class _PlanningPageState extends State<PlanningPage> {
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
-                                            pesan: orderViewModel.getCartList()[index],
+                                            pesan: orderViewModel
+                                                .getCartList()[index],
                                           );
                                         } else {
                                           return Container();
@@ -479,28 +483,28 @@ class _PlanCardState extends State<PlanCard> {
                 Text(widget.day,
                     style: (widget.isSelected)
                         ? TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Quicksand',
-                        color: Colors.white)
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Quicksand',
+                            color: Colors.white)
                         : TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Quicksand',
-                        color: Color(0xF6A6A6A).withOpacity(1.0))),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Quicksand',
+                            color: Color(0xF6A6A6A).withOpacity(1.0))),
                 SizedBox(height: 3.0),
                 Text(widget.date,
                     style: (widget.isSelected)
                         ? TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        fontFamily: 'Quicksand',
-                        color: Colors.white)
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'Quicksand',
+                            color: Colors.white)
                         : TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        fontFamily: 'Quicksand',
-                        color: Color(0xF6A6A6A).withOpacity(1.0))),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'Quicksand',
+                            color: Color(0xF6A6A6A).withOpacity(1.0))),
               ]),
             ),
           ),
@@ -629,7 +633,6 @@ class _CheckoutTileWithIconState extends State<CheckoutTileWithIcon> {
             children: [
               Row(
                 children: [
-                  // const SizedBox(width: 5.0),
                   Text(widget.pesan.menuName!,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -647,7 +650,6 @@ class _CheckoutTileWithIconState extends State<CheckoutTileWithIcon> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // const SizedBox(width: 5.0),
                   Row(
                     children: [
                       const Icon(Icons.group,
@@ -678,7 +680,6 @@ class _CheckoutTileWithIconState extends State<CheckoutTileWithIcon> {
               const SizedBox(height: 4.0),
               Row(
                 children: [
-                  // const SizedBox(width: 5.0),
                   Text('Rp.${widget.pesan.menuPrice}',
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
