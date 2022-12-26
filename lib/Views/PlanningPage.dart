@@ -10,6 +10,7 @@ import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../Models/Meal.dart';
+import '../Models/UserResponse.dart';
 import '../ViewModels/OrderViewModel.dart';
 import 'CheckoutPage.dart';
 
@@ -25,6 +26,7 @@ class _PlanningPageState extends State<PlanningPage> {
   int? currentSelectedIndex = 3;
   late int isWeek = 4;
   late OrderViewModel orderViewModel;
+  var userResponse;
   double totalPricing = 0;
   List<Meal> tempList = [];
   List<int> noWeek = [1, 2, 3, 4, 5];
@@ -142,6 +144,14 @@ class _PlanningPageState extends State<PlanningPage> {
     return temp;
   }
 
+  Future<void> getUser() async {
+    await orderViewModel.getUser().then((result) {
+      setState(() {
+        userResponse = result as UserResponse;
+      });
+    });
+  }
+
   @override
   initState() {
     super.initState();
@@ -251,16 +261,18 @@ class _PlanningPageState extends State<PlanningPage> {
                               fontSize: 16,
                               color: Colors.white,
                               fontFamily: 'Quicksand')),
-                      onPressed: () {
+                      onPressed: () async {
                         if (orderViewModel.getCartList().isNotEmpty) {
                           for (var item in orderViewModel.getCartList()) {
                             if (item.date![1] == ' ') {
                               if (item.date!.substring(0, 1) ==
                                   checkWeek()[currentSelectedIndex!].date) {
+                                await getUser();
                                 Navigator.pushNamed(
                                     context, CheckoutPage.routeName,
                                     arguments: {
                                       'currentList': tempList,
+                                      'userResponse': userResponse
                                     });
                                 break;
                               } else {
@@ -276,10 +288,12 @@ class _PlanningPageState extends State<PlanningPage> {
                             } else {
                               if (item.date!.substring(0, 2) ==
                                   checkWeek()[currentSelectedIndex!].date) {
+                                await getUser();
                                 Navigator.pushNamed(
                                     context, CheckoutPage.routeName,
                                     arguments: {
                                       'currentList': tempList,
+                                      'userResponse': userResponse
                                     });
                                 break;
                               } else {

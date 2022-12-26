@@ -26,34 +26,21 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
-  bool isLoading = true;
   int totalPricingFull = 0;
   int totalPricing = 0;
   late OrderViewModel orderViewModel;
-  var userResponse;
-
-  Future<void> getUser() async {
-    await orderViewModel.getUser().then((result) {
-      setState(() {
-        userResponse = result as UserResponse;
-        if (userResponse != null) {
-          isLoading = false;
-        }
-      });
-    });
-  }
 
   @override
   void initState() {
     super.initState();
     orderViewModel = Provider.of<OrderViewModel>(context, listen: false);
-    getUser();
   }
 
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
     List<Meal> tempList = data['currentList'];
+    UserResponse userResponse = data["userResponse"];
 
     // Calculate total price
     int totalPriceFood(List<Meal> tempList) {
@@ -105,9 +92,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       }
     }
 
-    return isLoading
-        ? Loading.loading()
-        : Scaffold(
+    return Scaffold(
             appBar: AppBar(
               iconTheme: IconThemeData(color: Color(0XFF1c9fe2)),
               backgroundColor: Colors.transparent,
@@ -640,17 +625,3 @@ class _CheckoutTileWithIconState extends State<CheckoutTileWithIcon> {
   }
 }
 
-class Loading {
-  static Container loading() {
-    return Container(
-      alignment: Alignment.center,
-      width: double.infinity,
-      height: double.infinity,
-      color: Colors.white,
-      child: const SpinKitFadingCircle(
-        size: 50,
-        color: Color(0xFF1C9FE2),
-      ),
-    );
-  }
-}
