@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:kukoki_flutter/Adapters/MidtransAdapter.dart';
 import 'package:kukoki_flutter/ViewModels/CheckoutViewModel.dart';
 import 'package:kukoki_flutter/Views/CatalogPage.dart';
 import 'package:kukoki_flutter/Views/CheckoutPage.dart';
