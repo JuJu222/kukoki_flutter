@@ -13,7 +13,7 @@ import 'package:kukoki_flutter/Views/ProfilePage.dart';
 import 'package:kukoki_flutter/Views/SuccessfulPaymentPage.dart';
 import 'package:kukoki_flutter/Views/WebviewMidtransPage.dart';
 import 'package:provider/provider.dart';
-import '../ViewModels/OrderViewModel.dart';
+import '../ViewModels/PlanningViewModel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider.value(value: OrderViewModel()),
+          ChangeNotifierProvider.value(value: PlanningViewModel()),
           ChangeNotifierProvider.value(value: CheckoutViewModel()),
         ],
         child: MaterialApp(

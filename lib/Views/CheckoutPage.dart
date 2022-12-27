@@ -13,7 +13,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../Models/Meal.dart';
 import '../Models/UserResponse.dart';
-import '../ViewModels/OrderViewModel.dart';
+import '../ViewModels/PlanningViewModel.dart';
 import 'WebviewMidtransPage.dart';
 
 class CheckoutPage extends StatefulWidget {
@@ -28,12 +28,12 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   int totalPricingFull = 0;
   int totalPricing = 0;
-  late OrderViewModel orderViewModel;
+  late PlanningViewModel planningViewModel;
 
   @override
   void initState() {
     super.initState();
-    orderViewModel = Provider.of<OrderViewModel>(context, listen: false);
+    planningViewModel = Provider.of<PlanningViewModel>(context, listen: false);
   }
 
   @override

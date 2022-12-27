@@ -22,7 +22,7 @@ class WebviewMidtransPage extends StatefulWidget {
 }
 
 class _WebviewMidtransState extends State<WebviewMidtransPage> {
-  late MidtransAdapter midtransAdapter = new MidtransAdapter();
+  late MidtransAdapter midtransAdapter = MidtransAdapter();
   late CheckoutViewModel checkoutViewModel;
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
@@ -39,7 +39,7 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
     List<Meal> tempList = data['temporaryCart'];
 
     Future<CheckoutResponse> url =
-        midtransAdapter.midtranAdapterControl(data["totalPayment"]);
+        midtransAdapter.checkout(data["totalPayment"]);
 
     return Scaffold(
         body: FutureBuilder(

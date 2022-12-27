@@ -6,22 +6,22 @@ String checkoutResponseToJson(CheckoutResponse data) => json.encode(data.toJson(
 
 class CheckoutResponse {
   CheckoutResponse({
-    this.snapToken,
+    this.status,
     this.snapUrl,
   });
 
-  String? snapToken;
+  String? status;
   String? snapUrl;
 
   // Convert JSON to CheckoutResponse object
   factory CheckoutResponse.fromJson(Map<String, dynamic> json) => CheckoutResponse(
-        snapToken: json['snapToken'],
+        status: json['status'],
         snapUrl: json['snapURL'],
       );
 
   // Convert CheckoutResponse object to JSON
   Map<String, dynamic> toJson() => {
-        'snapToken': snapToken,
+        'status': status,
         'snapURL': snapUrl,
       };
 }

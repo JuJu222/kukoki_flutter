@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../Models/CheckoutResponse.dart';
 import '../Models/Meal.dart';
 import '../Models/UserResponse.dart';
 
-class OrderRepository {
+class UserRepository {
 static List<Meal> cartList = [
     Meal(
       date: '22 November 2022',
@@ -90,21 +89,6 @@ static List<Meal> cartList = [
       menuId: 2,
     ),
   ];
-
-  // Return Midtrans' snap token in JSON to be passed on to the mobile app through existing User ID.
-  Future<dynamic> checkout(String total) async {
-    var response =
-        await http.post(Uri.parse('https://se.kukoki.com/api/checkout'),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(<String, dynamic>{
-              'userID': '1',
-              'total': total,
-            }));
-
-    return CheckoutResponse.fromJson(json.decode(response.body));
-  }
 
   // Get user's info to get their delivery details to be shown on the checkout page
   Future<dynamic> getUser(int userID) async {

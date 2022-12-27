@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../Models/Meal.dart';
 import '../Models/UserResponse.dart';
-import '../ViewModels/OrderViewModel.dart';
+import '../ViewModels/PlanningViewModel.dart';
 import 'CheckoutPage.dart';
 
 class PlanningPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class PlanningPage extends StatefulWidget {
 class _PlanningPageState extends State<PlanningPage> {
   int? currentSelectedIndex = 3;
   late int isWeek = 4;
-  late OrderViewModel orderViewModel;
+  late PlanningViewModel planningViewModel;
   var userResponse;
   double totalPricing = 0;
   List<Meal> tempList = [];
@@ -112,7 +112,7 @@ class _PlanningPageState extends State<PlanningPage> {
   void removeItem(int index) {
     setState(() {
       tempList.removeAt(index);
-      orderViewModel.getCartList().removeAt(index);
+      planningViewModel.getCartList().removeAt(index);
     });
   }
 
@@ -145,7 +145,7 @@ class _PlanningPageState extends State<PlanningPage> {
   }
 
   Future<void> getUser() async {
-    await orderViewModel.getUser().then((result) {
+    await planningViewModel.getUser().then((result) {
       setState(() {
         userResponse = result as UserResponse;
       });
@@ -155,8 +155,8 @@ class _PlanningPageState extends State<PlanningPage> {
   @override
   initState() {
     super.initState();
-    orderViewModel = Provider.of<OrderViewModel>(context, listen: false);
-    for (var item in orderViewModel.getCartList()) {
+    planningViewModel = Provider.of<PlanningViewModel>(context, listen: false);
+    for (var item in planningViewModel.getCartList()) {
       if (item.date![1] == ' ') {
         if (item.date!.substring(0, 1) ==
             checkWeek()[currentSelectedIndex!].date) {
@@ -222,7 +222,7 @@ class _PlanningPageState extends State<PlanningPage> {
                             fontFamily: 'Quicksand',
                             color: const Color(0xFF6A6A6A))),
                     Text(
-                        (orderViewModel.getCartList().isEmpty)
+                        (planningViewModel.getCartList().isEmpty)
                             ? '0'
                             : 'Rp${totalPrice(tempList).toString()}00',
                         style: TextStyle(
@@ -238,7 +238,7 @@ class _PlanningPageState extends State<PlanningPage> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10.0),
                           backgroundColor:
-                              (orderViewModel.getCartList().any((item) {
+                              (planningViewModel.getCartList().any((item) {
                             if (item.date![1] == ' ') {
                               if (item.date!.substring(0, 1) ==
                                   checkWeek()[currentSelectedIndex!].date) {
@@ -262,8 +262,8 @@ class _PlanningPageState extends State<PlanningPage> {
                               color: Colors.white,
                               fontFamily: 'Quicksand')),
                       onPressed: () async {
-                        if (orderViewModel.getCartList().isNotEmpty) {
-                          for (var item in orderViewModel.getCartList()) {
+                        if (planningViewModel.getCartList().isNotEmpty) {
+                          for (var item in planningViewModel.getCartList()) {
                             if (item.date![1] == ' ') {
                               if (item.date!.substring(0, 1) ==
                                   checkWeek()[currentSelectedIndex!].date) {
@@ -359,7 +359,7 @@ class _PlanningPageState extends State<PlanningPage> {
                           )),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: (orderViewModel.getOrderList().isEmpty)
+                          child: (planningViewModel.getOrderList().isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
                                   child: Text('No ordered meal kits',
@@ -369,7 +369,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                 )
                               : Column(
                                   children:
-                                      orderViewModel.getOrderList().mapIndexed(
+                                      planningViewModel.getOrderList().mapIndexed(
                                   (index, item) {
                                     if (item.date![1] == ' ') {
                                       if (item.date!.substring(0, 1) ==
@@ -407,14 +407,14 @@ class _PlanningPageState extends State<PlanningPage> {
                       ),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: (orderViewModel.getCartList().isEmpty)
+                          child: (planningViewModel.getCartList().isEmpty)
                               ? const Align(
                                   alignment: Alignment.center,
                                   child: Text('No meal kits in cart'),
                                 )
                               : Column(
                                   children:
-                                      orderViewModel.getCartList().mapIndexed(
+                                      planningViewModel.getCartList().mapIndexed(
                                     (index, item) {
                                       if (item.date![1] == ' ') {
                                         if (item.date!.substring(0, 1) ==
@@ -422,7 +422,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
-                                            pesan: orderViewModel
+                                            pesan: planningViewModel
                                                 .getCartList()[index],
                                           );
                                         } else {
@@ -434,7 +434,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
-                                            pesan: orderViewModel
+                                            pesan: planningViewModel
                                                 .getCartList()[index],
                                           );
                                         } else {
