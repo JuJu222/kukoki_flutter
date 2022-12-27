@@ -68,12 +68,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
     Future<void> navigatePaymentGateaway(BuildContext context) async {
       var totalPriceVariable =
           '${totalPrice(totalPriceFood, 20000, tempList).toString()}';
-      var getPay = await orderViewModel.checkout(
-          '${totalPrice(totalPriceFood, 20000, tempList).toString()}');
+
       final result = await Navigator.pushNamed(
           context, WebviewMidtransPage.routeName,
           arguments: {
-            'snapUrl': getPay.snapUrl,
             'totalPayment': '$totalPriceVariable',
             'transactionTime': DateTime.now(),
             'temporaryCart': tempList
