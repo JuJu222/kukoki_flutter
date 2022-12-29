@@ -144,6 +144,7 @@ class _PlanningPageState extends State<PlanningPage> {
     return temp;
   }
 
+  // Call getUser function from the viewmodel to access the data on the planning page
   Future<void> getUser() async {
     await planningViewModel.getUser().then((result) {
       setState(() {
