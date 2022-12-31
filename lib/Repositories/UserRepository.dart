@@ -91,7 +91,7 @@ static List<Meal> cartList = [
   ];
 
   // Get user's info to get their delivery details to be shown on the checkout page
-  Future<dynamic> getUser(int userID) async {
+  Future<dynamic> getUserAPI(int userID) async {
     var response = await http.get(
       Uri.parse('https://se.kukoki.com/api/user/${userID.toString()}'),
       headers: <String, String>{

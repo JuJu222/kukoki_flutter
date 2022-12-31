@@ -36,10 +36,10 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
-    List<Meal> tempList = data['temporaryCart'];
+    List<Meal> cart = data['temporaryCart'];
 
     Future<CheckoutResponse> url =
-        midtransAdapter.checkout(data["totalPayment"]);
+        midtransAdapter.checkout(data["totalPayment"], 1);
 
     return Scaffold(
         body: FutureBuilder(
@@ -65,10 +65,10 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
                 String res = request.url;
                 if (res.contains('transaction_status=settlement')) {
                   setState(() {
-                    checkoutViewModel.createOrder(tempList);
+                    checkoutViewModel.createOrder(cart, 1);
                     checkoutViewModel.emptyCart();
-                    tempList = checkoutViewModel.getCartList();
-                    for (var item in tempList) {
+                    cart = checkoutViewModel.getCartList();
+                    for (var item in cart) {
                       checkoutViewModel
                           .getCartList()
                           .removeWhere((element) => element == item);
@@ -83,9 +83,9 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
                   Navigator.pop(context, 'Payment Failed');
                 } else {
                   setState(() {
-                    checkoutViewModel.createOrder(tempList);
+                    checkoutViewModel.createOrder(cart, 1);
                     checkoutViewModel.emptyCart();
-                    tempList = checkoutViewModel.getCartList();
+                    cart = checkoutViewModel.getCartList();
                   });
                   Navigator.pushReplacementNamed(
                       context, SuccessfulPaymentPage.routeName, arguments: {

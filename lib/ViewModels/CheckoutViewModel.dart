@@ -20,9 +20,9 @@ class CheckoutViewModel extends ChangeNotifier {
   OrderResponse get result => createOrderResult;
 
   // Call createOrder function from the repository to be returned to the view
-  Future<dynamic> createOrder(List<Meal> cart) async {
+  Future<dynamic> createOrder(List<Meal> cart, int userID) async {
     try {
-      final createOrder = await CheckoutRepository().createOrder(cart);
+      final createOrder = await CheckoutRepository().createOrderAPI(cart, userID);
       if (createOrder.status == null) {
         notifyListeners();
         return messageResult = 'empty data';

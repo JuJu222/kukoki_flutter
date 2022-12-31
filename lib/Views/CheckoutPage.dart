@@ -8,12 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
-import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../Models/Meal.dart';
 import '../Models/UserResponse.dart';
-import '../ViewModels/PlanningViewModel.dart';
 import 'WebviewMidtransPage.dart';
 
 class CheckoutPage extends StatefulWidget {
@@ -28,53 +25,40 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   int totalPricingFull = 0;
   int totalPricing = 0;
-  late PlanningViewModel planningViewModel;
 
   @override
   void initState() {
     super.initState();
-    planningViewModel = Provider.of<PlanningViewModel>(context, listen: false);
   }
 
   @override
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
-    List<Meal> tempList = data['currentList'];
+    List<Meal> cart = data['currentList'];
     UserResponse userResponse = data["userResponse"];
 
-    // Calculate total price
-    int totalPriceFood(List<Meal> tempList) {
+    // Calculate total price of meal kits in cart
+    int countTotalPrice(List<Meal> cart) {
       totalPricing = 0;
-      tempList.forEach((e) {
+      cart.forEach((e) {
         setState(() {
           var menuPrice = e.menuPrice?.replaceAll('.', '');
           totalPricing += int.parse(menuPrice!);
         });
       });
-
       return totalPricing;
     }
 
-    // Calculate price
-    int totalPrice(
-        Function totalPriceFood, int deliveryFee, List<Meal> tempList) {
-      totalPricingFull = 0;
-      totalPricingFull = totalPriceFood(tempList) + deliveryFee;
-      tempList = [];
-      return totalPricingFull;
-    }
-
     // Call ViewModel function to redirect to payment gateaway webview
-    Future<void> navigatePaymentGateaway(BuildContext context) async {
-      var totalPriceVariable =
-          '${totalPrice(totalPriceFood, 20000, tempList).toString()}';
+    Future<void> callPaymentGateway(BuildContext context) async {
+      var totalPriceVariable = (countTotalPrice(cart) + 20000).toString();
 
       final result = await Navigator.pushNamed(
           context, WebviewMidtransPage.routeName,
           arguments: {
-            'totalPayment': '$totalPriceVariable',
+            'totalPayment': totalPriceVariable,
             'transactionTime': DateTime.now(),
-            'temporaryCart': tempList
+            'temporaryCart': cart
           });
 
       if (result == null) {
@@ -146,7 +130,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                               'Quicksand')),
                                                   SizedBox(width: 2.0),
                                                   Text(
-                                                      '${(totalPrice(totalPriceFood, 20000, tempList).toString())}',
+                                                      (countTotalPrice(cart) + 20000).toString(),
                                                       overflow:
                                                           TextOverflow.fade,
                                                       style: const TextStyle(
@@ -182,7 +166,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                             'Quicksand')),
                                                 onPressed: () async {
                                                   await CircularProgressIndicator();
-                                                  navigatePaymentGateaway(
+                                                  callPaymentGateway(
                                                       context);
                                                 },
                                               ),
@@ -302,10 +286,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   ],
                                 ),
                                 SizedBox(height: 5),
-                                ...tempList.mapIndexed(
+                                ...cart.mapIndexed(
                                   (index, e) {
                                     return CheckoutTile(
-                                      pesan: tempList[index],
+                                      pesan: cart[index],
                                     );
                                   },
                                 )
@@ -351,7 +335,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                       fontSize: 14,
                                                       fontFamily: 'Quicksand')),
                                               Text(
-                                                  'Rp${totalPriceFood(tempList).toString()}',
+                                                  'Rp${countTotalPrice(cart).toString()}',
                                                   style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,
@@ -398,7 +382,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                       fontSize: 16,
                                                       fontFamily: 'Quicksand')),
                                               Text(
-                                                  'Rp${(totalPrice(totalPriceFood, 20000, tempList).toString())}',
+                                                  'Rp${((countTotalPrice(cart) + 20000).toString())}',
                                                   style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,

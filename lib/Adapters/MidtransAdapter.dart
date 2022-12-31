@@ -8,9 +8,9 @@ class MidtransAdapter extends ChangeNotifier {
   CheckoutResponse get checkoutResponse => checkoutResult;
 
   // Call checkout function from the repository to be returned to the view
-  Future<CheckoutResponse> checkout(String total) async {
+  Future<CheckoutResponse> checkout(String total, int userID) async {
     try {
-      final checkout = await CheckoutRepository().checkout(total);
+      final checkout = await CheckoutRepository().checkoutAPI(total, userID);
       if (checkout.snapUrl == null) {
         notifyListeners();
         checkout.status = 'failed';

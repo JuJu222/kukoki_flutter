@@ -20,9 +20,9 @@ class PlanningViewModel extends ChangeNotifier {
   UserResponse get userResponse => getUserResult;
 
   // Call getUser function from the repository to be returned to the view
-  Future<dynamic> getUser() async {
+  Future<dynamic> getUser(int userID) async {
     try {
-      final getUser = await UserRepository().getUser(1);
+      final getUser = await UserRepository().getUserAPI(userID);
       if (getUser.status == null) {
         notifyListeners();
         return getUserMessageResult = 'empty data';

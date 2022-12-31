@@ -28,7 +28,7 @@ class _PlanningPageState extends State<PlanningPage> {
   late PlanningViewModel planningViewModel;
   var userResponse;
   double totalPricing = 0;
-  List<Meal> tempList = [];
+  List<Meal> cart = [];
   List<int> noWeek = [1, 2, 3, 4, 5];
   List<String> week = [
     '1-6 November 2022',
@@ -108,18 +108,18 @@ class _PlanningPageState extends State<PlanningPage> {
         date: '30', day: 'Jum', isSelected: false, onSelect: () {}, index: 0),
   ];
 
-  // Remove a mealkit on the cart when delete icon is clicked
+  // Remove a meal kit on the cart when delete icon is clicked
   void removeItem(int index) {
     setState(() {
-      tempList.removeAt(index);
+      cart.removeAt(index);
       planningViewModel.getCartList().removeAt(index);
     });
   }
 
-  // Count total price of mealkits in the cart
-  double totalPrice(List<Meal> tempList) {
+  // Count total price of meal kits in the cart
+  double countTotalPrice(List<Meal> cart) {
     totalPricing = 0;
-    for (var e in tempList) {
+    for (var e in cart) {
       setState(() {
         totalPricing += double.parse(e.menuPrice!);
       });
@@ -145,12 +145,71 @@ class _PlanningPageState extends State<PlanningPage> {
   }
 
   // Call getUser function from the viewmodel to access the data on the planning page
-  Future<void> getUser() async {
-    await planningViewModel.getUser().then((result) {
+  Future<void> getUser(int userID) async {
+    await planningViewModel.getUser(userID).then((result) {
       setState(() {
         userResponse = result as UserResponse;
       });
     });
+  }
+
+  Future<void> getCheckoutButtonPress() async {
+    if (planningViewModel.getCartList().isNotEmpty) {
+      for (var item in planningViewModel.getCartList()) {
+        if (item.date![1] == ' ') {
+          if (item.date!.substring(0, 1) ==
+              checkWeek()[currentSelectedIndex!].date) {
+            await getUser(1);
+            Navigator.pushNamed(
+                context, CheckoutPage.routeName,
+                arguments: {
+                  'currentList': cart,
+                  'userResponse': userResponse
+                });
+            break;
+          } else {
+            ScaffoldMessenger.of(context)
+              ..removeCurrentSnackBar()
+              ..showSnackBar(SnackBar(
+                  action: SnackBarAction(
+                    label: 'OK',
+                    onPressed: () {},
+                  ),
+                  content: Text('No meal kits in cart')));
+          }
+        } else {
+          if (item.date!.substring(0, 2) ==
+              checkWeek()[currentSelectedIndex!].date) {
+            await getUser(1);
+            Navigator.pushNamed(
+                context, CheckoutPage.routeName,
+                arguments: {
+                  'currentList': cart,
+                  'userResponse': userResponse
+                });
+            break;
+          } else {
+            ScaffoldMessenger.of(context)
+              ..removeCurrentSnackBar()
+              ..showSnackBar(SnackBar(
+                  action: SnackBarAction(
+                    label: 'OK',
+                    onPressed: () {},
+                  ),
+                  content: Text('No meal kits in cart')));
+          }
+        }
+      }
+    } else {
+      ScaffoldMessenger.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+            action: SnackBarAction(
+              label: 'OK',
+              onPressed: () {},
+            ),
+            content: Text('No meal kits in cart')));
+    }
   }
 
   @override
@@ -161,12 +220,12 @@ class _PlanningPageState extends State<PlanningPage> {
       if (item.date![1] == ' ') {
         if (item.date!.substring(0, 1) ==
             checkWeek()[currentSelectedIndex!].date) {
-          tempList.add(item);
+          cart.add(item);
         }
       } else {
         if (item.date!.substring(0, 2) ==
             checkWeek()[currentSelectedIndex!].date) {
-          tempList.add(item);
+          cart.add(item);
         }
       }
     }
@@ -225,7 +284,7 @@ class _PlanningPageState extends State<PlanningPage> {
                     Text(
                         (planningViewModel.getCartList().isEmpty)
                             ? '0'
-                            : 'Rp${totalPrice(tempList).toString()}00',
+                            : 'Rp${countTotalPrice(cart).toString()}00',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -262,63 +321,8 @@ class _PlanningPageState extends State<PlanningPage> {
                               fontSize: 16,
                               color: Colors.white,
                               fontFamily: 'Quicksand')),
-                      onPressed: () async {
-                        if (planningViewModel.getCartList().isNotEmpty) {
-                          for (var item in planningViewModel.getCartList()) {
-                            if (item.date![1] == ' ') {
-                              if (item.date!.substring(0, 1) ==
-                                  checkWeek()[currentSelectedIndex!].date) {
-                                await getUser();
-                                Navigator.pushNamed(
-                                    context, CheckoutPage.routeName,
-                                    arguments: {
-                                      'currentList': tempList,
-                                      'userResponse': userResponse
-                                    });
-                                break;
-                              } else {
-                                ScaffoldMessenger.of(context)
-                                  ..removeCurrentSnackBar()
-                                  ..showSnackBar(SnackBar(
-                                      action: SnackBarAction(
-                                        label: 'OK',
-                                        onPressed: () {},
-                                      ),
-                                      content: Text('No meal kits in cart')));
-                              }
-                            } else {
-                              if (item.date!.substring(0, 2) ==
-                                  checkWeek()[currentSelectedIndex!].date) {
-                                await getUser();
-                                Navigator.pushNamed(
-                                    context, CheckoutPage.routeName,
-                                    arguments: {
-                                      'currentList': tempList,
-                                      'userResponse': userResponse
-                                    });
-                                break;
-                              } else {
-                                ScaffoldMessenger.of(context)
-                                  ..removeCurrentSnackBar()
-                                  ..showSnackBar(SnackBar(
-                                      action: SnackBarAction(
-                                        label: 'OK',
-                                        onPressed: () {},
-                                      ),
-                                      content: Text('No meal kits in cart')));
-                              }
-                            }
-                          }
-                        } else {
-                          ScaffoldMessenger.of(context)
-                            ..removeCurrentSnackBar()
-                            ..showSnackBar(SnackBar(
-                                action: SnackBarAction(
-                                  label: 'OK',
-                                  onPressed: () {},
-                                ),
-                                content: Text('No meal kits in cart')));
-                        }
+                      onPressed: () {
+                        getCheckoutButtonPress();
                       },
                     ),
                   ],
