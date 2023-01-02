@@ -50,7 +50,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     }
 
     // Call ViewModel function to redirect to payment gateaway webview
-    Future<void> callPaymentGateway(BuildContext context) async {
+    Future<void> getOrderButtonPress(BuildContext context) async {
       var totalPriceVariable = (countTotalPrice(cart) + 20000).toString();
 
       final result = await Navigator.pushNamed(
@@ -166,7 +166,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                             'Quicksand')),
                                                 onPressed: () async {
                                                   await CircularProgressIndicator();
-                                                  callPaymentGateway(
+                                                  getOrderButtonPress(
                                                       context);
                                                 },
                                               ),
