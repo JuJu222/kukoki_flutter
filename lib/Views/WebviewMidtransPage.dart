@@ -37,7 +37,6 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
   Widget build(BuildContext context) {
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
     List<Meal> cart = data['temporaryCart'];
-
     Future<CheckoutResponse> url =
         midtransAdapter.checkout(data["totalPayment"], 1);
 
