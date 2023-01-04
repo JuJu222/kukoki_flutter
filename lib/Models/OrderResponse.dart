@@ -1,9 +1,3 @@
-import 'dart:convert';
-
-OrderResponse orderResponseFromJson(String str) => OrderResponse.fromJson(json.decode(str));
-
-String orderResponseToJson(OrderResponse data) => json.encode(data.toJson());
-
 class OrderResponse {
   OrderResponse({
     this.status,
@@ -21,13 +15,6 @@ class OrderResponse {
     order: Order.fromJson(json['order']),
     orderDetails: List<OrderDetail>.from(json['orderDetails'].map((x) => OrderDetail.fromJson(x))),
   );
-
-  // Convert OrderResponse object to JSON
-  Map<String, dynamic> toJson() => {
-    'status': status,
-    'order': order?.toJson(),
-    'orderDetails': List<dynamic>.from(orderDetails!.map((x) => x.toJson())),
-  };
 }
 
 class Order {
@@ -53,15 +40,6 @@ class Order {
     createdAt: json['created_at'],
     id: json['id'],
   );
-
-  // Convert Order object to JSON
-  Map<String, dynamic> toJson() => {
-    'user_id': userId,
-    'date': date,
-    'updated_at': updatedAt,
-    'created_at': createdAt,
-    'id': id,
-  };
 }
 
 class OrderDetail {
@@ -96,16 +74,4 @@ class OrderDetail {
     createdAt: json['created_at'],
     updatedAt: json['updated_at'],
   );
-
-  // Convert OrderDetail object to JSON
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'user_id': userId,
-    'meal_id': mealId,
-    'order_id': orderId,
-    'portion': portion,
-    'date': date,
-    'created_at': createdAt,
-    'updated_at': updatedAt,
-  };
 }

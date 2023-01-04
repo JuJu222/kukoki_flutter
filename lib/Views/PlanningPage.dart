@@ -37,48 +37,7 @@ class _PlanningPageState extends State<PlanningPage> {
     '19-24 November 2022',
     '25-30 November 2022'
   ];
-  List<PlanCard> currentMonthWeek1 = [
-    PlanCard(
-        date: '1', day: 'Kam', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '2', day: 'Jum', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '3', day: 'Sab', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '4', day: 'Min', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '5', day: 'Sen', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '6', day: 'Sel', isSelected: false, onSelect: () {}, index: 0),
-  ];
-  List<PlanCard> currentMonthWeek2 = [
-    PlanCard(
-        date: '7', day: 'Rab', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '8', day: 'Kam', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '9', day: 'Jum', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '10', day: 'Sab', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '11', day: 'Min', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '12', day: 'Sen', isSelected: false, onSelect: () {}, index: 0),
-  ];
-  List<PlanCard> currentMonthWeek3 = [
-    PlanCard(
-        date: '13', day: 'Sel', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '14', day: 'Rab', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '15', day: 'Kam', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '16', day: 'Jum', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '17', day: 'Sab', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '18', day: 'Min', isSelected: false, onSelect: () {}, index: 0),
-  ];
+  
   List<PlanCard> currentMonthWeek4 = [
     PlanCard(
         date: '19', day: 'Sen', isSelected: false, onSelect: () {}, index: 0),
@@ -93,73 +52,13 @@ class _PlanningPageState extends State<PlanningPage> {
     PlanCard(
         date: '24', day: 'Sab', isSelected: false, onSelect: () {}, index: 0),
   ];
-  List<PlanCard> currentMonthWeek5 = [
-    PlanCard(
-        date: '25', day: 'Min', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '26', day: 'Sen', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '27', day: 'Sel', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '28', day: 'Rab', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '29', day: 'Kam', isSelected: false, onSelect: () {}, index: 0),
-    PlanCard(
-        date: '30', day: 'Jum', isSelected: false, onSelect: () {}, index: 0),
-  ];
-
-  // Remove a meal kit on the cart when delete icon is clicked
-  void removeItem(int index) {
-    setState(() {
-      cart.removeAt(index);
-      planningViewModel.getCartList().removeAt(index);
-    });
-  }
-
-  // Count total price of meal kits in the cart
-  double countTotalPrice(List<Meal> cart) {
-    totalPricing = 0;
-    for (var e in cart) {
-      setState(() {
-        totalPricing += double.parse(e.menuPrice!);
-      });
-    }
-    return totalPricing;
-  }
-
-  // Check and return the current week
-  List<PlanCard> checkWeek() {
-    List<PlanCard> temp = [];
-    if (isWeek == 1) {
-      temp = currentMonthWeek1;
-    } else if (isWeek == 2) {
-      temp = currentMonthWeek2;
-    } else if (isWeek == 3) {
-      temp = currentMonthWeek3;
-    } else if (isWeek == 4) {
-      temp = currentMonthWeek4;
-    } else if (isWeek == 5) {
-      temp = currentMonthWeek5;
-    }
-    return temp;
-  }
-
-  // Call getUser function from the viewmodel to access the data on the planning page
-  Future<void> getUser(int userID) async {
-    await planningViewModel.getUser(userID).then((result) {
-      setState(() {
-        userResponse = result as UserResponse;
-      });
-    });
-  }
 
   Future<void> getCheckoutButtonPress() async {
     if (planningViewModel.getCartList().isNotEmpty) {
       for (var item in planningViewModel.getCartList()) {
         if (item.date![1] == ' ') {
           if (item.date!.substring(0, 1) ==
-              checkWeek()[currentSelectedIndex!].date) {
-            await getUser(1);
+              currentMonthWeek4[currentSelectedIndex!].date) {
             Navigator.pushNamed(
                 context, CheckoutPage.routeName,
                 arguments: {
@@ -179,8 +78,7 @@ class _PlanningPageState extends State<PlanningPage> {
           }
         } else {
           if (item.date!.substring(0, 2) ==
-              checkWeek()[currentSelectedIndex!].date) {
-            await getUser(1);
+              currentMonthWeek4[currentSelectedIndex!].date) {
             Navigator.pushNamed(
                 context, CheckoutPage.routeName,
                 arguments: {
@@ -219,16 +117,28 @@ class _PlanningPageState extends State<PlanningPage> {
     for (var item in planningViewModel.getCartList()) {
       if (item.date![1] == ' ') {
         if (item.date!.substring(0, 1) ==
-            checkWeek()[currentSelectedIndex!].date) {
+            currentMonthWeek4[currentSelectedIndex!].date) {
           cart.add(item);
         }
       } else {
         if (item.date!.substring(0, 2) ==
-            checkWeek()[currentSelectedIndex!].date) {
+            currentMonthWeek4[currentSelectedIndex!].date) {
           cart.add(item);
         }
       }
     }
+
+    for (var e in cart) {
+      setState(() {
+        totalPricing += double.parse(e.menuPrice!);
+      });
+    }
+
+    planningViewModel.getUser(1).then((result) {
+      setState(() {
+        userResponse = result as UserResponse;
+      });
+    });
   }
 
   @override
@@ -241,7 +151,7 @@ class _PlanningPageState extends State<PlanningPage> {
             child: Row(
               children: [
                 Text(
-                  '${checkWeek()[0].date}-${checkWeek()[checkWeek().length - 1].date} November 2022',
+                  '${currentMonthWeek4[0].date}-${currentMonthWeek4[currentMonthWeek4.length - 1].date} November 2022',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -284,7 +194,7 @@ class _PlanningPageState extends State<PlanningPage> {
                     Text(
                         (planningViewModel.getCartList().isEmpty)
                             ? '0'
-                            : 'Rp${countTotalPrice(cart).toString()}00',
+                            : 'Rp${totalPricing.toString()}00',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -301,11 +211,11 @@ class _PlanningPageState extends State<PlanningPage> {
                               (planningViewModel.getCartList().any((item) {
                             if (item.date![1] == ' ') {
                               if (item.date!.substring(0, 1) ==
-                                  checkWeek()[currentSelectedIndex!].date) {
+                                  currentMonthWeek4[currentSelectedIndex!].date) {
                                 return true;
                               }
                             } else if (item.date!.substring(0, 2) ==
-                                checkWeek()[currentSelectedIndex!].date) {
+                                currentMonthWeek4[currentSelectedIndex!].date) {
                               return true;
                             }
                             return false;
@@ -338,7 +248,7 @@ class _PlanningPageState extends State<PlanningPage> {
               child: SingleChildScrollView(
                 child: Column(children: [
                   Row(
-                      children: checkWeek().mapIndexed((index, item) {
+                      children: currentMonthWeek4.mapIndexed((index, item) {
                     return PlanCard(
                         date: item.date,
                         day: item.day,
@@ -364,41 +274,13 @@ class _PlanningPageState extends State<PlanningPage> {
                           )),
                       const SizedBox(height: 15.0),
                       SingleChildScrollView(
-                          child: (planningViewModel.getOrderList().isEmpty)
-                              ? const Align(
-                                  alignment: Alignment.center,
-                                  child: Text('No ordered meal kits',
-                                      style: TextStyle(
-                                          fontFamily: 'Quicksand',
-                                          fontWeight: FontWeight.w500)),
-                                )
-                              : Column(
-                                  children:
-                                      planningViewModel.getOrderList().mapIndexed(
-                                  (index, item) {
-                                    if (item.date![1] == ' ') {
-                                      if (item.date!.substring(0, 1) ==
-                                          checkWeek()[currentSelectedIndex!]
-                                              .date) {
-                                        return CheckoutTile(
-                                          pesan: item,
-                                        );
-                                      } else {
-                                        return Container();
-                                      }
-                                    } else {
-                                      if (item.date!.substring(0, 2) ==
-                                          checkWeek()[currentSelectedIndex!]
-                                              .date) {
-                                        return CheckoutTile(
-                                          pesan: item,
-                                        );
-                                      } else {
-                                        return Container();
-                                      }
-                                    }
-                                  },
-                                ).toList())),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text('No ordered meal kits',
+                                style: TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    fontWeight: FontWeight.w500)),
+                          )),
                       const SizedBox(height: 15.0),
                       Row(
                         children: [
@@ -423,7 +305,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                     (index, item) {
                                       if (item.date![1] == ' ') {
                                         if (item.date!.substring(0, 1) ==
-                                            checkWeek()[currentSelectedIndex!]
+                                            currentMonthWeek4[currentSelectedIndex!]
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},
@@ -435,7 +317,7 @@ class _PlanningPageState extends State<PlanningPage> {
                                         }
                                       } else {
                                         if (item.date!.substring(0, 2) ==
-                                            checkWeek()[currentSelectedIndex!]
+                                            currentMonthWeek4[currentSelectedIndex!]
                                                 .date) {
                                           return CheckoutTileWithIcon(
                                             onDelete: () {},

@@ -1,9 +1,3 @@
-import 'dart:convert';
-
-UserResponse UserResponseFromJson(String str) => UserResponse.fromJson(json.decode(str));
-
-String UserResponseToJson(UserResponse data) => json.encode(data.toJson());
-
 class UserResponse {
     UserResponse({
         this.status,
@@ -18,12 +12,6 @@ class UserResponse {
         status: json['status'],
         user: User.fromJson(json['user']),
     );
-
-    // Convert UserResponse object to JSON
-    Map<String, dynamic> toJson() => {
-        'status': status,
-        'user': user?.toJson(),
-    };
 }
 
 class User {
@@ -73,21 +61,4 @@ class User {
         createdAt: json['created_at'],
         updatedAt: json['updated_at'],
     );
-
-    // Convert User object to JSON
-    Map<String, dynamic> toJson() => {
-        'id': id,
-        'full_name': fullName,
-        'email': email,
-        'phone': phone,
-        'city': city,
-        'ward': ward,
-        'district': district,
-        'province': province,
-        'address': address,
-        'profile_picture': profilePicture,
-        'email_verified_at': emailVerifiedAt,
-        'created_at': createdAt,
-        'updated_at': updatedAt,
-    };
 }

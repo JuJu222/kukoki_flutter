@@ -5,9 +5,6 @@ import '../Repositories/CheckoutRepository.dart';
 import '../Repositories/UserRepository.dart';
 
 class CheckoutViewModel extends ChangeNotifier {
-  List<Meal> getCartList() {
-    return UserRepository.cartList;
-  }
 
   void emptyCart() {
     UserRepository.cartList = [];

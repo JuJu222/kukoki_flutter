@@ -66,12 +66,6 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
                   setState(() {
                     checkoutViewModel.createOrder(cart, 1);
                     checkoutViewModel.emptyCart();
-                    cart = checkoutViewModel.getCartList();
-                    for (var item in cart) {
-                      checkoutViewModel
-                          .getCartList()
-                          .removeWhere((element) => element == item);
-                    }
                   });
                   Navigator.pushReplacementNamed(
                       context, SuccessfulPaymentPage.routeName, arguments: {
@@ -84,7 +78,6 @@ class _WebviewMidtransState extends State<WebviewMidtransPage> {
                   setState(() {
                     checkoutViewModel.createOrder(cart, 1);
                     checkoutViewModel.emptyCart();
-                    cart = checkoutViewModel.getCartList();
                   });
                   Navigator.pushReplacementNamed(
                       context, SuccessfulPaymentPage.routeName, arguments: {

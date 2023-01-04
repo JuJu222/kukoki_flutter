@@ -1,9 +1,3 @@
-import 'dart:convert';
-
-CheckoutResponse checkoutResponseFromJson(String str) => CheckoutResponse.fromJson(json.decode(str));
-
-String checkoutResponseToJson(CheckoutResponse data) => json.encode(data.toJson());
-
 class CheckoutResponse {
   CheckoutResponse({
     this.status,
@@ -18,10 +12,4 @@ class CheckoutResponse {
         status: json['status'],
         snapUrl: json['snapURL'],
       );
-
-  // Convert CheckoutResponse object to JSON
-  Map<String, dynamic> toJson() => {
-        'status': status,
-        'snapURL': snapUrl,
-      };
 }

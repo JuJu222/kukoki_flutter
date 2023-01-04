@@ -5,19 +5,12 @@ import '../Models/CheckoutResponse.dart';
 import '../Repositories/UserRepository.dart';
 
 class PlanningViewModel extends ChangeNotifier {
-  List<Meal> getOrderList() {
-    return UserRepository.orderList;
-  }
+  late UserResponse getUserResult;
+  String getUserMessageResult = '';
 
   List<Meal> getCartList() {
     return UserRepository.cartList;
   }
-
-  late UserResponse getUserResult;
-  String getUserMessageResult = '';
-
-  String get getUserMessage => getUserMessageResult;
-  UserResponse get userResponse => getUserResult;
 
   // Call getUser function from the repository to be returned to the view
   Future<dynamic> getUser(int userID) async {
